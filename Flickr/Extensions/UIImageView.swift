@@ -6,7 +6,7 @@
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.
 //
 
-import SDWebImage
+import UIKit
 
 extension UIImageView {
 	public func setImageWithUrl(_ url: URL?,
@@ -14,40 +14,61 @@ extension UIImageView {
 	                            completion: @escaping (_ image: UIImage) -> Void = { _ in
 		}) {
 		guard let url = url else {
-			self.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+			setPlaceHolder(placeHolderImage: placeHolderImage)
 			return
 		}
-		guard let placeHolderImage = placeHolderImage else {
-			downloadImageWith(url: url, placeholder: #imageLiteral(resourceName: "Placeholder"), completion: { image in
+		if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+			self.animate(image: cachedImage,
+			             withAnimation: .transitionCrossDissolve,
+			             completion: { _ in
+							completion(cachedImage)
+			})
+		}
+		else {
+			self.downloadImageWith(url: url, placeHolderImage: placeHolderImage, completion: { image in
+				imageCache.setObject(image,
+				                     forKey: url.absoluteString as NSString)
 				completion(image)
 			})
+		}
+	}
+	
+	fileprivate func setPlaceHolder(placeHolderImage: UIImage?) {
+		guard let placeHolderImage = placeHolderImage else {
 			return
 		}
-		downloadImageWith(url: url, placeholder: placeHolderImage, completion: { image in
-			completion(image)
-		})
+		self.image = placeHolderImage
 	}
 	
-	fileprivate func downloadImageWith(url: URL?,
-	                                   placeholder: UIImage,
+	fileprivate func downloadImageWith(url: URL,
+	                                   placeHolderImage: UIImage?,
 	                                   completion: @escaping (_ image: UIImage) -> Void = { _ in
 		}) {
-		sd_setImage(with: url,
-		            placeholderImage: placeholder,
-		            options: SDWebImageOptions(rawValue: 0),
-		            completed: { (image, _, cacheType, _) in
-						switch cacheType {
-						case .none:
-							self.animate(image: image, withAnimation: .transitionCrossDissolve, completion: { _ in
-								completion(image ?? #imageLiteral(resourceName: "Placeholder"))
-							})
-						default:
-							break
-						}
-		})
+		getDataFromUrl(url: url) { data, response, error in
+			guard let data = data, error == nil else {
+				self.setPlaceHolder(placeHolderImage: placeHolderImage)
+				return
+			}
+			guard let image = UIImage(data: data) else {
+				self.setPlaceHolder(placeHolderImage: placeHolderImage)
+				return
+			}
+			self.animate(image: image,
+			             withAnimation: .transitionCrossDissolve,
+			             completion: { _ in
+				completion(image)
+			})
+		}
 	}
 	
-	fileprivate func animate(image: UIImage?,
+	fileprivate func getDataFromUrl(url: URL,
+	                                completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+		URLSession.shared.dataTask(with: url) { data, response, error in
+			completion(data, response, error)
+			}.resume()
+	}
+	
+	fileprivate func animate(image: UIImage,
 	                         withAnimation: UIViewAnimationOptions,
 	                         completion: @escaping (_ image: UIImage) -> Void = { _ in
 		}) {
@@ -58,7 +79,7 @@ extension UIImageView {
 							self.image = image
 		},
 		                  completion: { _ in
-							completion(image ?? #imageLiteral(resourceName: "Placeholder"))
+							completion(image)
 		})
 	}
 }

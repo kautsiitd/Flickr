@@ -81,6 +81,7 @@ extension MasterCollectionViewController : MasterLayoutDelegate {
 // MARK: - GetFeedProtocol
 extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
+		imageCache.removeAllObjects()
 		self.feed = feed
 		self.feedElements = feed.feedElements
 		DispatchQueue.main.async {

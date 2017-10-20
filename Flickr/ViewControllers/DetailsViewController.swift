@@ -19,7 +19,7 @@ class DetailsViewController: UIViewController {
 	@IBOutlet fileprivate weak var authorButton: UIButton!
 	@IBOutlet fileprivate weak var dateLabel: UILabel!
 	@IBOutlet fileprivate weak var timeLabel: UILabel!
-	@IBOutlet fileprivate weak var descriptionLabel: UILabel!
+	@IBOutlet fileprivate weak var descriptionTextView: UITextView!
 	
 	// MARK: Properties
 	var feedElement: FeedElement!
@@ -56,7 +56,7 @@ class DetailsViewController: UIViewController {
 		let hour = calendar.component(.hour, from: feedElement.date)
 		self.timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
 		
-		self.descriptionLabel.attributedText = Parser.parseHTMLString(feedElement.imageDescription)
+		self.descriptionTextView.attributedText = Parser.parseHTMLString(feedElement.imageDescription)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

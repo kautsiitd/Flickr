@@ -10,45 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Flickr/ViewControllers/MasterCollectionViewController.swift"
-            timestampString = "530189427.611847"
+            timestampString = "530207599.2555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "openFlickrInSafari()"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "feedFetchingFailed(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Flickr.MasterCollectionViewController.openFlickrInSafari () -&gt; ()"
-                  moduleName = "Flickr"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kauts/Desktop/Flickr/Flickr/ViewControllers/MasterCollectionViewController.swift"
-                  timestampString = "530189428.026644"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Flickr.MasterCollectionViewController.(openFlickrInSafari () -&gt; ()).(implicit closure #1)"
-                  moduleName = "Flickr"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kauts/Desktop/Flickr/Flickr/ViewControllers/MasterCollectionViewController.swift"
-                  timestampString = "530189428.031965"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Flickr/ViewControllers/MasterCollectionViewController.swift"
-            timestampString = "530190127.634012"
+            timestampString = "530207599.2555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "openFlickrInSafari()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "feedFetchedSuccessfully(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

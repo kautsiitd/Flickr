@@ -11,6 +11,9 @@ import SafariServices
 
 class MasterCollectionViewController: UICollectionViewController {
 	
+	// MARK: Elements
+	@IBOutlet fileprivate weak var loader: UIActivityIndicatorView!
+	
 	// MARK: Variables
 	fileprivate var feed: GetFeed?
 	fileprivate var feedElements: [FeedElement] = []
@@ -26,7 +29,12 @@ class MasterCollectionViewController: UICollectionViewController {
 		if let layout = collectionView?.collectionViewLayout as? MasterLayout {
 			layout.delegate = self
 		}
-		
+		fetchFeed()
+	}
+	
+	fileprivate func fetchFeed() {
+		loader.startAnimating()
+		loader.isHidden = false
 		GetFeed().fetchFeed(self)
 	}
 	
@@ -69,13 +77,15 @@ extension MasterCollectionViewController : MasterLayoutDelegate {
 // MARK: - GetFeedProtocol
 extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
-		// remove loader
 		self.feed = feed
 		self.feedElements = feed.feedElements
-		self.collectionView?.reloadData()
+		collectionView?.reloadData()
+		loader.stopAnimating()
+		loader.isHidden = true
 	}
 	func feedFetchingFailed(_ error: NSError?) {
-		// remove loader
+		loader.stopAnimating()
+		loader.isHidden = true
 		let retryButton = UIAlertAction(title: "Retry",
 		                                style: .default,
 		                                handler: { _ in
@@ -115,6 +125,6 @@ extension MasterCollectionViewController {
 	
 	
 	@IBAction func refreshFeed() {
-		GetFeed().fetchFeed(self)
+		fetchFeed()
 	}
 }

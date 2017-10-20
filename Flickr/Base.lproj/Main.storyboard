@@ -37,6 +37,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="OG6-cK-JXx" customClass="MasterLayout" customModule="Flickr" customModuleProvider="target"/>
+                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="XxX-ao-Td2">
+                            <rect key="frame" x="0.0" y="-64" width="320" height="480"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MasterCollectionViewCell" id="IIR-Vf-cwN" customClass="MasterCollectionViewCell" customModule="Flickr" customModuleProvider="target">
                                 <rect key="frame" x="53.5" y="0.0" width="213" height="285"/>
@@ -130,6 +134,9 @@
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
+                    <connections>
+                        <outlet property="loader" destination="XxX-ao-Td2" id="fJz-0d-xjN"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0NM-SM-4Xb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

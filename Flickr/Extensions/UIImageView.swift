@@ -17,18 +17,13 @@ extension UIImageView {
 			self.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
 			return
 		}
-		let formattedURLString = Commons.formatURLforImgix(url.absoluteString,
-		                                                   viewWidth: frame.size.width,
-		                                                   viewHeight: frame.size.height,
-		                                                   contentMode: .scaleAspectFill)
-		let newURL = URL(string: formattedURLString)
 		guard let placeHolderImage = placeHolderImage else {
-			downloadImageWith(url: newURL, placeholder: #imageLiteral(resourceName: "Placeholder"), completion: { image in
+			downloadImageWith(url: url, placeholder: #imageLiteral(resourceName: "Placeholder"), completion: { image in
 				completion(image)
 			})
 			return
 		}
-		downloadImageWith(url: newURL, placeholder: placeHolderImage, completion: { image in
+		downloadImageWith(url: url, placeholder: placeHolderImage, completion: { image in
 			completion(image)
 		})
 	}

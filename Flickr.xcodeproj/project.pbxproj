@@ -21,7 +21,6 @@
 		F20EB67B1F98C77F00AD2D77 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6781F98C77F00AD2D77 /* GradientView.swift */; };
 		F20EB67C1F98C77F00AD2D77 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6791F98C77F00AD2D77 /* String.swift */; };
 		F20EB67D1F98C77F00AD2D77 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */; };
-		F20EB6811F98C7A000AD2D77 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB67F1F98C7A000AD2D77 /* Commons.swift */; };
 		F20EB6821F98C7A000AD2D77 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6801F98C7A000AD2D77 /* Parser.swift */; };
 		F20EB6851F98C81300AD2D77 /* MasterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6841F98C81300AD2D77 /* MasterLayout.swift */; };
 		F2F2EFEF1F98F2140096E762 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2EFEE1F98F2140096E762 /* Date.swift */; };
@@ -47,7 +46,6 @@
 		F20EB6781F98C77F00AD2D77 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = Extensions/GradientView.swift; sourceTree = "<group>"; };
 		F20EB6791F98C77F00AD2D77 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Extensions/String.swift; sourceTree = "<group>"; };
 		F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
-		F20EB67F1F98C7A000AD2D77 /* Commons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Commons.swift; path = Others/Commons.swift; sourceTree = "<group>"; };
 		F20EB6801F98C7A000AD2D77 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Others/Parser.swift; sourceTree = "<group>"; };
 		F20EB6841F98C81300AD2D77 /* MasterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterLayout.swift; path = Layouts/MasterLayout.swift; sourceTree = "<group>"; };
 		F2F2EFEE1F98F2140096E762 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 		F20EB67E1F98C78B00AD2D77 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				F20EB67F1F98C7A000AD2D77 /* Commons.swift */,
 				F20EB6801F98C7A000AD2D77 /* Parser.swift */,
 			);
 			name = Others;
@@ -330,7 +327,6 @@
 				F2F2EFEF1F98F2140096E762 /* Date.swift in Sources */,
 				F20EB6851F98C81300AD2D77 /* MasterLayout.swift in Sources */,
 				F20EB67B1F98C77F00AD2D77 /* GradientView.swift in Sources */,
-				F20EB6811F98C7A000AD2D77 /* Commons.swift in Sources */,
 				F2F9BC271F99F7CF00BA10FD /* FullImageViewController.swift in Sources */,
 				F20EB6701F98C70A00AD2D77 /* MasterCollectionViewCell.swift in Sources */,
 				F2F2EFF11F98F4B30096E762 /* DetailsViewController.swift in Sources */,

@@ -67,6 +67,8 @@ class ApiManager: NSObject {
 			let jsonConverted = JSON(dataFormatted)
 			if jsonConverted == JSON.null {
 				delegate.didFailWithError(getParameters, nil)
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
+				return
 			}
 			
 			delegate.parseObject(jsonConverted,

@@ -38,6 +38,7 @@ class MasterCollectionViewController: UICollectionViewController {
 		collectionView?.reloadData()
 		loader.startAnimating()
 		loader.isHidden = false
+		navigationItem.rightBarButtonItem?.isEnabled = false
 		GetFeed().fetchFeed(self)
 	}
 	
@@ -86,6 +87,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
 			self.collectionView?.reloadData()
 			self.loader.stopAnimating()
 			self.loader.isHidden = true
+			self.navigationItem.rightBarButtonItem?.isEnabled = true
 		}
 	}
 	func feedFetchingFailed(_ error: NSError?) {
@@ -94,8 +96,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
 		let retryButton = UIAlertAction(title: "Retry",
 		                                style: .default,
 		                                handler: { _ in
-											// showLoader
-											GetFeed().fetchFeed(self)
+											self.fetchFeed()
 		})
 		let alertController = UIAlertController(title: "Error",
 		                                        message: error?.localizedDescription ?? "Unknown error occured!",

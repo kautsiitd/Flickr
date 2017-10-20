@@ -33,6 +33,9 @@ class MasterCollectionViewController: UICollectionViewController {
 	}
 	
 	fileprivate func fetchFeed() {
+		feedElements = []
+		(collectionView?.collectionViewLayout as? MasterLayout)?.cache = []
+		collectionView?.reloadData()
 		loader.startAnimating()
 		loader.isHidden = false
 		GetFeed().fetchFeed(self)
@@ -79,9 +82,11 @@ extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
 		self.feed = feed
 		self.feedElements = feed.feedElements
-		collectionView?.reloadData()
-		loader.stopAnimating()
-		loader.isHidden = true
+		DispatchQueue.main.async {
+			self.collectionView?.reloadData()
+			self.loader.stopAnimating()
+			self.loader.isHidden = true
+		}
 	}
 	func feedFetchingFailed(_ error: NSError?) {
 		loader.stopAnimating()

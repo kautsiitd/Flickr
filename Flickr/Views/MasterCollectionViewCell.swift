@@ -46,7 +46,7 @@ extension MasterCollectionViewCell {
 													return
 												}
 												if url.absoluteString == feedElement.mediaLink {
-													guard let image = imageCache.object(forKey: feedElement.mediaLink as NSString) else {
+													guard let image = image else {
 														DispatchQueue.main.async {
 															self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
 														}

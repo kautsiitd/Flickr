@@ -89,11 +89,11 @@ extension MasterCollectionViewController: GetFeedProtocol {
 		imageCache.removeAllObjects()
 		self.feed = feed
 		self.feedElements = feed.feedElements
-		self.navigationItem.leftBarButtonItem?.isEnabled = true
 		DispatchQueue.main.async {
 			self.collectionView?.reloadData()
 			self.loader.stopAnimating()
 			self.loader.isHidden = true
+			self.navigationItem.leftBarButtonItem?.isEnabled = true
 			self.navigationItem.rightBarButtonItem?.isEnabled = true
 		}
 	}

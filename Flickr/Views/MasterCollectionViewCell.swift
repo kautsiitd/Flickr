@@ -32,9 +32,11 @@ class MasterCollectionViewCell: UICollectionViewCell {
 
 extension MasterCollectionViewCell {
 	func setCellWith(feedElement: FeedElement) {
-		let imageURL = URL(string: feedElement.mediaLink)
-		self.productImageView.setImageWithUrl(imageURL,
-		                                      placeHolderImage: #imageLiteral(resourceName: "Placeholder"))
+		DispatchQueue.global(qos: .userInteractive).async {
+			let imageURL = URL(string: feedElement.mediaLink)
+			self.productImageView.setImageWithUrl(imageURL,
+			                                      placeHolderImage: #imageLiteral(resourceName: "Placeholder"))
+		}
 		authorNameLabel.text = feedElement.author
 		dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
 	}

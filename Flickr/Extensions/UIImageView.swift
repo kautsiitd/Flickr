@@ -14,7 +14,7 @@ extension UIImageView {
 	                            completion: @escaping (_ image: UIImage) -> Void = { _ in
 		}) {
 		guard let url = url else {
-			setPlaceHolder(placeHolderImage: placeHolderImage)
+			setImage(image: placeHolderImage)
 			return
 		}
 		if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
@@ -33,30 +33,32 @@ extension UIImageView {
 		}
 	}
 	
-	fileprivate func setPlaceHolder(placeHolderImage: UIImage?) {
-		guard let placeHolderImage = placeHolderImage else {
+	fileprivate func setImage(image: UIImage?) {
+		guard let image = image else {
 			return
 		}
-		self.image = placeHolderImage
+		DispatchQueue.main.async {
+			self.image = image
+		}
 	}
 	
 	fileprivate func downloadImageWith(url: URL,
 	                                   placeHolderImage: UIImage?,
 	                                   completion: @escaping (_ image: UIImage) -> Void = { _ in
 		}) {
-		getDataFromUrl(url: url) { data, response, error in
+		self.getDataFromUrl(url: url) { data, response, error in
 			guard let data = data, error == nil else {
-				self.setPlaceHolder(placeHolderImage: placeHolderImage)
+				self.setImage(image: placeHolderImage)
 				return
 			}
 			guard let image = UIImage(data: data) else {
-				self.setPlaceHolder(placeHolderImage: placeHolderImage)
+				self.setImage(image: placeHolderImage)
 				return
 			}
 			self.animate(image: image,
-			             withAnimation: .transitionCrossDissolve,
-			             completion: { _ in
-				completion(image)
+						 withAnimation: .transitionCrossDissolve,
+						 completion: { _ in
+							completion(image)
 			})
 		}
 	}
@@ -76,7 +78,7 @@ extension UIImageView {
 		                  duration: 0.5,
 		                  options: withAnimation,
 		                  animations: {
-							self.image = image
+							self.setImage(image: image)
 		},
 		                  completion: { _ in
 							completion(image)

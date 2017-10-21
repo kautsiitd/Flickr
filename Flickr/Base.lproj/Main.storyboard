@@ -122,12 +122,12 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Uploads from Everyone" id="DXT-sn-FeD">
                         <barButtonItem key="backBarButtonItem" title=" " id="nHp-0J-Nzf"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="JgS-Kf-0R7">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="action" id="JgS-Kf-0R7">
                             <connections>
                                 <action selector="openFlickrInSafari" destination="c9R-GV-kRA" id="NWC-wG-4RG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="5Kl-6g-vv8">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="plain" systemItem="refresh" id="5Kl-6g-vv8">
                             <connections>
                                 <action selector="refreshFeed" destination="c9R-GV-kRA" id="oWG-ZR-vng"/>
                             </connections>

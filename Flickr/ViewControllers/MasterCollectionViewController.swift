@@ -25,7 +25,7 @@ class MasterCollectionViewController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.backBarButtonItem?.title = ""
-		collectionView?.contentInset = UIEdgeInsets(top: 13, left: 10, bottom: 10, right: 10)
+		collectionView?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 		if let layout = collectionView?.collectionViewLayout as? MasterLayout {
 			layout.delegate = self
 		}
@@ -33,12 +33,17 @@ class MasterCollectionViewController: UICollectionViewController {
 	}
 	
 	fileprivate func fetchFeed() {
+		collectionView?.setContentOffset(CGPoint.init(x: 0,
+		                                              y: -(collectionView?.contentInset.top ?? 0)),
+		                                 animated: true)
 		feedElements = []
 		(collectionView?.collectionViewLayout as? MasterLayout)?.cache = []
-		collectionView?.reloadData()
-		loader.startAnimating()
-		loader.isHidden = false
-		navigationItem.rightBarButtonItem?.isEnabled = false
+		DispatchQueue.main.async {
+			self.collectionView?.reloadData()
+			self.loader.startAnimating()
+			self.loader.isHidden = false
+			self.navigationItem.rightBarButtonItem?.isEnabled = false
+		}
 		GetFeed().fetchFeed(self)
 	}
 	
@@ -84,6 +89,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
 		imageCache.removeAllObjects()
 		self.feed = feed
 		self.feedElements = feed.feedElements
+		self.navigationItem.leftBarButtonItem?.isEnabled = true
 		DispatchQueue.main.async {
 			self.collectionView?.reloadData()
 			self.loader.stopAnimating()

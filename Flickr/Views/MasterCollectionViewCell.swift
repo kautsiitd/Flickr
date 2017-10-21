@@ -16,6 +16,9 @@ class MasterCollectionViewCell: UICollectionViewCell {
 	@IBOutlet fileprivate weak var authorNameLabel: UILabel!
 	@IBOutlet fileprivate weak var dateTimeLabel: UILabel!
 	
+	// MARK: Properties
+	fileprivate var feedElement: FeedElement?
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		gradientView.layer.shouldRasterize = true
@@ -24,6 +27,7 @@ class MasterCollectionViewCell: UICollectionViewCell {
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
+		self.feedElement = nil
 		productImageView.image = #imageLiteral(resourceName: "Placeholder")
 		authorNameLabel.text = ""
 		dateTimeLabel.text = ""
@@ -32,13 +36,42 @@ class MasterCollectionViewCell: UICollectionViewCell {
 
 extension MasterCollectionViewCell {
 	func setCellWith(feedElement: FeedElement) {
-		DispatchQueue.global(qos: .userInteractive).async {
-			let imageURL = URL(string: feedElement.mediaLink)
-			self.productImageView.setImageWithUrl(imageURL,
-			                                      placeHolderImage: #imageLiteral(resourceName: "Placeholder"))
+		self.feedElement = feedElement
+		if let imageURL = URL(string: feedElement.mediaLink) {
+			self.productImageView.getImageWith(imageURL,
+			                                   placeHolderImage: #imageLiteral(resourceName: "Placeholder"),
+			                                   completion: { image, url, fetchedImageType in
+												guard let feedElement = self.feedElement else {
+													self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
+													return
+												}
+												if url.absoluteString == feedElement.mediaLink {
+													guard let image = imageCache.object(forKey: feedElement.mediaLink as NSString) else {
+														DispatchQueue.main.async {
+															self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
+														}
+														return
+													}
+													self.handleImageTransition(image: image,
+													                           fetchedImageType: fetchedImageType)
+												}
+			})
 		}
 		authorNameLabel.text = feedElement.author
 		dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
+	}
+	
+	fileprivate func handleImageTransition(image: UIImage, fetchedImageType: FetchedImageType) {
+		switch fetchedImageType {
+		case .cache:
+			DispatchQueue.main.async {
+				self.productImageView.image = image
+			}
+		case .downloaded:
+			productImageView.animate(image: image,
+			                         withAnimation: .transitionCrossDissolve,
+			                         completion: { _ in })
+		}
 	}
 	
 	//	func animateWith(relativePosition: CGFloat) {

@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="-977" y="-45"/>
         </scene>
-        <!--Uploads from Everyone-->
+        <!--Feed-->
         <scene sceneID="J7W-SB-qxQ">
             <objects>
                 <collectionViewController id="c9R-GV-kRA" customClass="MasterCollectionViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
@@ -120,7 +120,7 @@
                             <outlet property="delegate" destination="c9R-GV-kRA" id="die-9y-HiN"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Uploads from Everyone" id="DXT-sn-FeD">
+                    <navigationItem key="navigationItem" title="Feed" id="DXT-sn-FeD">
                         <barButtonItem key="backBarButtonItem" title=" " id="nHp-0J-Nzf"/>
                         <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="action" id="JgS-Kf-0R7">
                             <connections>

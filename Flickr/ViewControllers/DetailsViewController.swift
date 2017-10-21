@@ -91,12 +91,6 @@ extension DetailsViewController {
 		navigationController?.present(safariViewController, animated: true)
 	}
 	
-//	@IBAction func imageClicked() {
-//		let fullImageViewController = FullImageViewController(feedElement: feedElement)
-//		navigationController?.pushViewController(fullImageViewController,
-//		                                         animated: true)
-//	}
-	
 	@IBAction func flickrLinkButtonPressed() {
 		openLink(urlString: feedElement.flickrLink)
 	}

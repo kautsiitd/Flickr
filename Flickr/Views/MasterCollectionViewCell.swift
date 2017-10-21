@@ -58,7 +58,8 @@ extension MasterCollectionViewCell {
 			})
 		}
 		authorNameLabel.text = feedElement.author
-		dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
+		let agoTime = Date().offset(from: feedElement.date)
+		dateTimeLabel.text = agoTime == "" ? "Just now" : agoTime + " ago"
 	}
 	
 	fileprivate func handleImageTransition(image: UIImage, fetchedImageType: FetchedImageType) {
@@ -73,9 +74,4 @@ extension MasterCollectionViewCell {
 			                         completion: { _ in })
 		}
 	}
-	
-	//	func animateWith(relativePosition: CGFloat) {
-	//		let totalMovement = CGFloat(72)
-	//		productImageView.frame.origin.y = -totalMovement * relativePosition
-	//	}
 }

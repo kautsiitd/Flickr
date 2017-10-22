@@ -111,7 +111,7 @@
                                     <outlet property="dateTimeLabel" destination="XzC-5f-oyp" id="feb-Ds-v3g"/>
                                     <outlet property="gradientView" destination="XZc-Kn-CH2" id="DZ3-43-kOx"/>
                                     <outlet property="productImageView" destination="6dg-qn-myf" id="lpR-52-ySf"/>
-                                    <segue destination="EOJ-BE-PfC" kind="push" identifier="pushingDescriptionVC" id="hEb-ig-ALh"/>
+                                    <segue destination="EOJ-BE-PfC" kind="show" identifier="pushingDescriptionVC" id="hEb-ig-ALh"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -127,7 +127,7 @@
                                 <action selector="openFlickrInSafari" destination="c9R-GV-kRA" id="NWC-wG-4RG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="plain" systemItem="refresh" id="5Kl-6g-vv8">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="refresh" id="5Kl-6g-vv8">
                             <connections>
                                 <action selector="refreshFeed" destination="c9R-GV-kRA" id="oWG-ZR-vng"/>
                             </connections>
@@ -258,7 +258,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Description" id="Q5c-SX-fpv">
                         <barButtonItem key="backBarButtonItem" title=" " id="LUZ-dA-uDk"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="9q9-P9-icg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="9q9-P9-icg">
                             <connections>
                                 <action selector="flickrLinkButtonPressed" destination="EOJ-BE-PfC" id="LXL-8x-3qR"/>
                             </connections>

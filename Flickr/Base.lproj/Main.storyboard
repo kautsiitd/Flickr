@@ -313,6 +313,9 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wta-hB-CD4">
                                 <rect key="frame" x="28" y="40" width="39" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="yRZ-zH-R5p"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -328,7 +331,7 @@
                             <constraint firstItem="Qc6-Ji-iwi" firstAttribute="centerX" secondItem="Wta-hB-CD4" secondAttribute="centerX" id="1Ye-Jr-km5"/>
                             <constraint firstItem="KrM-yL-JmX" firstAttribute="centerX" secondItem="TDW-bE-hqy" secondAttribute="centerX" id="3Tl-H6-sXl"/>
                             <constraint firstItem="Qc6-Ji-iwi" firstAttribute="height" secondItem="Wta-hB-CD4" secondAttribute="height" constant="-5" id="3h1-s4-IYW"/>
-                            <constraint firstItem="KrM-yL-JmX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wta-hB-CD4" secondAttribute="bottom" constant="5" id="FMg-92-cEq"/>
+                            <constraint firstItem="KrM-yL-JmX" firstAttribute="top" secondItem="Wta-hB-CD4" secondAttribute="bottom" constant="5" id="FMg-92-cEq"/>
                             <constraint firstItem="Qc6-Ji-iwi" firstAttribute="centerY" secondItem="Wta-hB-CD4" secondAttribute="centerY" id="RMT-XD-Uop"/>
                             <constraint firstItem="Qc6-Ji-iwi" firstAttribute="width" secondItem="Wta-hB-CD4" secondAttribute="width" constant="15" id="VUp-lX-Lr6"/>
                             <constraint firstItem="KrM-yL-JmX" firstAttribute="centerY" secondItem="TDW-bE-hqy" secondAttribute="centerY" id="gPS-4E-sW8"/>

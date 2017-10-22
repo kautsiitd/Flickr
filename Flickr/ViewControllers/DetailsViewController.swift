@@ -56,7 +56,9 @@ class DetailsViewController: UIViewController {
 		let hour = calendar.component(.hour, from: feedElement.date)
 		self.timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
 		
-		self.descriptionTextView.attributedText = Parser.parseHTMLString(feedElement.imageDescription)
+		DispatchQueue.main.async {
+			self.descriptionTextView.attributedText = Parser.parseHTMLString(self.feedElement.imageDescription)
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,7 +92,9 @@ extension DetailsViewController {
 		                                                  entersReaderIfAvailable: false)
 		navigationController?.present(safariViewController, animated: true)
 	}
-	
+}
+
+extension DetailsViewController {
 	@IBAction func flickrLinkButtonPressed() {
 		openLink(urlString: feedElement.flickrLink)
 	}

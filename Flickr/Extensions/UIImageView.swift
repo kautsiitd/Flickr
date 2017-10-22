@@ -13,6 +13,7 @@ public enum FetchedImageType {
 	case downloaded
 }
 
+/// Setting and Downloading Image from URL in UIImageView
 extension UIImageView {
 	public func setImageWithUrl(_ url: URL?,
 	                            placeHolderImage: UIImage? = nil,
@@ -72,6 +73,7 @@ extension UIImageView {
 			completion(cachedImage, url, .cache)
 		}
 		else {
+			self.showLoader()
 			self.downloadImageWith(url: url, placeHolderImage: placeHolderImage, completion: { image in
 				guard let image = image else {
 					completion(nil, url, .downloaded)
@@ -79,6 +81,7 @@ extension UIImageView {
 				}
 				imageCache.setObject(image,
 				                     forKey: url.absoluteString as NSString)
+				self.stopLoader()
 				completion(image, url, .downloaded)
 			})
 		}
@@ -108,5 +111,31 @@ extension UIImageView {
 		URLSession.shared.dataTask(with: url) { data, response, error in
 			completion(data, response, error)
 			}.resume()
+	}
+}
+
+/// Showing Loader on UIImageView untill Image loads
+extension UIImageView {
+	var activityIndicatorTag: Int {
+		return 999999
+	}
+	public func showLoader() {
+		DispatchQueue.main.async {
+			let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+			activityIndicator.tag = self.activityIndicatorTag
+			activityIndicator.center = self.center
+			activityIndicator.hidesWhenStopped = true
+			activityIndicator.startAnimating()
+			self.addSubview(activityIndicator)
+		}
+	}
+	public func stopLoader() {
+		DispatchQueue.main.async {
+			if let activityIndicator = self.subviews.filter(
+				{ $0.tag == self.activityIndicatorTag}).first as? UIActivityIndicatorView {
+				activityIndicator.stopAnimating()
+				activityIndicator.removeFromSuperview()
+			}
+		}
 	}
 }

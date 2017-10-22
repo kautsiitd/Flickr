@@ -38,23 +38,23 @@ extension MasterCollectionViewCell {
 	func setCellWith(feedElement: FeedElement) {
 		self.feedElement = feedElement
 		if let imageURL = URL(string: feedElement.mediaLink) {
-			self.productImageView.getImageWith(imageURL,
-			                                   placeHolderImage: #imageLiteral(resourceName: "Placeholder"),
-			                                   completion: { image, url, fetchedImageType in
-												guard let feedElement = self.feedElement else {
-													self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
-													return
-												}
-												if url.absoluteString == feedElement.mediaLink {
-													guard let image = image else {
-														DispatchQueue.main.async {
-															self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
-														}
-														return
-													}
-													self.handleImageTransition(image: image,
-													                           fetchedImageType: fetchedImageType)
-												}
+			self.productImageView.getImageWith(imageURL, placeHolderImage: #imageLiteral(resourceName: "Placeholder"), completion: { image, url, fetchedImageType in
+				guard let feedElement = self.feedElement else {
+					self.productImageView.stopLoader()
+					self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
+					return
+				}
+				if url.absoluteString == feedElement.mediaLink {
+					guard let image = image else {
+						DispatchQueue.main.async {
+							self.productImageView.stopLoader()
+							self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
+						}
+						return
+					}
+					self.handleImageTransition(image: image,
+											   fetchedImageType: fetchedImageType)
+				}
 			})
 		}
 		authorNameLabel.text = feedElement.author
@@ -66,6 +66,7 @@ extension MasterCollectionViewCell {
 		switch fetchedImageType {
 		case .cache:
 			DispatchQueue.main.async {
+				self.productImageView.stopLoader()
 				self.productImageView.image = image
 			}
 		case .downloaded:

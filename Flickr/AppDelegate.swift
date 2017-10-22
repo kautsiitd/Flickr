@@ -9,6 +9,7 @@
 import UIKit
 
 let imageCache = NSCache<NSString, UIImage>()
+let inProgressRequests = [String: Bool]()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

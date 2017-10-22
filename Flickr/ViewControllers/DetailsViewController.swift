@@ -57,9 +57,7 @@ class DetailsViewController: UIViewController {
 		self.timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
 		
 		self.descriptionTextView.text = ""
-		DispatchQueue.main.async {
-			self.descriptionTextView.attributedText = Parser.parseHTMLString(self.feedElement.imageDescription)
-		}
+		self.descriptionTextView.attributedText = self.feedElement.attributedDescriptionString
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -58,8 +58,8 @@ class MasterLayout: UICollectionViewLayout {
 			let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
 			attributes.frame = insetFrame
 			cache.append(attributes)
-			contentHeight = max(contentHeight, frame.maxY)
 			yOffset[column] = yOffset[column] + height
+			contentHeight = max(contentHeight, yOffset[column])
 			column = yOffset[0] <= yOffset[1] ? 0 : 1
 		}
 	}

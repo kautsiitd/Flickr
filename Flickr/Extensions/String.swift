@@ -1,6 +1,6 @@
 //
 //  String.swift
-//  Roposo
+//  Flickr
 //
 //  Created by Kautsya Kanu on 18/10/17.
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.

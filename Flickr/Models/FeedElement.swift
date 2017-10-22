@@ -23,13 +23,15 @@ class FeedElement: FlickrObject {
 	var tags: String = ""
 	
 	// MARK: Calculated Properties
-	var imagewidth: CGFloat
-	var imageHeight: CGFloat
+	var imagewidth: CGFloat = 180
+	var imageHeight: CGFloat = 240
 	var authorLink: String = ""
 	var date: Date = Date()
+	var attributedDescriptionString: NSAttributedString = NSAttributedString()
 	
 	// MARK: Init
 	init(responseObject: [String: Any]) {
+		super.init()
 		title = responseObject["title"] as? String ?? ""
 		flickrLink = responseObject["link"] as? String ?? ""
 		mediaLink = (responseObject["media"] as? [String: String])?["m"] ?? ""
@@ -53,10 +55,10 @@ class FeedElement: FlickrObject {
 		let imageHeightString = imageDescriptionElements.first?[2] ?? "240"
 		imageHeight = NumberFormatter().number(from: imageHeightString) as? CGFloat ?? 240
 		
-		imageDescriptionElements = imageDescription.matchingStrings(regex: "<p>(.*?)<\\/p>")
-		imageDescription = imageDescriptionElements.count > 2 ? imageDescriptionElements[2][1] : ""
-		
-		super.init()
+		DispatchQueue.main.async {
+			imageDescriptionElements = self.imageDescription.matchingStrings(regex: "<p>(.*?)<\\/p>")
+			self.attributedDescriptionString = Parser.parseHTMLString( imageDescriptionElements.count > 2 ? imageDescriptionElements[2][1] : "")
+		}
 	}
 	
 	override func isValid() -> Bool {

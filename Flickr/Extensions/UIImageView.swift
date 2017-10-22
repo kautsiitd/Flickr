@@ -1,6 +1,6 @@
 //
 //  UIImageView.swift
-//  Roposo
+//  Flickr
 //
 //  Created by Kautsya Kanu on 18/10/17.
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.
@@ -21,10 +21,12 @@ extension UIImageView {
 		}) {
 		guard let url = url else {
 			guard let placeHolderImage = placeHolderImage else {
+				self.stopLoader()
 				self.image = nil
 				completion(nil, nil)
 				return
 			}
+			self.stopLoader()
 			self.image = placeHolderImage
 			completion(placeHolderImage, nil)
 			return
@@ -32,10 +34,12 @@ extension UIImageView {
 		self.getImageWith(url, placeHolderImage: placeHolderImage, completion: { image, url, type in
 			guard let image = image else {
 				guard let placeHolderImage = placeHolderImage else {
+					self.stopLoader()
 					self.image = nil
 					completion(nil, url)
 					return
 				}
+				self.stopLoader()
 				self.image = placeHolderImage
 				completion(placeHolderImage, url)
 				return
@@ -57,6 +61,7 @@ extension UIImageView {
 		                  options: withAnimation,
 		                  animations: {
 							DispatchQueue.main.async {
+								self.stopLoader()
 								self.image = image
 							}
 		},

@@ -23,6 +23,7 @@ class DetailsViewController: UIViewController {
 	
 	// MARK: Properties
 	var feedElement: FeedElement!
+	var imageTransition: ImageTransition!
 	
 	// MARK: Init
 	required init?(coder aDecoder: NSCoder) {
@@ -43,7 +44,8 @@ class DetailsViewController: UIViewController {
 		self.imageView.setImageWithUrl(URL(string: feedElement.mediaLink))
 		self.titleLabel.text = feedElement.title
 		self.flickrLinkButton.isEnabled = feedElement.flickrLink != ""
-		self.dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
+		let agoTime = Date().offset(from: feedElement.date)
+		self.dateTimeLabel.text = agoTime == "" ? "Just now" : agoTime + " ago"
 		self.authorButton.setTitle(feedElement.author, for: .normal)
 		
 		let calendar = Calendar.current
@@ -68,6 +70,9 @@ class DetailsViewController: UIViewController {
 				break
 			}
 			fullImageViewController.imageLink = url
+			imageTransition = ImageTransition(fromUIImageViewRect: self.imageView.frame, toUIImageViewRect: fullImageViewController.imageViewFrame)
+			fullImageViewController.transitioningDelegate = imageTransition
+			fullImageViewController.modalPresentationStyle = .custom
 		default:
 			break
 		}

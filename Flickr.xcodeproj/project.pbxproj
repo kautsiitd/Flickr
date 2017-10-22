@@ -23,6 +23,7 @@
 		F20EB67D1F98C77F00AD2D77 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */; };
 		F20EB6821F98C7A000AD2D77 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6801F98C7A000AD2D77 /* Parser.swift */; };
 		F20EB6851F98C81300AD2D77 /* MasterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6841F98C81300AD2D77 /* MasterLayout.swift */; };
+		F2E2B17E1F9BCF9A00A99D66 /* ImageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2B17D1F9BCF9A00A99D66 /* ImageTransition.swift */; };
 		F2F2EFEF1F98F2140096E762 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2EFEE1F98F2140096E762 /* Date.swift */; };
 		F2F2EFF11F98F4B30096E762 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2EFF01F98F4B30096E762 /* DetailsViewController.swift */; };
 		F2F9BC271F99F7CF00BA10FD /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9BC261F99F7CF00BA10FD /* FullImageViewController.swift */; };
@@ -48,6 +49,7 @@
 		F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 		F20EB6801F98C7A000AD2D77 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Others/Parser.swift; sourceTree = "<group>"; };
 		F20EB6841F98C81300AD2D77 /* MasterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterLayout.swift; path = Layouts/MasterLayout.swift; sourceTree = "<group>"; };
+		F2E2B17D1F9BCF9A00A99D66 /* ImageTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageTransition.swift; path = Transitions/ImageTransition.swift; sourceTree = "<group>"; };
 		F2F2EFEE1F98F2140096E762 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F2F2EFF01F98F4B30096E762 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = ViewControllers/DetailsViewController.swift; sourceTree = "<group>"; };
 		F2F9BC261F99F7CF00BA10FD /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullImageViewController.swift; path = ViewControllers/FullImageViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		F20EB6501F98925F00AD2D77 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				F2E2B17C1F9BCF4000A99D66 /* Transitions */,
 				F20EB6831F98C7FD00AD2D77 /* Layouts */,
 				F20EB67E1F98C78B00AD2D77 /* Others */,
 				F20EB6771F98C77100AD2D77 /* Extensions */,
@@ -181,6 +184,14 @@
 				F20EB6841F98C81300AD2D77 /* MasterLayout.swift */,
 			);
 			name = Layouts;
+			sourceTree = "<group>";
+		};
+		F2E2B17C1F9BCF4000A99D66 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				F2E2B17D1F9BCF9A00A99D66 /* ImageTransition.swift */,
+			);
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +338,7 @@
 				F20EB67B1F98C77F00AD2D77 /* GradientView.swift in Sources */,
 				F2F9BC271F99F7CF00BA10FD /* FullImageViewController.swift in Sources */,
 				F20EB6701F98C70A00AD2D77 /* MasterCollectionViewCell.swift in Sources */,
+				F2E2B17E1F9BCF9A00A99D66 /* ImageTransition.swift in Sources */,
 				F2F2EFF11F98F4B30096E762 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

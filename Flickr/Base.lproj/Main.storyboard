@@ -164,7 +164,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3h-Qb-USR">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                                 <connections>
-                                                    <segue destination="re6-mh-tQo" kind="presentation" identifier="presentingFullImageVC" id="6AV-fP-Qmf"/>
+                                                    <segue destination="re6-mh-tQo" kind="presentation" identifier="presentingFullImageVC" id="n4D-Or-nxH"/>
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="grZ-sp-PVq">
@@ -282,7 +282,7 @@
         <!--Full Image View Controller-->
         <scene sceneID="yXA-Ga-wV7">
             <objects>
-                <viewController id="re6-mh-tQo" customClass="FullImageViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="re6-mh-tQo" customClass="FullImageViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uMf-8g-f30"/>
                         <viewControllerLayoutGuide type="bottom" id="r03-gO-2Lq"/>

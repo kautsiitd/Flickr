@@ -11,10 +11,14 @@ import UIKit
 class FullImageViewController: UIViewController {
 	
 	// MARK: Elements
-	@IBOutlet fileprivate weak var imageView: UIImageView!
+	@IBOutlet weak var imageView: UIImageView!
 	
 	// MARK: Properties
 	var imageLink: URL?
+	var imageViewFrame = CGRect(x: 0,
+	                                   y: 73,
+	                                   width: 375,
+	                                   height: 521)
 	
 	// MARK: Init
 	required init?(coder aDecoder: NSCoder) {

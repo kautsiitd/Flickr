@@ -37,7 +37,10 @@ class MasterCollectionViewController: UICollectionViewController {
 		                                              y: -(collectionView?.contentInset.top ?? 0)),
 		                                 animated: true)
 		feedElements = []
-		(collectionView?.collectionViewLayout as? MasterLayout)?.cache = []
+		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
+			layout.cache = []
+			layout.contentHeight = 0
+		}
 		DispatchQueue.main.async {
 			self.collectionView?.reloadData()
 			self.loader.startAnimating()

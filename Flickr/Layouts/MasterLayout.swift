@@ -20,7 +20,7 @@ class MasterLayout: UICollectionViewLayout {
 	fileprivate var numberOfColumns = 2
 	fileprivate var cellPadding: CGFloat = 6
 	var cache = [UICollectionViewLayoutAttributes]()
-	fileprivate var contentHeight: CGFloat = 0
+	var contentHeight: CGFloat = 0
 	fileprivate var contentWidth: CGFloat {
 		guard let collectionView = collectionView else {
 			return 0

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+import UIKit
 
 class ApiManager: NSObject {
 	
@@ -64,8 +64,15 @@ class ApiManager: NSObject {
 			
 			let dataFormatted = "\(dataString)"[trimStartIndex..<trimEndIndex].data(using: String.Encoding.utf8,
 			                                                               allowLossyConversion: false)!
-			let jsonConverted = JSON(dataFormatted)
-			if jsonConverted == JSON.null {
+			var json: Any
+			do {
+				json = try JSONSerialization.jsonObject(with: dataFormatted, options: JSONSerialization.ReadingOptions.allowFragments)
+			} catch {
+				delegate.didFailWithError(getParameters, nil)
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
+				return
+			}
+			guard let jsonConverted = json as? [String: Any] else {
 				delegate.didFailWithError(getParameters, nil)
 				UIApplication.shared.isNetworkActivityIndicatorVisible = false
 				return

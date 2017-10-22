@@ -6,7 +6,7 @@
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.
 //
 
-import SwiftyJSON
+import Foundation
 
 protocol FlickrObjectDelegate: class {
 	/**
@@ -18,10 +18,10 @@ protocol FlickrObjectDelegate: class {
 	
 	/**
 	called once the api response comes, asks the class to parse the json response
-	- parameter responseObject: json response
+	- parameter responseObject: json response as Dictionary
 	- parameter params:			get parameters which were sent
 	*/
-	func parseObject(_ responseObject: JSON, _ params: [String: Any]?)
+	func parseObject(_ responseObject: [String: Any], _ params: [String: Any]?)
 	
 	/**
 	called once api call is succeeded and response is parsed
@@ -47,7 +47,7 @@ class FlickrObject: NSObject, FlickrObjectDelegate {
 	func getApiEndPointWithParams(_ params: [String: Any]?) -> String {
 		return ""
 	}
-	func parseObject(_ responseObject: JSON, _ params: [String: Any]?) {}
+	func parseObject(_ responseObject: [String: Any], _ params: [String: Any]?) {}
 	func didFetchSuccessfullyWithParams(_ params: [String: Any]?) {}
 	func didFailWithError(_ params: [String: Any]?, _ error: NSError?) {}
 	func isValid() -> Bool {

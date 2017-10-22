@@ -6,6 +6,4 @@ target 'Flickr' do
   use_frameworks!
 
   # Pods for Flickr
-	pod 'SwiftyJSON'
-
 end

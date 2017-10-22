@@ -1,15 +1,15 @@
 //
 //  GetFeed.swift
-//  Roposo
+//  Flickr
 //
-//  Created by Kautsya Kanu on 18/10/17.
+//  Created by Kautsya Kanu on 22/10/17.
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.
 //
 
-import SwiftyJSON
+import Foundation
 
 protocol GetFeedProtocol: class {
-	func feedFetchedSuccessfully(_ feedElements: [FeedElement])
+	func feedFetchedSuccessfully(_ feed: GetFeed)
 	func feedFetchingFailed(_ error: NSError?)
 }
 
@@ -20,7 +20,7 @@ class GetFeed: FlickrObject {
 	var feedDescription: String = ""
 	private var modified: String = ""
 	var generator: String = ""
-	private var items: [JSON] = []
+	private var items: [Any] = []
 	weak var delegate: GetFeedProtocol?
 	//	Formatted Properties
 	var modifiedFeedDate: Date = Date()
@@ -33,15 +33,18 @@ class GetFeed: FlickrObject {
 		                                     Delegate: self)
 	}
 	
-	override func parseObject(_ responseObject: JSON, _ params: [String: Any]?) {
-		title = responseObject["title"].string ?? ""
-		link = responseObject["link"].string ?? ""
-		feedDescription = responseObject["description"].string ?? ""
-		modified = responseObject["modified"].string ?? ""
-		generator = responseObject["generator"].string ?? ""
-		items = responseObject["items"].array ?? []
+	override func parseObject(_ responseObject: [String: Any], _ params: [String: Any]?) {
+		title = responseObject["title"] as? String ?? ""
+		link = responseObject["link"] as? String ?? ""
+		feedDescription = responseObject["description"] as? String ?? ""
+		modified = responseObject["modified"] as? String ?? ""
+		generator = responseObject["generator"] as? String ?? ""
+		items = responseObject["items"] as? [Any] ?? []
 		
-		for item in items {
+		for index in 0..<items.count {
+			guard let item = items[index] as? [String: Any] else {
+				continue
+			}
 			feedElements.append(FeedElement(responseObject: item))
 		}
 		let dateFormatter = DateFormatter()
@@ -58,7 +61,7 @@ class GetFeed: FlickrObject {
 	}
 	
 	override func didFetchSuccessfullyWithParams(_ params: [String: Any]?) {
-		self.delegate?.feedFetchedSuccessfully(feedElements)
+		self.delegate?.feedFetchedSuccessfully(self)
 	}
 	
 	override func didFailWithError(_ params: [String: Any]?, _ error: NSError?) {

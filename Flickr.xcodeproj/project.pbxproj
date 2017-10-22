@@ -13,8 +13,6 @@
 		F20EB6591F98925F00AD2D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6581F98925F00AD2D77 /* Assets.xcassets */; };
 		F20EB65C1F98925F00AD2D77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20EB65A1F98925F00AD2D77 /* LaunchScreen.storyboard */; };
 		F20EB6671F98C5BC00AD2D77 /* MasterCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6651F98C5BC00AD2D77 /* MasterCollectionViewController.swift */; };
-		F20EB66C1F98C69900AD2D77 /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB66A1F98C69900AD2D77 /* FeedElement.swift */; };
-		F20EB66D1F98C69900AD2D77 /* GetFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB66B1F98C69900AD2D77 /* GetFeed.swift */; };
 		F20EB6701F98C70A00AD2D77 /* MasterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB66E1F98C70A00AD2D77 /* MasterCollectionViewCell.swift */; };
 		F20EB6751F98C76200AD2D77 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6731F98C76200AD2D77 /* ApiManager.swift */; };
 		F20EB6761F98C76200AD2D77 /* FlickrObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6741F98C76200AD2D77 /* FlickrObject.swift */; };
@@ -23,7 +21,9 @@
 		F20EB67D1F98C77F00AD2D77 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */; };
 		F20EB6821F98C7A000AD2D77 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6801F98C7A000AD2D77 /* Parser.swift */; };
 		F20EB6851F98C81300AD2D77 /* MasterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6841F98C81300AD2D77 /* MasterLayout.swift */; };
-		F2F2EFEF1F98F2140096E762 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2EFEE1F98F2140096E762 /* Date.swift */; };
+		F2E2B18A1F9CEF6500A99D66 /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2B1891F9CEF6500A99D66 /* FeedElement.swift */; };
+		F2E2B18E1F9CF02C00A99D66 /* GetFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2B18D1F9CF02C00A99D66 /* GetFeed.swift */; };
+		F2E2B1901F9CF10F00A99D66 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E2B18F1F9CF10F00A99D66 /* Date.swift */; };
 		F2F2EFF11F98F4B30096E762 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F2EFF01F98F4B30096E762 /* DetailsViewController.swift */; };
 		F2F9BC271F99F7CF00BA10FD /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9BC261F99F7CF00BA10FD /* FullImageViewController.swift */; };
 /* End PBXBuildFile section */
@@ -38,8 +38,6 @@
 		F20EB65B1F98925F00AD2D77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F20EB65D1F98925F00AD2D77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20EB6651F98C5BC00AD2D77 /* MasterCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterCollectionViewController.swift; path = ViewControllers/MasterCollectionViewController.swift; sourceTree = "<group>"; };
-		F20EB66A1F98C69900AD2D77 /* FeedElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedElement.swift; path = "../../Interview Documents/Roposo/Roposo/Models/FeedElement.swift"; sourceTree = "<group>"; };
-		F20EB66B1F98C69900AD2D77 /* GetFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetFeed.swift; path = "../../Interview Documents/Roposo/Roposo/Models/GetFeed.swift"; sourceTree = "<group>"; };
 		F20EB66E1F98C70A00AD2D77 /* MasterCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterCollectionViewCell.swift; path = Views/MasterCollectionViewCell.swift; sourceTree = "<group>"; };
 		F20EB6731F98C76200AD2D77 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiManager.swift; path = ApiManager/ApiManager.swift; sourceTree = "<group>"; };
 		F20EB6741F98C76200AD2D77 /* FlickrObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlickrObject.swift; path = ApiManager/FlickrObject.swift; sourceTree = "<group>"; };
@@ -48,7 +46,9 @@
 		F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 		F20EB6801F98C7A000AD2D77 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Others/Parser.swift; sourceTree = "<group>"; };
 		F20EB6841F98C81300AD2D77 /* MasterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterLayout.swift; path = Layouts/MasterLayout.swift; sourceTree = "<group>"; };
-		F2F2EFEE1F98F2140096E762 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		F2E2B1891F9CEF6500A99D66 /* FeedElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedElement.swift; path = Models/FeedElement.swift; sourceTree = "<group>"; };
+		F2E2B18D1F9CF02C00A99D66 /* GetFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetFeed.swift; path = Models/GetFeed.swift; sourceTree = "<group>"; };
+		F2E2B18F1F9CF10F00A99D66 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Extensions/Date.swift; sourceTree = "<group>"; };
 		F2F2EFF01F98F4B30096E762 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = ViewControllers/DetailsViewController.swift; sourceTree = "<group>"; };
 		F2F9BC261F99F7CF00BA10FD /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullImageViewController.swift; path = ViewControllers/FullImageViewController.swift; sourceTree = "<group>"; };
 		F83DD8E9E1EA4DAA3266CBFF /* Pods-Flickr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flickr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flickr/Pods-Flickr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 		F20EB6641F98931B00AD2D77 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F20EB66A1F98C69900AD2D77 /* FeedElement.swift */,
-				F20EB66B1F98C69900AD2D77 /* GetFeed.swift */,
+				F2E2B1891F9CEF6500A99D66 /* FeedElement.swift */,
+				F2E2B18D1F9CF02C00A99D66 /* GetFeed.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 				F20EB6781F98C77F00AD2D77 /* GradientView.swift */,
 				F20EB6791F98C77F00AD2D77 /* String.swift */,
 				F20EB67A1F98C77F00AD2D77 /* UIImageView.swift */,
-				F2F2EFEE1F98F2140096E762 /* Date.swift */,
+				F2E2B18F1F9CF10F00A99D66 /* Date.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -313,16 +313,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F20EB66D1F98C69900AD2D77 /* GetFeed.swift in Sources */,
-				F20EB66C1F98C69900AD2D77 /* FeedElement.swift in Sources */,
 				F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */,
+				F2E2B1901F9CF10F00A99D66 /* Date.swift in Sources */,
 				F20EB67C1F98C77F00AD2D77 /* String.swift in Sources */,
+				F2E2B18A1F9CEF6500A99D66 /* FeedElement.swift in Sources */,
 				F20EB6761F98C76200AD2D77 /* FlickrObject.swift in Sources */,
 				F20EB6671F98C5BC00AD2D77 /* MasterCollectionViewController.swift in Sources */,
 				F20EB67D1F98C77F00AD2D77 /* UIImageView.swift in Sources */,
+				F2E2B18E1F9CF02C00A99D66 /* GetFeed.swift in Sources */,
 				F20EB6751F98C76200AD2D77 /* ApiManager.swift in Sources */,
 				F20EB6821F98C7A000AD2D77 /* Parser.swift in Sources */,
-				F2F2EFEF1F98F2140096E762 /* Date.swift in Sources */,
 				F20EB6851F98C81300AD2D77 /* MasterLayout.swift in Sources */,
 				F20EB67B1F98C77F00AD2D77 /* GradientView.swift in Sources */,
 				F2F9BC271F99F7CF00BA10FD /* FullImageViewController.swift in Sources */,

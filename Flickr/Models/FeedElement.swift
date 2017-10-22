@@ -1,16 +1,17 @@
 //
 //  FeedElement.swift
-//  Roposo
+//  Flickr
 //
-//  Created by Kautsya Kanu on 18/10/17.
+//  Created by Kautsya Kanu on 22/10/17.
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.
 //
 
-import SwiftyJSON
+import Foundation
+import UIKit
 
 class FeedElement: FlickrObject {
 	
-	// Mark: Properties
+	// MARK: Properties
 	var title: String = ""
 	var flickrLink: String = ""
 	var mediaLink: String = ""
@@ -20,20 +21,24 @@ class FeedElement: FlickrObject {
 	var author: String = ""
 	var authorId: String = ""
 	var tags: String = ""
+	
+	// MARK: Calculated Properties
 	var imagewidth: CGFloat
 	var imageHeight: CGFloat
+	var authorLink: String = ""
+	var date: Date = Date()
 	
 	// MARK: Init
-	init(responseObject: JSON) {
-		title = responseObject["title"].string ?? ""
-		flickrLink = responseObject["link"].string ?? ""
-		mediaLink = responseObject["media"].dictionary?["m"]?.string ?? ""
-		dateTaken = responseObject["date_taken"].string ?? ""
-		imageDescription = responseObject["description"].string ?? ""
-		publishedDate = responseObject["published"].string ?? ""
-		author = responseObject["author"].string ?? ""
-		authorId = responseObject["author_id"].string ?? ""
-		tags = responseObject["tags"].string ?? ""
+	init(responseObject: [String: Any]) {
+		title = responseObject["title"] as? String ?? ""
+		flickrLink = responseObject["link"] as? String ?? ""
+		mediaLink = (responseObject["media"] as? [String: String])?["m"] ?? ""
+		dateTaken = responseObject["date_taken"] as? String ?? ""
+		imageDescription = responseObject["description"] as? String ?? ""
+		publishedDate = responseObject["published"] as? String ?? ""
+		author = responseObject["author"] as? String ?? ""
+		authorId = responseObject["author_id"] as? String ?? ""
+		tags = responseObject["tags"] as? String ?? ""
 		
 		let imageWidthString = imageDescription.matchingStrings(regex: "width=\\\"(.*?)\\\"").first?[0] ?? "180"
 		imagewidth = NumberFormatter().number(from: imageWidthString) as? CGFloat ?? 180
@@ -46,3 +51,4 @@ class FeedElement: FlickrObject {
 		return true
 	}
 }
+

@@ -36,14 +36,26 @@ class FeedElement: FlickrObject {
 		dateTaken = responseObject["date_taken"] as? String ?? ""
 		imageDescription = responseObject["description"] as? String ?? ""
 		publishedDate = responseObject["published"] as? String ?? ""
+		
 		author = responseObject["author"] as? String ?? ""
+		var imageDescriptionElements = imageDescription.matchingStrings(regex: "<a href=\\\"(.*?)\">(.*?)</a>")
+		if imageDescriptionElements.count > 0 {
+			authorLink = imageDescriptionElements[0][1]
+			author = imageDescriptionElements[0][2]
+		}
+		
 		authorId = responseObject["author_id"] as? String ?? ""
 		tags = responseObject["tags"] as? String ?? ""
 		
-		let imageWidthString = imageDescription.matchingStrings(regex: "width=\\\"(.*?)\\\"").first?[0] ?? "180"
+		imageDescriptionElements = imageDescription.matchingStrings(regex: "width=\\\"(.*?)\\\" height=\\\"(.*?)\\\"")
+		let imageWidthString = imageDescriptionElements.first?[1] ?? "180"
 		imagewidth = NumberFormatter().number(from: imageWidthString) as? CGFloat ?? 180
-		let imageHeightString = imageDescription.matchingStrings(regex: "width=\\\"(.*?)\\\"").first?[0] ?? "240"
+		let imageHeightString = imageDescriptionElements.first?[2] ?? "240"
 		imageHeight = NumberFormatter().number(from: imageHeightString) as? CGFloat ?? 240
+		
+		imageDescriptionElements = imageDescription.matchingStrings(regex: "<p>(.*?)<\\/p>")
+		imageDescription = imageDescriptionElements.count > 2 ? imageDescriptionElements[2][1] : ""
+		
 		super.init()
 	}
 	

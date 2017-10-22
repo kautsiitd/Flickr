@@ -56,6 +56,7 @@ class DetailsViewController: UIViewController {
 		let hour = calendar.component(.hour, from: feedElement.date)
 		self.timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
 		
+		self.descriptionTextView.text = ""
 		DispatchQueue.main.async {
 			self.descriptionTextView.attributedText = Parser.parseHTMLString(self.feedElement.imageDescription)
 		}

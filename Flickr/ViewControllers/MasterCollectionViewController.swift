@@ -41,6 +41,11 @@ class MasterCollectionViewController: UICollectionViewController {
 			layout.cache = []
 			layout.contentHeight = 0
 		}
+		URLSession.shared.getTasksWithCompletionHandler( { tasks, _, _ in
+			for task in tasks {
+				task.cancel()
+			}
+		})
 		DispatchQueue.main.async {
 			self.collectionView?.reloadData()
 			self.loader.startAnimating()

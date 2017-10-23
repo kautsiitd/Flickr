@@ -50,10 +50,6 @@ class MasterCollectionViewController: UICollectionViewController {
 			                                              y: -(collectionView?.contentInset.top ?? 0)),
 			                                 animated: true)
 			feedElements = []
-			if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
-				layout.cache = []
-				layout.contentHeight = 0
-			}
 			DispatchQueue.main.async {
 				self.collectionView?.reloadData()
 				self.loader.startAnimating()
@@ -105,6 +101,10 @@ extension MasterCollectionViewController : MasterLayoutDelegate {
 extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
 		imageCache.removeAllObjects()
+		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
+			layout.cache = []
+			layout.contentHeight = 0
+		}
 		self.feed = feed
 		self.feedElements = feed.feedElements
 		DispatchQueue.main.async {

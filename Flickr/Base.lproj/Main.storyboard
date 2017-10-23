@@ -242,7 +242,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="dae-5E-I1m" secondAttribute="trailing" id="5fW-CC-emH"/>
                                     <constraint firstItem="dae-5E-I1m" firstAttribute="top" secondItem="G0I-Q5-MJQ" secondAttribute="top" constant="-64" id="AFd-fb-gZg"/>
-                                    <constraint firstAttribute="bottom" secondItem="dae-5E-I1m" secondAttribute="bottom" constant="-64" id="LKK-Tq-i5W"/>
+                                    <constraint firstAttribute="bottom" secondItem="dae-5E-I1m" secondAttribute="bottom" id="LKK-Tq-i5W"/>
                                     <constraint firstItem="dae-5E-I1m" firstAttribute="leading" secondItem="G0I-Q5-MJQ" secondAttribute="leading" id="l5q-7R-nLu"/>
                                 </constraints>
                             </scrollView>

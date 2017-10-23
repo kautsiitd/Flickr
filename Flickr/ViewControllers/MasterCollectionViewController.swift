@@ -17,6 +17,7 @@ class MasterCollectionViewController: UICollectionViewController {
 	// MARK: Variables
 	fileprivate var feed: GetFeed?
 	fileprivate var feedElements: [FeedElement] = []
+	fileprivate var refreshControl: UIRefreshControl!
 	
 	override var preferredStatusBarStyle : UIStatusBarStyle {
 		return UIStatusBarStyle.lightContent
@@ -29,29 +30,38 @@ class MasterCollectionViewController: UICollectionViewController {
 		if let layout = collectionView?.collectionViewLayout as? MasterLayout {
 			layout.delegate = self
 		}
-		fetchFeed()
+		refreshControl = UIRefreshControl()
+		refreshControl.attributedTitle = NSAttributedString(string: "")
+		refreshControl.addTarget(self, action: #selector(fetchFeed), for: UIControlEvents.valueChanged)
+		collectionView?.addSubview(refreshControl)
+		fetchFeed(normalRefresh: true)
 	}
 	
-	fileprivate func fetchFeed() {
-		collectionView?.setContentOffset(CGPoint.init(x: 0,
-		                                              y: -(collectionView?.contentInset.top ?? 0)),
-		                                 animated: true)
-		feedElements = []
-		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
-			layout.cache = []
-			layout.contentHeight = 0
-		}
+	@objc
+	fileprivate func fetchFeed(normalRefresh: Bool = false) {
 		URLSession.shared.getTasksWithCompletionHandler( { tasks, _, _ in
 			for task in tasks {
 				task.cancel()
 			}
 		})
-		DispatchQueue.main.async {
-			self.collectionView?.reloadData()
-			self.loader.startAnimating()
-			self.loader.isHidden = false
-			self.navigationItem.rightBarButtonItem?.isEnabled = false
+		
+		if normalRefresh {
+			collectionView?.setContentOffset(CGPoint.init(x: 0,
+			                                              y: -(collectionView?.contentInset.top ?? 0)),
+			                                 animated: true)
+			feedElements = []
+			if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
+				layout.cache = []
+				layout.contentHeight = 0
+			}
+			DispatchQueue.main.async {
+				self.collectionView?.reloadData()
+				self.loader.startAnimating()
+				self.loader.isHidden = false
+			}
 		}
+		
+		self.navigationItem.rightBarButtonItem?.isEnabled = false
 		GetFeed().fetchFeed(self)
 	}
 	
@@ -101,6 +111,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
 			self.collectionView?.reloadData()
 			self.loader.stopAnimating()
 			self.loader.isHidden = true
+			self.refreshControl.endRefreshing()
 			self.navigationItem.leftBarButtonItem?.isEnabled = true
 			self.navigationItem.rightBarButtonItem?.isEnabled = true
 		}
@@ -108,10 +119,11 @@ extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchingFailed(_ error: NSError?) {
 		loader.stopAnimating()
 		loader.isHidden = true
+		refreshControl.endRefreshing()
 		let retryButton = UIAlertAction(title: "Retry",
 		                                style: .default,
 		                                handler: { _ in
-											self.fetchFeed()
+											self.fetchFeed(normalRefresh: true)
 		})
 		let alertController = UIAlertController(title: "Error",
 		                                        message: error?.localizedDescription ?? "Unknown error occured!",
@@ -146,6 +158,6 @@ extension MasterCollectionViewController {
 	
 	
 	@IBAction func refreshFeed() {
-		fetchFeed()
+		fetchFeed(normalRefresh: true)
 	}
 }

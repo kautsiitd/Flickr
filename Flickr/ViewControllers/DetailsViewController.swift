@@ -56,7 +56,6 @@ class DetailsViewController: UIViewController {
 		let hour = calendar.component(.hour, from: feedElement.date)
 		self.timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
 		
-		self.descriptionTextView.text = ""
 		self.descriptionTextView.attributedText = self.feedElement.attributedDescriptionString
 	}
 	

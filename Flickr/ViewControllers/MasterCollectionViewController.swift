@@ -49,7 +49,7 @@ class MasterCollectionViewController: UICollectionViewController {
 			collectionView?.setContentOffset(CGPoint.init(x: 0,
 			                                              y: -(collectionView?.contentInset.top ?? 0)),
 			                                 animated: true)
-			feedElements = []
+			resetFeedElements()
 			DispatchQueue.main.async {
 				self.collectionView?.reloadData()
 				self.loader.startAnimating()
@@ -59,6 +59,15 @@ class MasterCollectionViewController: UICollectionViewController {
 		
 		self.navigationItem.rightBarButtonItem?.isEnabled = false
 		GetFeed().fetchFeed(self)
+	}
+	
+	fileprivate func resetFeedElements() {
+		feedElements = []
+		imageCache.removeAllObjects()
+		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
+			layout.cache = []
+			layout.contentHeight = 0
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,11 +109,7 @@ extension MasterCollectionViewController : MasterLayoutDelegate {
 // MARK: - GetFeedProtocol
 extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
-		imageCache.removeAllObjects()
-		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
-			layout.cache = []
-			layout.contentHeight = 0
-		}
+		resetFeedElements()
 		self.feed = feed
 		self.feedElements = feed.feedElements
 		DispatchQueue.main.async {
@@ -117,6 +122,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
 		}
 	}
 	func feedFetchingFailed(_ error: NSError?) {
+		resetFeedElements()
 		loader.stopAnimating()
 		loader.isHidden = true
 		refreshControl.endRefreshing()

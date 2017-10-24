@@ -37,6 +37,14 @@ class MasterCollectionViewController: UICollectionViewController {
 		fetchFeed(normalRefresh: true)
 	}
 	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		guard let flowLayout = self.collectionView?.collectionViewLayout as? MasterLayout else {
+			return
+		}
+		flowLayout.cache = []
+		flowLayout.invalidateLayout()
+	}
+	
 	@objc
 	fileprivate func fetchFeed(normalRefresh: Bool = false) {
 		URLSession.shared.getTasksWithCompletionHandler( { tasks, _, _ in
@@ -91,6 +99,7 @@ extension MasterCollectionViewController {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MasterCollectionViewCell",
 		                                              for: indexPath)
 		if let collectionViewCell = cell as? MasterCollectionViewCell {
+			// FIXME: indexOut of range on pullToRefresh.. feedElements.count = 0
 			collectionViewCell.setCellWith(feedElement: feedElements[indexPath.item])
 		}
 		return cell

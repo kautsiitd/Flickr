@@ -53,11 +53,16 @@ class MasterCollectionViewController: UICollectionViewController {
 			}
 		})
 		
+		feedElements = []
+		imageCache.removeAllObjects()
+		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
+			layout.cache = []
+			layout.contentHeight = 0
+		}
 		if normalRefresh {
 			collectionView?.setContentOffset(CGPoint.init(x: 0,
 			                                              y: -(collectionView?.contentInset.top ?? 0)),
 			                                 animated: true)
-			resetFeedElements()
 			DispatchQueue.main.async {
 				self.collectionView?.reloadData()
 				self.loader.startAnimating()
@@ -67,15 +72,6 @@ class MasterCollectionViewController: UICollectionViewController {
 		
 		self.navigationItem.rightBarButtonItem?.isEnabled = false
 		GetFeed().fetchFeed(self)
-	}
-	
-	fileprivate func resetFeedElements() {
-		feedElements = []
-		imageCache.removeAllObjects()
-		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
-			layout.cache = []
-			layout.contentHeight = 0
-		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -99,7 +95,6 @@ extension MasterCollectionViewController {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MasterCollectionViewCell",
 		                                              for: indexPath)
 		if let collectionViewCell = cell as? MasterCollectionViewCell {
-			// FIXME: indexOut of range on pullToRefresh.. feedElements.count = 0
 			collectionViewCell.setCellWith(feedElement: feedElements[indexPath.item])
 		}
 		return cell
@@ -118,7 +113,6 @@ extension MasterCollectionViewController : MasterLayoutDelegate {
 // MARK: - GetFeedProtocol
 extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
-		resetFeedElements()
 		self.feed = feed
 		self.feedElements = feed.feedElements
 		DispatchQueue.main.async {
@@ -131,7 +125,6 @@ extension MasterCollectionViewController: GetFeedProtocol {
 		}
 	}
 	func feedFetchingFailed(_ error: NSError?) {
-		resetFeedElements()
 		loader.stopAnimating()
 		loader.isHidden = true
 		refreshControl.endRefreshing()

@@ -17,6 +17,7 @@ class MasterCollectionViewController: UICollectionViewController {
 	// MARK: Variables
 	fileprivate var feed: GetFeed?
 	fileprivate var feedElements: [FeedElement] = []
+	fileprivate var visibleCellIndexPath: IndexPath!
 	fileprivate var refreshControl: UIRefreshControl!
 	
 	override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -38,10 +39,23 @@ class MasterCollectionViewController: UICollectionViewController {
 	}
 	
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		coordinator.animate(alongsideTransition: { context in
+			let firstCellIndexPath = IndexPath(item: 0, section: 0)
+			guard let currentCell = self.collectionView?.visibleCells[0] else {
+				self.visibleCellIndexPath = firstCellIndexPath
+				return
+			}
+			self.visibleCellIndexPath = self.collectionView?.indexPath(for: currentCell) ?? firstCellIndexPath
+			context.viewController(forKey: UITransitionContextViewControllerKey.from)
+		}, completion: { context in
+			self.collectionView?.scrollToItem(at: self.visibleCellIndexPath, at: .centeredVertically, animated: true)
+		})
+		
 		guard let flowLayout = self.collectionView?.collectionViewLayout as? MasterLayout else {
 			return
 		}
 		flowLayout.cache = []
+		flowLayout.contentHeight = 0
 		flowLayout.invalidateLayout()
 	}
 	

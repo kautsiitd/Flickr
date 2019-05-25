@@ -33,7 +33,7 @@ class MasterCollectionViewController: UICollectionViewController {
 		}
 		refreshControl = UIRefreshControl()
 		refreshControl.attributedTitle = NSAttributedString(string: "")
-		refreshControl.addTarget(self, action: #selector(fetchFeed), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(fetchFeed), for: UIControl.Event.valueChanged)
 		collectionView?.addSubview(refreshControl)
 		fetchFeed(normalRefresh: true)
 	}

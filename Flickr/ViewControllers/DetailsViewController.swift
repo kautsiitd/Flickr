@@ -79,7 +79,7 @@ extension DetailsViewController {
 		guard let url = URL(string: urlString) else {
 			let alert = UIAlertController(title: "Error!",
 			                              message: "Sorry, Link is not working!",
-			                              preferredStyle: UIAlertControllerStyle.alert)
+                                          preferredStyle: UIAlertController.Style.alert)
 			alert.addAction(UIAlertAction(title: "OK",
 			                              style: .cancel,
 			                              handler: nil))

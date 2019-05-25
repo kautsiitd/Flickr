@@ -33,9 +33,9 @@ class Parser {
 		
 		do {
 			if formattedText.data(using: String.Encoding.unicode, allowLossyConversion: false) != nil {
-				return try NSAttributedString( data: formattedText.data(using: String.Encoding.unicode, allowLossyConversion: false)!, options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+				return try NSAttributedString( data: formattedText.data(using: String.Encoding.unicode, allowLossyConversion: false)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
 			} else if formattedText.data(using: String.Encoding.unicode, allowLossyConversion: true) != nil {
-				return try NSAttributedString( data: formattedText.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+				return try NSAttributedString( data: formattedText.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
 			}
 		} catch let error as NSError {
 			return NSAttributedString(string: error.localizedDescription)

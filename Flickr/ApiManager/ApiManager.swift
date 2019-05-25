@@ -58,7 +58,7 @@ class ApiManager: NSObject {
 			var trimStartIndex = 0
 			var trimEndIndex =  "\(dataString)".count
 			if prefix != "" {
-				trimStartIndex = prefix.characters.count
+				trimStartIndex = prefix.count
 				trimEndIndex -= 1
 			}
 			

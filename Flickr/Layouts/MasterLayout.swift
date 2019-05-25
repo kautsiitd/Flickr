@@ -17,7 +17,7 @@ class MasterLayout: UICollectionViewLayout {
 	
 	// MARK: Variables
 	weak var delegate: MasterLayoutDelegate!
-	fileprivate var numberOfColumns = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) ? 3:2
+	fileprivate var numberOfColumns = UIApplication.shared.statusBarOrientation.isLandscape ? 3:2
 	fileprivate var cellPadding: CGFloat = 6
 	var cache = [UICollectionViewLayoutAttributes]()
 	var contentHeight: CGFloat = 0
@@ -36,7 +36,7 @@ class MasterLayout: UICollectionViewLayout {
 		guard cache.isEmpty == true, let collectionView = collectionView else {
 			return
 		}
-		numberOfColumns = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) ? 3:2
+		numberOfColumns = UIApplication.shared.statusBarOrientation.isLandscape ? 3:2
 		let columnWidth = contentWidth / CGFloat(numberOfColumns)
 		var xOffset = [CGFloat]()
 		for column in 0 ..< numberOfColumns {
@@ -63,7 +63,7 @@ class MasterLayout: UICollectionViewLayout {
 			contentHeight = max(contentHeight, yOffset[column])
 			
 			let minElement = yOffset.min() ?? 0
-			column = yOffset.index(of: minElement) ?? 0
+			column = yOffset.firstIndex(of: minElement) ?? 0
 		}
 	}
 	

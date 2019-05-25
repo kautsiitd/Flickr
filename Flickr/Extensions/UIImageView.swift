@@ -17,7 +17,7 @@ public enum FetchedImageType {
 extension UIImageView {
 	public func setImageWithUrl(_ url: URL?,
 	                            placeHolderImage: UIImage? = nil,
-	                            completion: @escaping (_ image: UIImage?, _ url: URL?) -> Void = { _ in
+                                completion: @escaping (_ image: UIImage?, _ url: URL?) -> Void = { _,_  in
 		}) {
 		guard let url = url else {
 			guard let placeHolderImage = placeHolderImage else {
@@ -53,7 +53,7 @@ extension UIImageView {
 	}
 	
 	public func animate(image: UIImage,
-	                    withAnimation: UIViewAnimationOptions,
+	                    withAnimation: UIView.AnimationOptions,
 	                    completion: @escaping (_ completed: Bool) -> Void = { _ in
 		}) {
 		UIView.transition(with: self,
@@ -72,7 +72,7 @@ extension UIImageView {
 	
 	public func getImageWith(_ url: URL,
 	                         placeHolderImage: UIImage? = nil,
-	                         completion: @escaping (_ image: UIImage?, _ url: URL, _ type: FetchedImageType) -> Void = { _ in
+                             completion: @escaping (_ image: UIImage?, _ url: URL, _ type: FetchedImageType) -> Void = { _,_,_  in
 		}) {
 		if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
 			completion(cachedImage, url, .cache)
@@ -126,7 +126,7 @@ extension UIImageView {
 	}
 	public func showLoader() {
 		DispatchQueue.main.async {
-			let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
 			activityIndicator.tag = self.activityIndicatorTag
 			activityIndicator.center = self.center
 			activityIndicator.hidesWhenStopped = true

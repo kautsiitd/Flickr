@@ -86,7 +86,9 @@ class ApiManager: NSObject {
 			else {
 				delegate.didFailWithError(getParameters, nil)
 			}
-			UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
 		}
 		task.resume()
 	}

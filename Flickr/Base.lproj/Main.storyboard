@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Mco-uM-OKo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Mco-uM-OKo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +16,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FVC-FY-NgJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -43,7 +42,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </activityIndicatorView>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MasterCollectionViewCell" id="IIR-Vf-cwN" customClass="MasterCollectionViewCell" customModule="Flickr" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="MasterCollectionViewCell" id="IIR-Vf-cwN" customClass="MasterCollectionViewCell" customModule="Flickr" customModuleProvider="target">
                                 <rect key="frame" x="53.5" y="0.0" width="213" height="285"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -51,10 +50,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6dg-qn-myf">
-                                            <rect key="frame" x="0.0" y="0.0" width="213" height="285"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="158" height="98"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZc-Kn-CH2" customClass="GradientView" customModule="Flickr" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="255" width="213" height="30"/>
+                                            <rect key="frame" x="0.0" y="68" width="158" height="30"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1M-32-jFi">
                                                     <rect key="frame" x="10" y="9" width="41" height="16"/>
@@ -63,7 +62,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzC-5f-oyp">
-                                                    <rect key="frame" x="174.5" y="9" width="28.5" height="16"/>
+                                                    <rect key="frame" x="119.5" y="9" width="28.5" height="16"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -159,7 +158,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dae-5E-I1m" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="-64" width="320" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3h-Qb-USR">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
@@ -241,7 +240,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="dae-5E-I1m" secondAttribute="trailing" id="5fW-CC-emH"/>
-                                    <constraint firstItem="dae-5E-I1m" firstAttribute="top" secondItem="G0I-Q5-MJQ" secondAttribute="top" constant="-64" id="AFd-fb-gZg"/>
+                                    <constraint firstItem="dae-5E-I1m" firstAttribute="top" secondItem="G0I-Q5-MJQ" secondAttribute="top" id="AFd-fb-gZg"/>
                                     <constraint firstAttribute="bottom" secondItem="dae-5E-I1m" secondAttribute="bottom" id="LKK-Tq-i5W"/>
                                     <constraint firstItem="dae-5E-I1m" firstAttribute="leading" secondItem="G0I-Q5-MJQ" secondAttribute="leading" id="l5q-7R-nLu"/>
                                 </constraints>
@@ -288,11 +287,11 @@
                         <viewControllerLayoutGuide type="bottom" id="r03-gO-2Lq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TDW-bE-hqy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KrM-yL-JmX">
-                                <rect key="frame" x="0.0" y="73" width="375" height="521"/>
+                                <rect key="frame" x="0.0" y="73" width="320" height="334"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qc6-Ji-iwi" customClass="GradientView" customModule="Flickr" customModuleProvider="target">
                                 <rect key="frame" x="20.5" y="42.5" width="54" height="23"/>

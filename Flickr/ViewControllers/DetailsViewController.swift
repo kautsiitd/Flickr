@@ -40,23 +40,23 @@ class DetailsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.imageView.setImageWithUrl(URL(string: feedElement.mediaLink))
-		self.titleLabel.text = feedElement.title
-		self.flickrLinkButton.isEnabled = feedElement.flickrLink != ""
-		self.dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
-		self.authorButton.setTitle(feedElement.author, for: .normal)
+		imageView.setImageWithUrl(URL(string: feedElement.mediaLink))
+		titleLabel.text = feedElement.title
+		flickrLinkButton.isEnabled = feedElement.flickrLink != ""
+		dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
+		authorButton.setTitle(feedElement.author, for: .normal)
 		
 		let calendar = Calendar.current
 		let day = calendar.component(.day, from: feedElement.date)
 		let month = calendar.component(.month, from: feedElement.date)
 		let year = calendar.component(.year, from: feedElement.date)%100
-		self.dateLabel.text = "\(day)/\(month)/\(year)"
+		dateLabel.text = "\(day)/\(month)/\(year)"
 		
 		let minute = calendar.component(.minute, from: feedElement.date)
 		let hour = calendar.component(.hour, from: feedElement.date)
-		self.timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
+		timeLabel.text = "\(hour):\(minute/10)\(minute%10)"
 		
-		self.descriptionTextView.attributedText = self.feedElement.attributedDescriptionString
+		descriptionTextView.attributedText = self.feedElement.attributedDescriptionString
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,7 +83,7 @@ extension DetailsViewController {
 			alert.addAction(UIAlertAction(title: "OK",
 			                              style: .cancel,
 			                              handler: nil))
-			self.present(alert, animated: true, completion: nil)
+			present(alert, animated: true, completion: nil)
 			return
 		}
 		let safariViewController = SFSafariViewController(url: url,

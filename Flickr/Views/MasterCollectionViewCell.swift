@@ -27,7 +27,7 @@ class MasterCollectionViewCell: UICollectionViewCell {
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
-		self.feedElement = nil
+		feedElement = nil
 		productImageView.image = #imageLiteral(resourceName: "Placeholder")
 		authorNameLabel.text = ""
 		dateTimeLabel.text = ""
@@ -38,21 +38,22 @@ extension MasterCollectionViewCell {
 	func setCellWith(feedElement: FeedElement) {
 		self.feedElement = feedElement
 		if let imageURL = URL(string: feedElement.mediaLink) {
-			self.productImageView.getImageWith(imageURL, placeHolderImage: #imageLiteral(resourceName: "Placeholder"), completion: { image, url, fetchedImageType in
-				guard let feedElement = self.feedElement else {
-					self.productImageView.stopLoader()
-					self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
+			productImageView.getImageWith(imageURL, placeHolderImage:
+                #imageLiteral(resourceName: "Placeholder"), completion: { [weak self] image, url, fetchedImageType in
+				guard let feedElement = self?.feedElement else {
+					self?.productImageView.stopLoader()
+					self?.productImageView.image = #imageLiteral(resourceName: "Placeholder")
 					return
 				}
 				if url.absoluteString == feedElement.mediaLink {
 					guard let image = image else {
 						DispatchQueue.main.async {
-							self.productImageView.stopLoader()
-							self.productImageView.image = #imageLiteral(resourceName: "Placeholder")
+							self?.productImageView.stopLoader()
+							self?.productImageView.image = #imageLiteral(resourceName: "Placeholder")
 						}
 						return
 					}
-					self.handleImageTransition(image: image,
+					self?.handleImageTransition(image: image,
 											   fetchedImageType: fetchedImageType)
 				}
 			})
@@ -65,14 +66,13 @@ extension MasterCollectionViewCell {
 	fileprivate func handleImageTransition(image: UIImage, fetchedImageType: FetchedImageType) {
 		switch fetchedImageType {
 		case .cache:
-			DispatchQueue.main.async {
-				self.productImageView.stopLoader()
-				self.productImageView.image = image
+			DispatchQueue.main.async { [weak self] in
+				self?.productImageView.stopLoader()
+				self?.productImageView.image = image
 			}
 		case .downloaded:
 			productImageView.animate(image: image,
-			                         withAnimation: .transitionCrossDissolve,
-			                         completion: { _ in })
+			                         withAnimation: .transitionCrossDissolve)
 		}
 	}
 }

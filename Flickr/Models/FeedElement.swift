@@ -55,7 +55,10 @@ class FeedElement: FlickrObject {
 		let imageHeightString = imageDescriptionElements.first?[2] ?? "240"
 		imageHeight = NumberFormatter().number(from: imageHeightString) as? CGFloat ?? 240
 		
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
 			imageDescriptionElements = self.imageDescription.matchingStrings(regex: "<p>(.*?)<\\/p>")
 			self.attributedDescriptionString = Parser.parseHTMLString( imageDescriptionElements.count > 2 ? imageDescriptionElements[2][1] : "")
 		}

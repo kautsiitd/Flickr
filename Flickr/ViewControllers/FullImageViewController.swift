@@ -32,7 +32,7 @@ class FullImageViewController: UIViewController {
 
 extension FullImageViewController {
 	@IBAction func closeButtonPressed() {
-		self.dismiss(animated: true,
+		dismiss(animated: true,
 		             completion: nil)
 	}
 }

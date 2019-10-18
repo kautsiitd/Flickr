@@ -39,19 +39,22 @@ class MasterCollectionViewController: UICollectionViewController {
 	}
 	
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-		coordinator.animate(alongsideTransition: { context in
+		coordinator.animate(alongsideTransition: { [weak self] context in
 			let firstCellIndexPath = IndexPath(item: 0, section: 0)
-			guard let currentCell = self.collectionView?.visibleCells[0] else {
-				self.visibleCellIndexPath = firstCellIndexPath
+			guard let currentCell = self?.collectionView?.visibleCells[0] else {
+				self?.visibleCellIndexPath = firstCellIndexPath
 				return
 			}
-			self.visibleCellIndexPath = self.collectionView?.indexPath(for: currentCell) ?? firstCellIndexPath
+			self?.visibleCellIndexPath = self?.collectionView?.indexPath(for: currentCell) ?? firstCellIndexPath
 			context.viewController(forKey: UITransitionContextViewControllerKey.from)
-		}, completion: { context in
+		}, completion: { [weak self] context in
+            guard let self = self else {
+                return
+            }
 			self.collectionView?.scrollToItem(at: self.visibleCellIndexPath, at: .centeredVertically, animated: true)
 		})
 		
-		guard let flowLayout = self.collectionView?.collectionViewLayout as? MasterLayout else {
+		guard let flowLayout = collectionView?.collectionViewLayout as? MasterLayout else {
 			return
 		}
 		flowLayout.cache = []
@@ -77,14 +80,14 @@ class MasterCollectionViewController: UICollectionViewController {
 			collectionView?.setContentOffset(CGPoint.init(x: 0,
 			                                              y: -(collectionView?.contentInset.top ?? 0)),
 			                                 animated: true)
-			DispatchQueue.main.async {
-				self.collectionView?.reloadData()
-				self.loader.startAnimating()
-				self.loader.isHidden = false
+			DispatchQueue.main.async { [weak self] in
+				self?.collectionView?.reloadData()
+				self?.loader.startAnimating()
+				self?.loader.isHidden = false
 			}
 		}
 		
-		self.navigationItem.rightBarButtonItem?.isEnabled = false
+		navigationItem.rightBarButtonItem?.isEnabled = false
 		GetFeed().fetchFeed(self)
 	}
 	
@@ -93,7 +96,7 @@ class MasterCollectionViewController: UICollectionViewController {
 		switch segue.identifier ?? "" {
 		case "pushingDescriptionVC":
 			let detailsViewController = segue.destination as! DetailsViewController
-			let item = self.collectionView?.indexPathsForSelectedItems?[0].item ?? 0
+			let item = collectionView?.indexPathsForSelectedItems?[0].item ?? 0
 			detailsViewController.feedElement = feedElements[item]
 		default:
 			break
@@ -129,31 +132,33 @@ extension MasterCollectionViewController: GetFeedProtocol {
 	func feedFetchedSuccessfully(_ feed: GetFeed) {
 		self.feed = feed
 		self.feedElements = feed.feedElements
-		DispatchQueue.main.async {
-			self.collectionView?.reloadData()
-			self.loader.stopAnimating()
-			self.loader.isHidden = true
-			self.refreshControl.endRefreshing()
-			self.navigationItem.leftBarButtonItem?.isEnabled = true
-			self.navigationItem.rightBarButtonItem?.isEnabled = true
+		DispatchQueue.main.async { [weak self] in
+			self?.collectionView?.reloadData()
+			self?.loader.stopAnimating()
+			self?.loader.isHidden = true
+			self?.refreshControl.endRefreshing()
+			self?.navigationItem.leftBarButtonItem?.isEnabled = true
+			self?.navigationItem.rightBarButtonItem?.isEnabled = true
 		}
 	}
 	func feedFetchingFailed(_ error: NSError?) {
-		loader.stopAnimating()
-		loader.isHidden = true
-		refreshControl.endRefreshing()
-		let retryButton = UIAlertAction(title: "Retry",
-		                                style: .default,
-		                                handler: { _ in
-											self.fetchFeed(normalRefresh: true)
-		})
-		let alertController = UIAlertController(title: "Error",
-		                                        message: error?.localizedDescription ?? "Unknown error occured!",
-		                                        preferredStyle: .alert)
-		alertController.addAction(retryButton)
-		navigationController?.present(alertController,
-		                              animated: true,
-		                              completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.loader.stopAnimating()
+            self?.loader.isHidden = true
+            self?.refreshControl.endRefreshing()
+            let retryButton = UIAlertAction(title: "Retry",
+                                            style: .default,
+                                            handler: { _ in
+                                                self?.fetchFeed(normalRefresh: true)
+            })
+            let alertController = UIAlertController(title: "Error",
+                                                    message: error?.localizedDescription ?? "Unknown error occured!",
+                                                    preferredStyle: .alert)
+            alertController.addAction(retryButton)
+            self?.navigationController?.present(alertController,
+                                          animated: true,
+                                          completion: nil)
+        }
 	}
 }
 

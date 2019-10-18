@@ -32,7 +32,6 @@ class MasterCollectionViewController: UICollectionViewController {
 			layout.delegate = self
 		}
 		refreshControl = UIRefreshControl()
-		refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(fetchFeed), for: UIControl.Event.valueChanged)
 		collectionView?.addSubview(refreshControl)
 		fetchFeed(normalRefresh: true)
@@ -76,17 +75,16 @@ class MasterCollectionViewController: UICollectionViewController {
 			layout.cache = []
 			layout.contentHeight = 0
 		}
-		if normalRefresh {
-			collectionView?.setContentOffset(CGPoint.init(x: 0,
-			                                              y: -(collectionView?.contentInset.top ?? 0)),
-			                                 animated: true)
-			DispatchQueue.main.async { [weak self] in
-				self?.collectionView?.reloadData()
-				self?.loader.startAnimating()
-				self?.loader.isHidden = false
-			}
-		}
-		
+        collectionView?.setContentOffset(CGPoint.init(x: 0,
+                                                      y: -(collectionView?.contentInset.top ?? 0)),
+                                         animated: true)
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView?.reloadData()
+            if normalRefresh {
+                self?.loader.startAnimating()
+                self?.loader.isHidden = false
+            }
+        }
 		navigationItem.rightBarButtonItem?.isEnabled = false
 		GetFeed().fetchFeed(self)
 	}

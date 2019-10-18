@@ -33,12 +33,14 @@ extension UIImageView {
     
     public func animate(image: UIImage,
                         withAnimation: UIView.AnimationOptions) {
-        UIView.transition(with: self,
-                          duration: 0.5,
-                          options: withAnimation,
-                          animations: { [weak self] in
-                            self?.assignImage(image: image)
-        }, completion: nil)
+        DispatchQueue.main.async {
+            UIView.transition(with: self,
+                              duration: 0.5,
+                              options: withAnimation,
+                              animations: { [weak self] in
+                                self?.assignImage(image: image)
+            }, completion: nil)
+        }
     }
     
     private func assignImage(image: UIImage?) {

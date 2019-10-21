@@ -33,6 +33,7 @@ class MasterLayout: UICollectionViewLayout {
 	}
 	
 	override func prepare() {
+        super.prepare()
 		guard cache.isEmpty == true, let collectionView = collectionView else {
 			return
 		}

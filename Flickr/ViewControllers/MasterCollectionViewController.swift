@@ -116,6 +116,8 @@ extension MasterCollectionViewController {
 	}
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Range is Screen Height/2
+        // and range is distributed to Image Overflow in one Direction = 20
         let range = collectionView.frame.height/40
         for cell in collectionView.visibleCells {
             guard let cell = cell as? MasterCollectionViewCell else {

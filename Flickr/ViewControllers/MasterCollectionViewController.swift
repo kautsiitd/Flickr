@@ -114,6 +114,21 @@ extension MasterCollectionViewController {
 		}
 		return cell
 	}
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let range = collectionView.frame.height/40
+        for cell in collectionView.visibleCells {
+            guard let cell = cell as? MasterCollectionViewCell else {
+                continue
+            }
+            let scrollPos = scrollView.contentOffset.y
+            let cellPos = cell.frame.minY
+            let cellY = (scrollPos - cellPos)/range
+            var newFrame = cell.productImageView.frame
+            newFrame.origin = CGPoint(x: 0, y: cellY)
+            cell.productImageView.frame = newFrame
+        }
+    }
 }
 
 // MARK: - MasterLayoutDelegate

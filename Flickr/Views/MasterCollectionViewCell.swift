@@ -11,7 +11,7 @@ import UIKit
 class MasterCollectionViewCell: UICollectionViewCell {
 	
 	// MARK: Elements
-	@IBOutlet fileprivate weak var productImageView: UIImageView!
+	@IBOutlet internal weak var productImageView: UIImageView!
 	@IBOutlet fileprivate weak var gradientView: GradientView!
 	@IBOutlet fileprivate weak var authorNameLabel: UILabel!
 	@IBOutlet fileprivate weak var dateTimeLabel: UILabel!

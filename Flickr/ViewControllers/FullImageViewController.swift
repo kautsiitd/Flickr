@@ -26,7 +26,9 @@ class FullImageViewController: UIViewController {
 	}
 	
 	override func viewDidLoad() {
-		imageView.setImageWithUrl(imageLink)
+        imageView.setImageWithUrl(imageLink,
+                                  handleLoader: true,
+                                  completion: {_ in})
 	}
 }
 

@@ -40,7 +40,9 @@ class DetailsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		imageView.setImageWithUrl(URL(string: feedElement.mediaLink))
+        imageView.setImageWithUrl(URL(string: feedElement.mediaLink),
+                                  handleLoader: true,
+                                  completion: {_ in})
 		titleLabel.text = feedElement.title
 		flickrLinkButton.isEnabled = feedElement.flickrLink != ""
 		dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"

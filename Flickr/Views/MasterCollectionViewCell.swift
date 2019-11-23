@@ -12,6 +12,7 @@ class MasterCollectionViewCell: UICollectionViewCell {
 	
 	// MARK: Elements
 	@IBOutlet internal weak var productImageView: UIImageView!
+    @IBOutlet fileprivate weak var imageLoader: UIActivityIndicatorView!
 	@IBOutlet fileprivate weak var gradientView: GradientView!
 	@IBOutlet fileprivate weak var authorNameLabel: UILabel!
 	@IBOutlet fileprivate weak var dateTimeLabel: UILabel!
@@ -38,17 +39,19 @@ extension MasterCollectionViewCell {
 	func setCellWith(feedElement: FeedElement) {
 		self.feedElement = feedElement
 		if let imageURL = URL(string: feedElement.mediaLink) {
+            imageLoader.startAnimating()
+            imageLoader.isHidden = false
 			productImageView.getImageWith(imageURL, placeHolderImage:
                 #imageLiteral(resourceName: "Placeholder"), completion: { [weak self] image, url, fetchedImageType in
 				guard let feedElement = self?.feedElement else {
-					self?.productImageView.stopLoader()
+					self?.imageLoader.stopAnimating()
 					self?.productImageView.image = #imageLiteral(resourceName: "Placeholder")
 					return
 				}
 				if url.absoluteString == feedElement.mediaLink {
 					guard let image = image else {
 						DispatchQueue.main.async {
-							self?.productImageView.stopLoader()
+                            self?.imageLoader.stopAnimating()
 							self?.productImageView.image = #imageLiteral(resourceName: "Placeholder")
 						}
 						return
@@ -67,12 +70,15 @@ extension MasterCollectionViewCell {
 		switch fetchedImageType {
 		case .cache:
 			DispatchQueue.main.async { [weak self] in
-				self?.productImageView.stopLoader()
+				self?.imageLoader.stopAnimating()
 				self?.productImageView.image = image
 			}
 		case .downloaded:
-			productImageView.animate(image: image,
-			                         withAnimation: .transitionCrossDissolve)
+            DispatchQueue.main.async { [weak self] in
+                self?.imageLoader.stopAnimating()
+                self?.productImageView.animate(image: image,
+                withAnimation: .transitionCrossDissolve)
+            }
 		}
 	}
 }

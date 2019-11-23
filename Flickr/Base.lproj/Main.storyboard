@@ -86,11 +86,16 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="6LM-hm-mlc">
+                                            <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="6dg-qn-myf" firstAttribute="width" secondItem="IIR-Vf-cwN" secondAttribute="width" id="2li-FB-T25"/>
+                                    <constraint firstItem="6LM-hm-mlc" firstAttribute="centerY" secondItem="IIR-Vf-cwN" secondAttribute="centerY" id="8AB-Zc-ukZ"/>
                                     <constraint firstItem="XZc-Kn-CH2" firstAttribute="width" secondItem="IIR-Vf-cwN" secondAttribute="width" id="9Gr-qx-Pvy"/>
+                                    <constraint firstItem="6LM-hm-mlc" firstAttribute="centerX" secondItem="IIR-Vf-cwN" secondAttribute="centerX" id="FN5-ef-gCW"/>
                                     <constraint firstItem="6dg-qn-myf" firstAttribute="top" secondItem="IIR-Vf-cwN" secondAttribute="top" constant="-20" id="OvQ-Zj-xlN"/>
                                     <constraint firstItem="XZc-Kn-CH2" firstAttribute="centerX" secondItem="IIR-Vf-cwN" secondAttribute="centerX" id="Q7Q-w3-Bvv"/>
                                     <constraint firstAttribute="bottom" secondItem="6dg-qn-myf" secondAttribute="bottom" constant="-20" id="iMb-3M-9rp"/>
@@ -107,6 +112,7 @@
                                     <outlet property="authorNameLabel" destination="N1M-32-jFi" id="NCD-t6-Vzy"/>
                                     <outlet property="dateTimeLabel" destination="XzC-5f-oyp" id="feb-Ds-v3g"/>
                                     <outlet property="gradientView" destination="XZc-Kn-CH2" id="DZ3-43-kOx"/>
+                                    <outlet property="imageLoader" destination="6LM-hm-mlc" id="iA6-qQ-Ohw"/>
                                     <outlet property="productImageView" destination="6dg-qn-myf" id="lpR-52-ySf"/>
                                     <segue destination="EOJ-BE-PfC" kind="show" identifier="pushingDescriptionVC" id="hEb-ig-ALh"/>
                                 </connections>

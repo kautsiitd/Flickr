@@ -16,18 +16,23 @@ public enum FetchedImageType {
 /// Setting and Downloading Image from URL in UIImageView
 extension UIImageView {
 	public func setImageWithUrl(_ url: URL?,
-                                placeHolderImage: UIImage? = nil) {
+                                handleLoader: Bool = false,
+                                placeHolderImage: UIImage? = nil,
+                                completion: @escaping (_ imageSet: Bool) -> Void = { _ in}) {
         guard let url = url else {
             assignImage(image: placeHolderImage)
+            completion(true)
             return
         }
-        self.getImageWith(url, placeHolderImage: placeHolderImage, completion: { [weak self] image, _, _ in
+        self.getImageWith(url, handleLoader: handleLoader, placeHolderImage: placeHolderImage, completion: { [weak self] image, _, _ in
             guard let image = image else {
                 self?.assignImage(image: placeHolderImage)
+                completion(true)
                 return
             }
             self?.animate(image: image,
                          withAnimation: .transitionCrossDissolve)
+            completion(true)
         })
     }
     
@@ -51,6 +56,7 @@ extension UIImageView {
     }
     
     public func getImageWith(_ url: URL,
+                             handleLoader: Bool = false,
                              placeHolderImage: UIImage? = nil,
                              completion: @escaping (_ image: UIImage?, _ url: URL, _ type: FetchedImageType) -> Void = { _,_,_  in
         }) {
@@ -58,7 +64,7 @@ extension UIImageView {
             completion(cachedImage, url, .cache)
         }
         else {
-            showLoader()
+            if handleLoader {showLoader()}
             downloadImageWith(url: url, completion: { [weak self] image in
                 guard let image = image else {
                     completion(placeHolderImage, url, .downloaded)

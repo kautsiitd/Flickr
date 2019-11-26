@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63CEC78B23890749001B8B41 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEC78A23890749001B8B41 /* SearchViewController.swift */; };
+		63CEC78D2389094A001B8B41 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEC78C2389094A001B8B41 /* SearchCollectionViewCell.swift */; };
+		63CEC78F238909B7001B8B41 /* SearchElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEC78E238909B7001B8B41 /* SearchElement.swift */; };
+		63CEC79123890E24001B8B41 /* SearchFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CEC79023890E24001B8B41 /* SearchFeed.swift */; };
 		F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6511F98925F00AD2D77 /* AppDelegate.swift */; };
 		F20EB6571F98925F00AD2D77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6551F98925F00AD2D77 /* Main.storyboard */; };
 		F20EB6591F98925F00AD2D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6581F98925F00AD2D77 /* Assets.xcassets */; };
@@ -28,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63CEC78A23890749001B8B41 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ViewControllers/SearchViewController.swift; sourceTree = "<group>"; };
+		63CEC78C2389094A001B8B41 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchCollectionViewCell.swift; path = Views/SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		63CEC78E238909B7001B8B41 /* SearchElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchElement.swift; sourceTree = "<group>"; };
+		63CEC79023890E24001B8B41 /* SearchFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeed.swift; sourceTree = "<group>"; };
 		F20EB64E1F98925F00AD2D77 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20EB6511F98925F00AD2D77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F20EB6561F98925F00AD2D77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -102,6 +110,7 @@
 				F20EB6651F98C5BC00AD2D77 /* MasterCollectionViewController.swift */,
 				F2F2EFF01F98F4B30096E762 /* DetailsViewController.swift */,
 				F2F9BC261F99F7CF00BA10FD /* FullImageViewController.swift */,
+				63CEC78A23890749001B8B41 /* SearchViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -111,6 +120,8 @@
 			children = (
 				F2E2B1891F9CEF6500A99D66 /* FeedElement.swift */,
 				F2E2B18D1F9CF02C00A99D66 /* GetFeed.swift */,
+				63CEC78E238909B7001B8B41 /* SearchElement.swift */,
+				63CEC79023890E24001B8B41 /* SearchFeed.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -119,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				F20EB66E1F98C70A00AD2D77 /* MasterCollectionViewCell.swift */,
+				63CEC78C2389094A001B8B41 /* SearchCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -233,15 +245,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */,
+				63CEC79123890E24001B8B41 /* SearchFeed.swift in Sources */,
 				F2E2B1901F9CF10F00A99D66 /* Date.swift in Sources */,
 				F20EB67C1F98C77F00AD2D77 /* String.swift in Sources */,
 				F2E2B18A1F9CEF6500A99D66 /* FeedElement.swift in Sources */,
+				63CEC78F238909B7001B8B41 /* SearchElement.swift in Sources */,
 				F20EB6761F98C76200AD2D77 /* FlickrObject.swift in Sources */,
 				F20EB6671F98C5BC00AD2D77 /* MasterCollectionViewController.swift in Sources */,
 				F20EB67D1F98C77F00AD2D77 /* UIImageView.swift in Sources */,
 				F2E2B18E1F9CF02C00A99D66 /* GetFeed.swift in Sources */,
 				F20EB6751F98C76200AD2D77 /* ApiManager.swift in Sources */,
 				F20EB6821F98C7A000AD2D77 /* Parser.swift in Sources */,
+				63CEC78B23890749001B8B41 /* SearchViewController.swift in Sources */,
+				63CEC78D2389094A001B8B41 /* SearchCollectionViewCell.swift in Sources */,
 				F20EB6851F98C81300AD2D77 /* MasterLayout.swift in Sources */,
 				F20EB67B1F98C77F00AD2D77 /* GradientView.swift in Sources */,
 				F2F9BC271F99F7CF00BA10FD /* FullImageViewController.swift in Sources */,

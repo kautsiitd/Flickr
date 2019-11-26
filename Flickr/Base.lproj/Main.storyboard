@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -130,11 +131,18 @@
                                 <action selector="openFlickrInSafari" destination="c9R-GV-kRA" id="NWC-wG-4RG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="refresh" id="5Kl-6g-vv8">
-                            <connections>
-                                <action selector="refreshFeed" destination="c9R-GV-kRA" id="oWG-ZR-vng"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem enabled="NO" systemItem="refresh" id="5Kl-6g-vv8">
+                                <connections>
+                                    <action selector="refreshFeed" destination="c9R-GV-kRA" id="oWG-ZR-vng"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="search" id="bcj-OF-QIc">
+                                <connections>
+                                    <segue destination="bg8-eW-hxx" kind="presentation" id="YlP-dX-QeH"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
@@ -145,6 +153,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0NM-SM-4Xb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-116.8" y="-45.877061469265371"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="SbN-zN-89N">
+            <objects>
+                <viewController id="bg8-eW-hxx" customClass="SearchViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MQn-Zt-fFf"/>
+                        <viewControllerLayoutGuide type="bottom" id="yBM-rd-La5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rHE-3a-ScO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Rose" translatesAutoresizingMaskIntoConstraints="NO" id="7DE-ri-eyX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bg8-eW-hxx" id="UbT-Pj-ZUR"/>
+                                </connections>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qmX-X6-iOh">
+                                <rect key="frame" x="0.0" y="56" width="320" height="404"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M6G-x5-CmN">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="gib-ZI-fXh">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="404"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCollectionViewCell" id="bm6-Sh-1gE" customClass="SearchCollectionViewCell" customModule="Flickr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MCv-7f-TQU">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pfk-e1-89v">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pfk-e1-89v" firstAttribute="leading" secondItem="MCv-7f-TQU" secondAttribute="leading" id="6Fz-GS-EUF"/>
+                                                <constraint firstAttribute="trailing" secondItem="pfk-e1-89v" secondAttribute="trailing" id="MYx-d8-UDh"/>
+                                                <constraint firstItem="pfk-e1-89v" firstAttribute="top" secondItem="MCv-7f-TQU" secondAttribute="top" id="PYz-bR-F10"/>
+                                                <constraint firstAttribute="bottom" secondItem="pfk-e1-89v" secondAttribute="bottom" id="m0S-J5-KAu"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="pfk-e1-89v" id="ozg-ge-HFN"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="bg8-eW-hxx" id="6Hp-O3-elV"/>
+                                    <outlet property="delegate" destination="bg8-eW-hxx" id="lhh-TM-0u9"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yBM-rd-La5" firstAttribute="top" secondItem="qmX-X6-iOh" secondAttribute="bottom" id="BNK-u9-Gc8"/>
+                            <constraint firstAttribute="trailing" secondItem="qmX-X6-iOh" secondAttribute="trailing" id="GS2-eo-zm8"/>
+                            <constraint firstAttribute="trailing" secondItem="7DE-ri-eyX" secondAttribute="trailing" id="RKH-GW-Rqg"/>
+                            <constraint firstItem="qmX-X6-iOh" firstAttribute="leading" secondItem="rHE-3a-ScO" secondAttribute="leading" id="Tni-WR-4GM"/>
+                            <constraint firstItem="7DE-ri-eyX" firstAttribute="top" secondItem="MQn-Zt-fFf" secondAttribute="bottom" id="Vw7-9X-aUc"/>
+                            <constraint firstItem="qmX-X6-iOh" firstAttribute="top" secondItem="7DE-ri-eyX" secondAttribute="bottom" id="poD-TB-Zpr"/>
+                            <constraint firstItem="7DE-ri-eyX" firstAttribute="leading" secondItem="rHE-3a-ScO" secondAttribute="leading" id="sCU-aa-kDN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="qmX-X6-iOh" id="8Xx-Ih-E6F"/>
+                        <outlet property="loader" destination="gib-ZI-fXh" id="663-3S-8Ll"/>
+                        <outlet property="searchBar" destination="7DE-ri-eyX" id="UaX-qy-tR7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KFq-Gc-gaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-116" y="665"/>
         </scene>
         <!--Description-->
         <scene sceneID="8Sj-Ml-v6E">

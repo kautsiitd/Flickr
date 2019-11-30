@@ -33,7 +33,7 @@ class GetFeed: FlickrObject {
 		                                     Delegate: self)
 	}
 	
-	override func parseObject(_ responseObject: [String: Any], _ params: [String: Any]?) {
+	override func parseObject(_ responseObject: [String: Any]) {
 		title = responseObject["title"] as? String ?? ""
 		link = responseObject["link"] as? String ?? ""
 		feedDescription = responseObject["description"] as? String ?? ""
@@ -52,19 +52,15 @@ class GetFeed: FlickrObject {
 		modifiedFeedDate = dateFormatter.date(from: modified) ?? Date()
 	}
 	
-	override func isValid() -> Bool {
-		return true
-	}
-	
-	override func getApiEndPointWithParams(_ params: [String: Any]?) -> String {
+	override func getApiEndPoint() -> String {
 		return "feeds/photos_public.gne"
 	}
 	
-	override func didFetchSuccessfullyWithParams(_ params: [String: Any]?) {
+	override func didFetchSuccessfully() {
 		self.delegate?.feedFetchedSuccessfully(self)
 	}
 	
-	override func didFailWithError(_ params: [String: Any]?, _ error: NSError?) {
+	override func didFailWithError(_ error: NSError?) {
 		self.delegate?.feedFetchingFailed(error)
 	}
 }

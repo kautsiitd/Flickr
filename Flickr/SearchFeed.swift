@@ -42,7 +42,7 @@ class SearchFeed: FlickrObject {
                 "page": currentPage]
     }
     
-    override func parseObject(_ responseObject: [String: Any], _ params: [String: Any]?) {
+    override func parseObject(_ responseObject: [String: Any]) {
         let response = responseObject["photos"] as? [String: Any] ?? [:]
         currentPage = response["page"] as? Int ?? 1
         totalPages = response["pages"] as? Int ?? 1
@@ -58,15 +58,15 @@ class SearchFeed: FlickrObject {
         }
     }
     
-    override func getApiEndPointWithParams(_ params: [String: Any]?) -> String {
+    override func getApiEndPoint() -> String {
         return "rest"
     }
     
-    override func didFetchSuccessfullyWithParams(_ params: [String: Any]?) {
+    override func didFetchSuccessfully() {
         self.delegate?.feedFetchedSuccessfully(self)
     }
     
-    override func didFailWithError(_ params: [String: Any]?, _ error: NSError?) {
+    override func didFailWithError(_ error: NSError?) {
         self.delegate?.feedFetchingFailed(error)
     }
 }

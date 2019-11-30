@@ -26,24 +26,29 @@ class ApiManager: NSObject {
 	                JSONPrefix prefix: String,
 	                Delegate delegate: FlickrObjectDelegate) {
 		
-		var apiEndPoint = delegate.getApiEndPointWithParams(getParameters)
-		apiEndPoint = self.appendGetParametersToURL(URL: apiEndPoint,
+		let apiEndPoint = appendGetParametersTo(URL: delegate.getApiEndPoint(),
 		                                            GetParams: getParameters)
-		let apiFullPath = self.baseURL + apiEndPoint
+		let apiFullPath = baseURL + apiEndPoint
 		guard let url = URL(string: apiFullPath) else {
-			delegate.didFailWithError(getParameters, nil)
+            let error = NSError(domain: "Invalid URL",
+                                code: 0000,
+                                userInfo: nil)
+			delegate.didFailWithError(error)
 			return
 		}
 		
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
 			
 			guard let data = data else {
-                delegate.didFailWithError(getParameters, error as NSError?)
+                delegate.didFailWithError(error as NSError?)
 				return
 			}
 			
 			guard let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
-				delegate.didFailWithError(getParameters, nil)
+                let error = NSError(domain: "Invalid Response Format",
+                                    code: 0001,
+                                    userInfo: nil)
+				delegate.didFailWithError(error)
 				return
 			}
 			
@@ -53,38 +58,44 @@ class ApiManager: NSObject {
 				trimStartIndex = prefix.count
 				trimEndIndex -= 1
 			}
-			
-			let dataFormatted = "\(dataString)"[trimStartIndex..<trimEndIndex].data(using: String.Encoding.utf8,
-			                                                               allowLossyConversion: false)!
+			guard let dataFormatted = "\(dataString)"[trimStartIndex..<trimEndIndex]
+                .data(using: String.Encoding.utf8,
+                      allowLossyConversion: false) else {
+                        let error = NSError(domain: "Invalid Response",
+                                            code: 0002,
+                                            userInfo: nil)
+                        delegate.didFailWithError(error)
+                        return
+            }
+            
 			var json: Any
 			do {
 				json = try JSONSerialization.jsonObject(with: dataFormatted, options: JSONSerialization.ReadingOptions.allowFragments)
 			} catch {
-				delegate.didFailWithError(getParameters, nil)
+                let error = NSError(domain: "JSON Serialization Failed",
+                                    code: 0003,
+                                    userInfo: nil)
+				delegate.didFailWithError(error)
 				return
 			}
 			guard let jsonConverted = json as? [String: Any] else {
-				delegate.didFailWithError(getParameters, nil)
+                let error = NSError(domain: "JSON Conversion Failed",
+                                    code: 0004,
+                                    userInfo: nil)
+				delegate.didFailWithError(error)
 				return
 			}
 			
-			delegate.parseObject(jsonConverted,
-			                     getParameters)
-			if delegate.isValid() {
-				delegate.didFetchSuccessfullyWithParams(getParameters)
-			}
-			else {
-				delegate.didFailWithError(getParameters, nil)
-			}
+			delegate.parseObject(jsonConverted)
+            delegate.didFetchSuccessfully()
 		}
 		task.resume()
 	}
 }
 
 extension ApiManager {
-	fileprivate func appendGetParametersToURL(URL url: String,
-	                                          GetParams getParams: [String: Any]?) -> String {
-		var url = url
+	private func appendGetParametersTo(URL url: String,
+                                       GetParams getParams: [String: Any]?) -> String {
 		if getParams == nil || getParams?.count == 0 {
 			return url
 		}
@@ -92,6 +103,7 @@ extension ApiManager {
 		for (key, value) in getParams! {
 			joinedGetParams.append(key+"="+String(describing: value))
 		}
+        var url = url
 		url += "?" + joinedGetParams.joined(separator: "&")
 		return url
 	}

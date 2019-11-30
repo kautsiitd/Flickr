@@ -63,9 +63,5 @@ class FeedElement: FlickrObject {
 			self.attributedDescriptionString = Parser.parseHTMLString( imageDescriptionElements.count > 2 ? imageDescriptionElements[2][1] : "")
 		}
 	}
-	
-	override func isValid() -> Bool {
-		return true
-	}
 }
 

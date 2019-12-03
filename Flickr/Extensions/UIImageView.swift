@@ -114,7 +114,8 @@ extension UIImageView {
             }
             let activityIndicator = UIActivityIndicatorView(style: .gray)
             activityIndicator.tag = UIImageView.activityIndicatorTag
-			activityIndicator.center = self.center
+			activityIndicator.center = CGPoint(x: self.bounds.midX,
+                                               y: self.bounds.midY)
 			activityIndicator.hidesWhenStopped = true
 			activityIndicator.startAnimating()
 			self.addSubview(activityIndicator)

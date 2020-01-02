@@ -11,7 +11,7 @@ import UIKit
 class SearchCollectionViewCell: UICollectionViewCell {
     
     //MARK: Elements
-    @IBOutlet fileprivate weak var imageView: UIImageView!
+    @IBOutlet fileprivate weak var imageView: CustomImageView!
     
     //MARK" Properties
     fileprivate var searchElement: SearchElement?
@@ -31,31 +31,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
 extension SearchCollectionViewCell {
     func setCellWith(searchElement: SearchElement) {
         self.searchElement = searchElement
-        
-        if let imageURL = URL(string: searchElement.imageURL) {
-            imageView.getImageWith(imageURL,
-                                   handleLoader: true,
-                                   placeHolderImage: #imageLiteral(resourceName: "Placeholder"),
-                                   completion: { [weak self] image, url, fetchedImageType in
-                guard let searchElement = self?.searchElement else {
-                    DispatchQueue.main.async {
-                        self?.imageView.stopLoader()
-                        self?.imageView.image = #imageLiteral(resourceName: "Placeholder")
-                    }
-                    return
-                }
-                if imageURL.absoluteString == searchElement.imageURL {
-                    guard let image = image else {
-                        DispatchQueue.main.async {
-                            self?.imageView.stopLoader()
-                            self?.imageView.image = #imageLiteral(resourceName: "Placeholder")
-                        }
-                        return
-                    }
-                    self?.imageView.animate(image: image,
-                                            withAnimation: .transitionCrossDissolve)
-                }
-            })
-        }
+        imageView.setImage(with: searchElement.imageURL)
     }
 }

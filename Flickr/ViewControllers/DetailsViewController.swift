@@ -12,7 +12,7 @@ import SafariServices
 class DetailsViewController: UIViewController {
 	
 	// MARK: Elements
-	@IBOutlet fileprivate weak var imageView: UIImageView!
+	@IBOutlet fileprivate weak var imageView: CustomImageView!
 	@IBOutlet fileprivate weak var titleLabel: UILabel!
 	@IBOutlet fileprivate weak var flickrLinkButton: UIBarButtonItem!
 	@IBOutlet fileprivate weak var dateTimeLabel: UILabel!
@@ -40,9 +40,7 @@ class DetailsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        imageView.setImageWithUrl(URL(string: feedElement.mediaLink),
-                                  handleLoader: true,
-                                  completion: {_ in})
+        imageView.setImage(with: feedElement.mediaLink)
 		titleLabel.text = feedElement.title
 		flickrLinkButton.isEnabled = feedElement.flickrLink != ""
 		dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
@@ -66,10 +64,7 @@ class DetailsViewController: UIViewController {
 		switch segue.identifier ?? "" {
 		case "presentingFullImageVC":
 			let fullImageViewController = segue.destination as! FullImageViewController
-			guard let url = URL(string: feedElement.mediaLink) else {
-				break
-			}
-			fullImageViewController.imageLink = url
+            fullImageViewController.imageLink = feedElement.mediaLink
 		default:
 			break
 		}

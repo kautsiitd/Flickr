@@ -11,7 +11,7 @@ import UIKit
 class MasterCollectionViewCell: UICollectionViewCell {
 	
 	// MARK: Elements
-	@IBOutlet internal weak var productImageView: UIImageView!
+	@IBOutlet internal weak var productImageView: CustomImageView!
     @IBOutlet fileprivate weak var imageLoader: UIActivityIndicatorView!
 	@IBOutlet fileprivate weak var gradientView: GradientView!
 	@IBOutlet fileprivate weak var authorNameLabel: UILabel!
@@ -38,47 +38,9 @@ class MasterCollectionViewCell: UICollectionViewCell {
 extension MasterCollectionViewCell {
 	func setCellWith(feedElement: FeedElement) {
 		self.feedElement = feedElement
-		if let imageURL = URL(string: feedElement.mediaLink) {
-            imageLoader.startAnimating()
-            imageLoader.isHidden = false
-			productImageView.getImageWith(imageURL, placeHolderImage:
-                #imageLiteral(resourceName: "Placeholder"), completion: { [weak self] image, url, fetchedImageType in
-				guard let feedElement = self?.feedElement else {
-					self?.imageLoader.stopAnimating()
-					self?.productImageView.image = #imageLiteral(resourceName: "Placeholder")
-					return
-				}
-				if url.absoluteString == feedElement.mediaLink {
-					guard let image = image else {
-						DispatchQueue.main.async {
-                            self?.imageLoader.stopAnimating()
-							self?.productImageView.image = #imageLiteral(resourceName: "Placeholder")
-						}
-						return
-					}
-					self?.handleImageTransition(image: image,
-											   fetchedImageType: fetchedImageType)
-				}
-			})
-		}
+        productImageView.setImage(with: feedElement.mediaLink)
 		authorNameLabel.text = feedElement.author
 		let agoTime = Date().offset(from: feedElement.date)
 		dateTimeLabel.text = agoTime == "" ? "Just now" : agoTime + " ago"
-	}
-	
-	fileprivate func handleImageTransition(image: UIImage, fetchedImageType: FetchedImageType) {
-		switch fetchedImageType {
-		case .cache:
-			DispatchQueue.main.async { [weak self] in
-				self?.imageLoader.stopAnimating()
-				self?.productImageView.image = image
-			}
-		case .downloaded:
-            DispatchQueue.main.async { [weak self] in
-                self?.imageLoader.stopAnimating()
-                self?.productImageView.animate(image: image,
-                withAnimation: .transitionCrossDissolve)
-            }
-		}
 	}
 }

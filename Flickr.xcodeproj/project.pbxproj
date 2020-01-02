@@ -10,7 +10,6 @@
 		63D91CDC23BDDED100F1CDE4 /* MasterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDB23BDDED100F1CDE4 /* MasterLayout.swift */; };
 		63D91CDE23BDDEDC00F1CDE4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */; };
 		63D91CE323BDDEEC00F1CDE4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDF23BDDEEC00F1CDE4 /* Date.swift */; };
-		63D91CE423BDDEEC00F1CDE4 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CE023BDDEEC00F1CDE4 /* UIImageView.swift */; };
 		63D91CE523BDDEEC00F1CDE4 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CE123BDDEEC00F1CDE4 /* GradientView.swift */; };
 		63D91CE623BDDEEC00F1CDE4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CE223BDDEEC00F1CDE4 /* String.swift */; };
 		63D91CE923BDDEF900F1CDE4 /* FlickrObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CE723BDDEF900F1CDE4 /* FlickrObject.swift */; };
@@ -25,6 +24,7 @@
 		63D91CFA23BDDF1800F1CDE4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CF623BDDF1800F1CDE4 /* SearchViewController.swift */; };
 		63D91CFD23BDDF2400F1CDE4 /* MasterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CFB23BDDF2400F1CDE4 /* MasterCollectionViewCell.swift */; };
 		63D91CFE23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CFC23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift */; };
+		63D91D0023BE22BF00F1CDE4 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CFF23BE22BF00F1CDE4 /* CustomImageView.swift */; };
 		F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6511F98925F00AD2D77 /* AppDelegate.swift */; };
 		F20EB6571F98925F00AD2D77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6551F98925F00AD2D77 /* Main.storyboard */; };
 		F20EB6591F98925F00AD2D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6581F98925F00AD2D77 /* Assets.xcassets */; };
@@ -35,7 +35,6 @@
 		63D91CDB23BDDED100F1CDE4 /* MasterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterLayout.swift; sourceTree = "<group>"; };
 		63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		63D91CDF23BDDEEC00F1CDE4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		63D91CE023BDDEEC00F1CDE4 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		63D91CE123BDDEEC00F1CDE4 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		63D91CE223BDDEEC00F1CDE4 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		63D91CE723BDDEF900F1CDE4 /* FlickrObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrObject.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		63D91CF623BDDF1800F1CDE4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		63D91CFB23BDDF2400F1CDE4 /* MasterCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D91CFC23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		63D91CFF23BE22BF00F1CDE4 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		F20EB64E1F98925F00AD2D77 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20EB6511F98925F00AD2D77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F20EB6561F98925F00AD2D77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -150,7 +150,6 @@
 				63D91CDF23BDDEEC00F1CDE4 /* Date.swift */,
 				63D91CE123BDDEEC00F1CDE4 /* GradientView.swift */,
 				63D91CE223BDDEEC00F1CDE4 /* String.swift */,
-				63D91CE023BDDEEC00F1CDE4 /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -159,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */,
+				63D91CFF23BE22BF00F1CDE4 /* CustomImageView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -253,13 +253,13 @@
 				F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */,
 				63D91CDC23BDDED100F1CDE4 /* MasterLayout.swift in Sources */,
 				63D91CE323BDDEEC00F1CDE4 /* Date.swift in Sources */,
+				63D91D0023BE22BF00F1CDE4 /* CustomImageView.swift in Sources */,
 				63D91CE523BDDEEC00F1CDE4 /* GradientView.swift in Sources */,
 				63D91CDE23BDDEDC00F1CDE4 /* Parser.swift in Sources */,
 				63D91CEA23BDDEF900F1CDE4 /* ApiManager.swift in Sources */,
 				63D91CF923BDDF1800F1CDE4 /* FullImageViewController.swift in Sources */,
 				63D91CEF23BDDF0B00F1CDE4 /* GetFeed.swift in Sources */,
 				63D91CF723BDDF1800F1CDE4 /* DetailsViewController.swift in Sources */,
-				63D91CE423BDDEEC00F1CDE4 /* UIImageView.swift in Sources */,
 				63D91CF023BDDF0B00F1CDE4 /* SearchFeed.swift in Sources */,
 				63D91CFE23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift in Sources */,
 				63D91CF223BDDF0B00F1CDE4 /* SearchElement.swift in Sources */,

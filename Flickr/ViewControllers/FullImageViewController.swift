@@ -25,9 +25,3 @@ class FullImageViewController: UIViewController {
         imageView.setImage(with: imageLink)
 	}
 }
-
-extension FullImageViewController {
-	@IBAction func closeButtonPressed() {
-		dismiss(animated: true, completion: nil)
-	}
-}

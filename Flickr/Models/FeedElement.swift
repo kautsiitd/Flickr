@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FeedElement: FlickrObject {
+class FeedElement {
 	
 	// MARK: Properties
 	var title: String = ""
@@ -31,7 +31,6 @@ class FeedElement: FlickrObject {
 	
 	// MARK: Init
 	init(responseObject: [String: Any]) {
-		super.init()
 		title = responseObject["title"] as? String ?? ""
 		flickrLink = responseObject["link"] as? String ?? ""
 		mediaLink = (responseObject["media"] as? [String: String])?["m"] ?? ""

@@ -9,8 +9,8 @@
 import Foundation
 
 protocol GetFeedProtocol: class {
-	func feedFetchedSuccessfully(_ feed: GetFeed)
-	func feedFetchingFailed(_ error: NSError?)
+	func feedFetchedSuccessfully()
+	func feedFetchingFailed(_ error: CustomError)
 }
 
 class GetFeed: FlickrObject {
@@ -21,13 +21,16 @@ class GetFeed: FlickrObject {
 	private var modified: String = ""
 	var generator: String = ""
 	private var items: [Any] = []
-	weak var delegate: GetFeedProtocol?
+	var delegate: GetFeedProtocol
 	//	Formatted Properties
 	var modifiedFeedDate: Date = Date()
 	var feedElements: [FeedElement] = []
+    
+    init(delegate: GetFeedProtocol) {
+        self.delegate = delegate
+    }
 	
-	func fetchFeed(_ delegate: GetFeedProtocol?) {
-		self.delegate = delegate
+	func fetchFeed() {
 		ApiManager.sharedInstance.getRequest(GetParameters: ["format": "json#"],
 		                                     JSONPrefix: "jsonFlickrFeed(",
 		                                     Delegate: self)
@@ -41,6 +44,7 @@ class GetFeed: FlickrObject {
 		generator = responseObject["generator"] as? String ?? ""
 		items = responseObject["items"] as? [Any] ?? []
 		
+        feedElements = []
 		for index in 0..<items.count {
 			guard let item = items[index] as? [String: Any] else {
 				continue
@@ -57,10 +61,10 @@ class GetFeed: FlickrObject {
 	}
 	
 	override func didFetchSuccessfully() {
-		self.delegate?.feedFetchedSuccessfully(self)
+		delegate.feedFetchedSuccessfully()
 	}
 	
-	override func didFailWithError(_ error: NSError?) {
-		self.delegate?.feedFetchingFailed(error)
+	override func didFailWithError(_ error: CustomError) {
+		delegate.feedFetchingFailed(error)
 	}
 }

@@ -12,13 +12,18 @@ import SafariServices
 class MasterCollectionViewController: UICollectionViewController {
 	
 	// MARK: Elements
-	@IBOutlet fileprivate weak var loader: UIActivityIndicatorView!
+	@IBOutlet private weak var loader: UIActivityIndicatorView!
 	
 	// MARK: Variables
-	fileprivate var feed: GetFeed?
-	fileprivate var feedElements: [FeedElement] = []
-	fileprivate var visibleCellIndexPath: IndexPath!
-	fileprivate var refreshControl: UIRefreshControl!
+	private var feed: GetFeed!
+	private var feedElements: [FeedElement] = []
+	private var visibleCellIndexPath: IndexPath!
+	private var refreshControl: UIRefreshControl!
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        feed = GetFeed(delegate: self)
+    }
 	
 	override var preferredStatusBarStyle : UIStatusBarStyle {
 		return UIStatusBarStyle.lightContent
@@ -62,7 +67,7 @@ class MasterCollectionViewController: UICollectionViewController {
 	}
 	
 	@objc
-	fileprivate func fetchFeed(normalRefresh: Bool = false) {
+	private func fetchFeed(normalRefresh: Bool = false) {
 		URLSession.shared.getTasksWithCompletionHandler( { tasks, _, _ in
 			for task in tasks {
 				task.cancel()
@@ -86,7 +91,7 @@ class MasterCollectionViewController: UICollectionViewController {
             }
         }
 		navigationItem.rightBarButtonItem?.isEnabled = false
-		GetFeed().fetchFeed(self)
+        feed.fetchFeed()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -114,7 +119,6 @@ extension MasterCollectionViewController {
 		}
 		return cell
 	}
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Range is Screen Height/2
         // and range is distributed to Image Overflow in one Direction = 20
@@ -144,8 +148,7 @@ extension MasterCollectionViewController : MasterLayoutDelegate {
 
 // MARK: - GetFeedProtocol
 extension MasterCollectionViewController: GetFeedProtocol {
-	func feedFetchedSuccessfully(_ feed: GetFeed) {
-		self.feed = feed
+	func feedFetchedSuccessfully() {
 		self.feedElements = feed.feedElements
 		DispatchQueue.main.async { [weak self] in
 			self?.collectionView?.reloadData()
@@ -156,7 +159,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
 			self?.navigationItem.rightBarButtonItem?.isEnabled = true
 		}
 	}
-	func feedFetchingFailed(_ error: NSError?) {
+	func feedFetchingFailed(_ error: CustomError) {
         DispatchQueue.main.async { [weak self] in
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
@@ -166,8 +169,8 @@ extension MasterCollectionViewController: GetFeedProtocol {
                                             handler: { _ in
                                                 self?.fetchFeed(normalRefresh: true)
             })
-            let alertController = UIAlertController(title: "Error",
-                                                    message: error?.localizedDescription ?? "Unknown error occured!",
+            let alertController = UIAlertController(title: error.title,
+                                                    message: error.description,
                                                     preferredStyle: .alert)
             alertController.addAction(retryButton)
             self?.navigationController?.present(alertController,

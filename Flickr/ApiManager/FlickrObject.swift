@@ -30,7 +30,7 @@ protocol FlickrObjectDelegate: class {
 	called if the api call gets failed
 	- parameter error:	reason of the failure
 	*/
-	func didFailWithError(_ error: NSError?)
+	func didFailWithError(_ error: CustomError)
 }
 
 
@@ -40,5 +40,5 @@ class FlickrObject: NSObject, FlickrObjectDelegate {
 	}
 	func parseObject(_ responseObject: [String: Any]) {}
 	func didFetchSuccessfully() {}
-	func didFailWithError(_ error: NSError?) {}
+	func didFailWithError(_ error: CustomError) {}
 }

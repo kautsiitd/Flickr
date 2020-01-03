@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kautsya Kanu. All rights reserved.
 //
 
-class SearchElement: FlickrObject {
+class SearchElement {
     
     // MARK: Properties
     var id: String = ""
@@ -24,7 +24,6 @@ class SearchElement: FlickrObject {
     
     // MARK: Init
     init(responseObject: [String: Any]) {
-        super.init()
         id = responseObject["id"] as? String ?? ""
         owner = responseObject["id"] as? String ?? ""
         secret = responseObject["secret"] as? String ?? ""

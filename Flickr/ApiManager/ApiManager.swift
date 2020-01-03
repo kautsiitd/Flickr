@@ -30,25 +30,15 @@ class ApiManager: NSObject {
 		                                            GetParams: getParameters)
 		let apiFullPath = baseURL + apiEndPoint
 		guard let url = URL(string: apiFullPath) else {
-            let error = NSError(domain: "Invalid URL",
-                                code: 0000,
-                                userInfo: nil)
-			delegate.didFailWithError(error)
+            delegate.didFailWithError(.invalidURL)
 			return
 		}
 		
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
 			
-			guard let data = data else {
-                delegate.didFailWithError(error as NSError?)
-				return
-			}
-			
-			guard let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
-                let error = NSError(domain: "Invalid Response Format",
-                                    code: 0001,
-                                    userInfo: nil)
-				delegate.didFailWithError(error)
+			guard let data = data,
+                let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
+                delegate.didFailWithError(.invalidData)
 				return
 			}
 			
@@ -61,10 +51,7 @@ class ApiManager: NSObject {
 			guard let dataFormatted = "\(dataString)"[trimStartIndex..<trimEndIndex]
                 .data(using: String.Encoding.utf8,
                       allowLossyConversion: false) else {
-                        let error = NSError(domain: "Invalid Response",
-                                            code: 0002,
-                                            userInfo: nil)
-                        delegate.didFailWithError(error)
+                        delegate.didFailWithError(.invalidData)
                         return
             }
             
@@ -72,17 +59,11 @@ class ApiManager: NSObject {
 			do {
 				json = try JSONSerialization.jsonObject(with: dataFormatted, options: JSONSerialization.ReadingOptions.allowFragments)
 			} catch {
-                let error = NSError(domain: "JSON Serialization Failed",
-                                    code: 0003,
-                                    userInfo: nil)
-				delegate.didFailWithError(error)
+                delegate.didFailWithError(.invalidData)
 				return
 			}
 			guard let jsonConverted = json as? [String: Any] else {
-                let error = NSError(domain: "JSON Conversion Failed",
-                                    code: 0004,
-                                    userInfo: nil)
-				delegate.didFailWithError(error)
+                delegate.didFailWithError(.invalidData)
 				return
 			}
 			

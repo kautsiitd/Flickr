@@ -11,13 +11,17 @@ import UIKit
 class SearchViewController: UIViewController {
     
     //MARK: Elements
-    @IBOutlet fileprivate weak var loader: UIActivityIndicatorView!
-    @IBOutlet fileprivate weak var searchBar: UISearchBar!
-    @IBOutlet fileprivate weak var collectionView: UICollectionView!
+    @IBOutlet private weak var loader: UIActivityIndicatorView!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     //MARK: Variables
-    fileprivate var feed: SearchFeed?
-    fileprivate var searchElements: [SearchElement] = []
+    private var feed: SearchFeed!
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        feed = SearchFeed(delegate: self)
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,20 +34,21 @@ class SearchViewController: UIViewController {
             self?.collectionView?.reloadData()
             self?.loader.startAnimating()
             self?.loader.isHidden = false
+            self?.feed.fetchFeed(searchText: "Rose")
         }
-        SearchFeed().fetchFeed(self, searchText: "rose")
     }
 }
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchElements.count
+        return feed.searchElements.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell",
                                                       for: indexPath)
         if let cell = cell as? SearchCollectionViewCell {
-            cell.setCellWith(searchElement: searchElements[indexPath.row])
+            let searchElement = feed.searchElements[indexPath.row]
+            cell.setCellWith(searchElement: searchElement)
         }
         return cell
     }
@@ -59,16 +64,14 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - SearchFeedProtocol
 extension SearchViewController: SearchFeedProtocol {
-    func feedFetchedSuccessfully(_ feed: SearchFeed) {
-        self.feed = feed
-        searchElements = feed.searchElements
+    func feedFetchedSuccessfully() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView?.reloadData()
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
         }
     }
-    func feedFetchingFailed(_ error: NSError?) {
+    func feedFetchingFailed(_ error: CustomError) {
         DispatchQueue.main.async { [weak self] in
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
@@ -78,8 +81,8 @@ extension SearchViewController: SearchFeedProtocol {
                                         handler: { _ in
                                             self.fetchFeed()
         })
-        let alertController = UIAlertController(title: "Error",
-                                                message: error?.localizedDescription ?? "Unknown error occured!",
+        let alertController = UIAlertController(title: error.title,
+                                                message: error.description,
                                                 preferredStyle: .alert)
         alertController.addAction(retryButton)
         navigationController?.present(alertController,
@@ -93,7 +96,7 @@ extension SearchViewController: UISearchBarDelegate {
         if searchBar.text == "" {
             searchBar.text = "Rose"
         }
-        SearchFeed().fetchFeed(self, searchText: searchBar.text ?? "rose")
+        feed.fetchFeed(searchText: searchBar.text ?? "Rose")
         searchBar.endEditing(true)
     }
 }

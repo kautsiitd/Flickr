@@ -32,6 +32,7 @@ class CustomImageView: UIImageView {
 extension CustomImageView {
     func setImage(with urlString: String) {
         image = nil
+        backgroundColor = .lightGray
         self.urlString = urlString
         loader.startAnimating()
         //Checking cache
@@ -69,7 +70,10 @@ extension CustomImageView {
             if urlString == self.urlString {
                 self.loader.stopAnimating()
                 if animate { self.animate(image: image) }
-                else { self.image = image }
+                else {
+                    self.image = image
+                    self.backgroundColor = .white
+                }
             }
         }
     }
@@ -78,6 +82,7 @@ extension CustomImageView {
         UIView.transition(with: self, duration: 0.5, options: [.transitionCrossDissolve],
                           animations: { [weak self] in
                             self?.image = image
+                            self?.backgroundColor = .white
             }, completion: nil)
     }
 }

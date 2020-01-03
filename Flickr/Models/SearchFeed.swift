@@ -9,13 +9,13 @@
 import Foundation
 
 protocol SearchFeedProtocol: class {
-    func feedFetchedSuccessfully(_ feed: SearchFeed)
-    func feedFetchingFailed(_ error: NSError?)
+    func feedFetchedSuccessfully()
+    func feedFetchingFailed(_ error: CustomError)
 }
 
 class SearchFeed: FlickrObject {
     // Mark: Properties
-    weak var delegate: SearchFeedProtocol?
+    private var delegate: SearchFeedProtocol!
     var searchText: String = "rose"
     var currentPage: Int = 1
     var totalPages: Int = 1
@@ -24,8 +24,11 @@ class SearchFeed: FlickrObject {
     var page: Int = 1
     var searchElements: [SearchElement] = []
     
-    func fetchFeed(_ delegate: SearchFeedProtocol?, searchText: String) {
+    init(delegate: SearchFeedProtocol) {
         self.delegate = delegate
+    }
+    
+    func fetchFeed(searchText: String) {
         self.searchText = searchText
         ApiManager.sharedInstance.getRequest(GetParameters: getParams(),
                                              JSONPrefix: "",
@@ -50,6 +53,7 @@ class SearchFeed: FlickrObject {
         totalPics = response["total"] as? Int ?? 0
         let items = response["photo"] as? [Any] ?? []
         
+        searchElements = []
         for index in 0..<items.count {
             guard let item = items[index] as? [String: Any] else {
                 continue
@@ -63,10 +67,10 @@ class SearchFeed: FlickrObject {
     }
     
     override func didFetchSuccessfully() {
-        self.delegate?.feedFetchedSuccessfully(self)
+        delegate.feedFetchedSuccessfully()
     }
     
-    override func didFailWithError(_ error: NSError?) {
-        self.delegate?.feedFetchingFailed(error)
+    override func didFailWithError(_ error: CustomError) {
+        delegate.feedFetchingFailed(error)
     }
 }

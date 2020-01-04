@@ -1,5 +1,5 @@
 //
-//  FeedElement.swift
+//  HomeFeedElement.swift
 //  Flickr
 //
 //  Created by Kautsya Kanu on 22/10/17.
@@ -9,18 +9,18 @@
 import Foundation
 import UIKit
 
-class FeedElement {
+class HomeFeedElement {
 	
 	// MARK: Properties
-	var title: String = ""
-	var flickrLink: String = ""
-	var mediaLink: String = ""
-	var dateTaken: String = ""
-	var imageDescription: String = ""
-	var publishedDate: String = ""
-	var author: String = ""
-	var authorId: String = ""
-	var tags: String = ""
+	var title: String
+	var flickrLink: String
+	var mediaLink: String
+	var dateTaken: String
+	var imageDescription: String
+	var publishedDate: String
+	var author: String
+	var authorId: String
+	var tags: String
 	
 	// MARK: Calculated Properties
 	var imagewidth: CGFloat = 180
@@ -30,23 +30,23 @@ class FeedElement {
 	var attributedDescriptionString: NSAttributedString = NSAttributedString()
 	
 	// MARK: Init
-	init(responseObject: [String: Any]) {
-		title = responseObject["title"] as? String ?? ""
-		flickrLink = responseObject["link"] as? String ?? ""
-		mediaLink = (responseObject["media"] as? [String: String])?["m"] ?? ""
-		dateTaken = responseObject["date_taken"] as? String ?? ""
-		imageDescription = responseObject["description"] as? String ?? ""
-		publishedDate = responseObject["published"] as? String ?? ""
+	init(response: [String: Any]) {
+		title = response["title"] as? String ?? ""
+		flickrLink = response["link"] as? String ?? ""
+		mediaLink = (response["media"] as? [String: String])?["m"] ?? ""
+		dateTaken = response["date_taken"] as? String ?? ""
+		imageDescription = response["description"] as? String ?? ""
+		publishedDate = response["published"] as? String ?? ""
 		
-		author = responseObject["author"] as? String ?? ""
+		author = response["author"] as? String ?? ""
 		var imageDescriptionElements = imageDescription.matchingStrings(regex: "<a href=\\\"(.*?)\">(.*?)</a>")
 		if imageDescriptionElements.count > 0 {
 			authorLink = imageDescriptionElements[0][1]
 			author = imageDescriptionElements[0][2]
 		}
 		
-		authorId = responseObject["author_id"] as? String ?? ""
-		tags = responseObject["tags"] as? String ?? ""
+		authorId = response["author_id"] as? String ?? ""
+		tags = response["tags"] as? String ?? ""
 		
 		imageDescriptionElements = imageDescription.matchingStrings(regex: "width=\\\"(.*?)\\\" height=\\\"(.*?)\\\"")
 		let imageWidthString = imageDescriptionElements.first?[1] ?? "180"
@@ -55,9 +55,7 @@ class FeedElement {
 		imageHeight = NumberFormatter().number(from: imageHeightString) as? CGFloat ?? 240
 		
 		DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
-                return
-            }
+            guard let self = self else { return }
 			imageDescriptionElements = self.imageDescription.matchingStrings(regex: "<p>(.*?)<\\/p>")
 			self.attributedDescriptionString = Parser.parseHTMLString( imageDescriptionElements.count > 2 ? imageDescriptionElements[2][1] : "")
 		}

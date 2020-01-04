@@ -23,16 +23,16 @@ class SearchElement {
     var imageURL: String = ""
     
     // MARK: Init
-    init(responseObject: [String: Any]) {
-        id = responseObject["id"] as? String ?? ""
-        owner = responseObject["id"] as? String ?? ""
-        secret = responseObject["secret"] as? String ?? ""
-        server = responseObject["server"] as? String ?? ""
-        farm = responseObject["farm"] as? Int ?? 1
-        title = responseObject["title"] as? String ?? ""
-        ispublic = responseObject["isPublic"] as? Bool ?? false
-        isfriendly = responseObject["isfriendly"] as? Bool ?? false
-        isfamily = responseObject["isfamily"] as? Bool ?? false
+    init(response: [String: Any]) {
+        id = response["id"] as? String ?? ""
+        owner = response["id"] as? String ?? ""
+        secret = response["secret"] as? String ?? ""
+        server = response["server"] as? String ?? ""
+        farm = response["farm"] as? Int ?? 1
+        title = response["title"] as? String ?? ""
+        ispublic = response["isPublic"] as? Bool ?? false
+        isfriendly = response["isfriendly"] as? Bool ?? false
+        isfamily = response["isfamily"] as? Bool ?? false
         
         imageURL = "https://farm\(farm).static.flickr.com/\(server)/\(id)_\(secret).jpg"
     }

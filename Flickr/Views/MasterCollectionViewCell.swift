@@ -18,7 +18,7 @@ class MasterCollectionViewCell: UICollectionViewCell {
 	@IBOutlet fileprivate weak var dateTimeLabel: UILabel!
 	
 	// MARK: Properties
-	fileprivate var feedElement: FeedElement?
+	fileprivate var feedElement: HomeFeedElement?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -36,7 +36,7 @@ class MasterCollectionViewCell: UICollectionViewCell {
 }
 
 extension MasterCollectionViewCell {
-	func setCellWith(feedElement: FeedElement) {
+	func setCellWith(feedElement: HomeFeedElement) {
 		self.feedElement = feedElement
         productImageView.setImage(with: feedElement.mediaLink)
 		authorNameLabel.text = feedElement.author

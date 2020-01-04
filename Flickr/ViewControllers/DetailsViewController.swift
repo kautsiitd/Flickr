@@ -22,7 +22,7 @@ class DetailsViewController: UIViewController {
 	@IBOutlet fileprivate weak var descriptionTextView: UITextView!
 	
 	// MARK: Properties
-	var feedElement: FeedElement!
+	var feedElement: HomeFeedElement!
 	
 	// MARK: Init
 	required init?(coder aDecoder: NSCoder) {
@@ -33,7 +33,7 @@ class DetailsViewController: UIViewController {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 	}
 	
-	convenience init(feedElement: FeedElement) {
+	convenience init(feedElement: HomeFeedElement) {
 		self.init(nibName: nil, bundle: nil)
 		self.feedElement = feedElement
 	}

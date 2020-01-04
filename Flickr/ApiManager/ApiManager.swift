@@ -9,83 +9,68 @@
 import Foundation
 import UIKit
 
-class ApiManager: NSObject {
+class ApiManager {
 	
 	// MARK: Variables
-	static let sharedInstance = ApiManager()
+	static let shared = ApiManager()
 	let session = URLSession.shared
-	let baseURL = "https://api.flickr.com/services/"
+    let baseURL = URL(string: "https://api.flickr.com")
+    
+    private init() {}
 	
 	/**
 	sends get api call
 	
-	- parameter getParameters: all the get parameters needs to be sent
-	- parameter delegate:	  flickrObject delegate which implements didfetch, didfail etc.
+     - parameter params: all the get parameters needs to be sent
+     - parameter prefix: prefix before response like "jsonConverted("
+     - parameter delegate: flickrObject delegate which implements didfetch, didfail etc.
 	*/
-	func getRequest(GetParameters getParameters: [String: Any]?,
-	                JSONPrefix prefix: String,
-	                Delegate delegate: FlickrObjectDelegate) {
+    func getRequest(for params: [String: Any] = [:],
+                    with regex: String = "(?s).*",
+                    _ delegate: FlickrObjectDelegate) {
+        let endPoint = delegate.apiEndPoint()
+        guard let url = URL(string: endPoint, params: params, relativeTo: baseURL) else {
+            delegate.didFail(with: .invalidURL)
+            return
+        }
 		
-		let apiEndPoint = appendGetParametersTo(URL: delegate.getApiEndPoint(),
-		                                            GetParams: getParameters)
-		let apiFullPath = baseURL + apiEndPoint
-		guard let url = URL(string: apiFullPath) else {
-            delegate.didFailWithError(.invalidURL)
-			return
-		}
-		
-		let task = URLSession.shared.dataTask(with: url) { data, response, error in
-			
-			guard let data = data,
-                let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
-                delegate.didFailWithError(.invalidData)
-				return
-			}
-			
-			var trimStartIndex = 0
-			var trimEndIndex =  "\(dataString)".count
-			if prefix != "" {
-				trimStartIndex = prefix.count
-				trimEndIndex -= 1
-			}
-			guard let dataFormatted = "\(dataString)"[trimStartIndex..<trimEndIndex]
-                .data(using: String.Encoding.utf8,
-                      allowLossyConversion: false) else {
-                        delegate.didFailWithError(.invalidData)
-                        return
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = self.fix(data, for: regex),
+                let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
+                let response = json as? [String: Any] else {
+                delegate.didFail(with: .invalidData)
+                return
             }
             
-			var json: Any
-			do {
-				json = try JSONSerialization.jsonObject(with: dataFormatted, options: JSONSerialization.ReadingOptions.allowFragments)
-			} catch {
-                delegate.didFailWithError(.invalidData)
-				return
-			}
-			guard let jsonConverted = json as? [String: Any] else {
-                delegate.didFailWithError(.invalidData)
-				return
-			}
-			
-			delegate.parseObject(jsonConverted)
+            delegate.parse(response)
             delegate.didFetchSuccessfully()
 		}
 		task.resume()
 	}
-}
-
-extension ApiManager {
-	private func appendGetParametersTo(URL url: String,
-                                       GetParams getParams: [String: Any]?) -> String {
-		if getParams == nil || getParams?.count == 0 {
-			return url
-		}
-		var joinedGetParams: [String] = []
-		for (key, value) in getParams! {
-			joinedGetParams.append(key+"="+String(describing: value))
-		}
-        var url = url
-		url += "?" + joinedGetParams.joined(separator: "&")
-		return url
-	}
+    
+    private func fix(_ data: Data?, for regex: String) -> Data? {
+        guard let data = data,
+            let dataString = String(data: data, encoding: .utf8),
+            let newDataString = listMatches(for: regex, inString: dataString).first else {
+            return nil
+        }
+        
+        let newData = newDataString.data(using: .utf8)
+        return newData
+    }
+    
+    private func listMatches(for pattern: String,
+                             inString string: String) -> [String] {
+      guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+        return []
+      }
+      
+      let range = NSRange(string.startIndex..., in: string)
+      let matches = regex.matches(in: string, options: [], range: range)
+      
+      return matches.map {
+        let range = Range($0.range, in: string)!
+        return String(string[range])
+      }
+    }
 }

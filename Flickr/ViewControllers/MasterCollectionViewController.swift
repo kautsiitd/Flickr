@@ -15,14 +15,13 @@ class MasterCollectionViewController: UICollectionViewController {
 	@IBOutlet private weak var loader: UIActivityIndicatorView!
 	
 	// MARK: Variables
-	private var feed: GetFeed!
-	private var feedElements: [FeedElement] = []
+	private var feed: HomeFeed!
 	private var visibleCellIndexPath: IndexPath!
 	private var refreshControl: UIRefreshControl!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        feed = GetFeed(delegate: self)
+        feed = HomeFeed(delegate: self)
     }
 	
 	override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -74,8 +73,6 @@ class MasterCollectionViewController: UICollectionViewController {
 			}
 		})
 		
-		feedElements = []
-		imageCache.removeAllObjects()
 		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
 			layout.cache = []
 			layout.contentHeight = 0
@@ -100,7 +97,7 @@ class MasterCollectionViewController: UICollectionViewController {
 		case "pushingDescriptionVC":
 			let detailsViewController = segue.destination as! DetailsViewController
 			let item = collectionView?.indexPathsForSelectedItems?[0].item ?? 0
-			detailsViewController.feedElement = feedElements[item]
+            detailsViewController.feedElement = feed.feedElements[item]
 		default:
 			break
 		}
@@ -109,13 +106,13 @@ class MasterCollectionViewController: UICollectionViewController {
 
 extension MasterCollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return feedElements.count
+        return feed.feedElements.count
 	}
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MasterCollectionViewCell",
 		                                              for: indexPath)
 		if let collectionViewCell = cell as? MasterCollectionViewCell {
-			collectionViewCell.setCellWith(feedElement: feedElements[indexPath.item])
+            collectionViewCell.setCellWith(feedElement: feed.feedElements[indexPath.item])
 		}
 		return cell
 	}
@@ -141,25 +138,24 @@ extension MasterCollectionViewController {
 extension MasterCollectionViewController : MasterLayoutDelegate {
 	func collectionView(_ collectionView: UICollectionView,
 	                    heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
-		return feedElements[indexPath.item].imageHeight
+        return feed.feedElements[indexPath.item].imageHeight
 	}
 	
 }
 
-// MARK: - GetFeedProtocol
-extension MasterCollectionViewController: GetFeedProtocol {
-	func feedFetchedSuccessfully() {
-		self.feedElements = feed.feedElements
-		DispatchQueue.main.async { [weak self] in
-			self?.collectionView?.reloadData()
-			self?.loader.stopAnimating()
-			self?.loader.isHidden = true
-			self?.refreshControl.endRefreshing()
-			self?.navigationItem.leftBarButtonItem?.isEnabled = true
-			self?.navigationItem.rightBarButtonItem?.isEnabled = true
-		}
-	}
-	func feedFetchingFailed(_ error: CustomError) {
+// MARK: - HomeFeedProtocol
+extension MasterCollectionViewController: ApiProtocol {
+    func didFetchSuccessfully() {
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView?.reloadData()
+            self?.loader.stopAnimating()
+            self?.loader.isHidden = true
+            self?.refreshControl.endRefreshing()
+            self?.navigationItem.leftBarButtonItem?.isEnabled = true
+            self?.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
+    func didFail(with error: CustomError) {
         DispatchQueue.main.async { [weak self] in
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
@@ -177,7 +173,7 @@ extension MasterCollectionViewController: GetFeedProtocol {
                                           animated: true,
                                           completion: nil)
         }
-	}
+    }
 }
 
 extension MasterCollectionViewController {

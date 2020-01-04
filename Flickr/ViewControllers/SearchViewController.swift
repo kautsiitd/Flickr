@@ -34,7 +34,7 @@ class SearchViewController: UIViewController {
             self?.collectionView?.reloadData()
             self?.loader.startAnimating()
             self?.loader.isHidden = false
-            self?.feed.fetchFeed(searchText: "Rose")
+            self?.feed.fetch(for: "Rose", pageNumber: 1)
         }
     }
 }
@@ -63,21 +63,23 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - SearchFeedProtocol
-extension SearchViewController: SearchFeedProtocol {
-    func feedFetchedSuccessfully() {
+extension SearchViewController: ApiProtocol {
+    func didFetchSuccessfully() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView?.reloadData()
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
         }
     }
-    func feedFetchingFailed(_ error: CustomError) {
+    func didFail(with error: CustomError) {
         DispatchQueue.main.async { [weak self] in
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
+            self?.showAlert(with: error)
         }
-        let retryButton = UIAlertAction(title: "Retry",
-                                        style: .default,
+    }
+    private func showAlert(with error: CustomError) {
+        let retryButton = UIAlertAction(title: "Retry", style: .default,
                                         handler: { _ in
                                             self.fetchFeed()
         })
@@ -85,9 +87,7 @@ extension SearchViewController: SearchFeedProtocol {
                                                 message: error.description,
                                                 preferredStyle: .alert)
         alertController.addAction(retryButton)
-        navigationController?.present(alertController,
-                                      animated: true,
-                                      completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -96,7 +96,8 @@ extension SearchViewController: UISearchBarDelegate {
         if searchBar.text == "" {
             searchBar.text = "Rose"
         }
-        feed.fetchFeed(searchText: searchBar.text ?? "Rose")
+        let searchString = searchBar.text ?? "Rose"
+        feed.fetch(for: searchString, pageNumber: 1)
         searchBar.endEditing(true)
     }
 }

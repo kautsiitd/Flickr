@@ -8,37 +8,20 @@
 
 import Foundation
 
-protocol FlickrObjectDelegate: class {
-	/**
-	get api end point from the class
-	- returns: api end point
-	*/
-	func getApiEndPoint() -> String
-	
-	/**
-	called once the api response comes, asks the class to parse the json response
-	- parameter responseObject: json response as Dictionary
-	*/
-	func parseObject(_ responseObject: [String: Any])
-	
-	/**
-	called once api call is succeeded and response is parsed
-	*/
-	func didFetchSuccessfully()
-	
-	/**
-	called if the api call gets failed
-	- parameter error:	reason of the failure
-	*/
-	func didFailWithError(_ error: CustomError)
+protocol ApiProtocol {
+    func didFetchSuccessfully()
+    func didFail(with error: CustomError)
+}
+
+protocol FlickrObjectDelegate: ApiProtocol {
+	func apiEndPoint() -> String
+	func parse(_ response: [String: Any])
 }
 
 
 class FlickrObject: NSObject, FlickrObjectDelegate {
-	func getApiEndPoint() -> String {
-		return ""
-	}
-	func parseObject(_ responseObject: [String: Any]) {}
+	func apiEndPoint() -> String { return "" }
+    func parse(_ response: [String : Any]) {}
 	func didFetchSuccessfully() {}
-	func didFailWithError(_ error: CustomError) {}
+	func didFail(with error: CustomError) {}
 }

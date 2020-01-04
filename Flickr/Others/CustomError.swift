@@ -25,7 +25,8 @@ enum CustomError {
         switch self {
         case .invalidURL: return "Can't Open"
         case .invalidData: return "Can't Open"
-        case let .custom(error): return error?.localizedDescription ?? "Something went wrong 😭"
+        case let .custom(error):
+            return error?.localizedDescription ?? "Something went wrong 😭"
         }
     }
 }

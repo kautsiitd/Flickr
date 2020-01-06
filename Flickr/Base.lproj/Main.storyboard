@@ -207,6 +207,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="imageView" destination="pfk-e1-89v" id="ozg-ge-HFN"/>
+                                            <segue destination="re6-mh-tQo" kind="presentation" identifier="searchToFullImageVC" id="naA-An-MGl"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -235,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFq-Gc-gaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-116" y="665"/>
+            <point key="canvasLocation" x="-117" y="569"/>
         </scene>
         <!--Description-->
         <scene sceneID="8Sj-Ml-v6E">
@@ -405,10 +406,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUp-vV-SDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1436" y="-46.326836581709152"/>
+            <point key="canvasLocation" x="651" y="569"/>
         </scene>
     </scenes>
     <resources>
         <image name="Placeholder" width="384" height="220"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="naA-An-MGl"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -14,7 +14,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var imageView: CustomImageView!
     
     //MARK" Properties
-    private var searchElement: SearchElement?
+    var searchElement: SearchElement? {
+        didSet { updateCell() }
+    }
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,13 +26,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         searchElement = nil
-        imageView.image = nil
     }
-}
-
-extension SearchCollectionViewCell {
-    func setCell(with searchElement: SearchElement) {
-        self.searchElement = searchElement
-        imageView.setImage(with: searchElement.imageURL)
+    
+    private func updateCell() {
+        imageView.setImage(with: searchElement?.imageURL)
     }
 }

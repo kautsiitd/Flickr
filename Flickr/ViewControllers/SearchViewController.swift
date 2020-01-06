@@ -37,6 +37,18 @@ class SearchViewController: UIViewController {
             self?.feed.fetch(for: "Rose", pageNumber: 1)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        switch segue.identifier ?? "" {
+        case "searchToFullImageVC":
+            let fullImageViewController = segue.destination as! FullImageViewController
+            let cell = sender as! SearchCollectionViewCell
+            fullImageViewController.imageLink = cell.searchElement?.imageURL
+        default:
+            break
+        }
+    }
 }
 
 extension SearchViewController: UICollectionViewDataSource {
@@ -46,7 +58,7 @@ extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
         let searchElement = feed.searchElements[indexPath.row]
-        cell.setCell(with: searchElement)
+        cell.searchElement = searchElement
         return cell
     }
 }

@@ -77,6 +77,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63AB443E23C32E9D00B20EDD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F20EB6721F98C74B00AD2D77 /* ApiManager */,
+				F20EB6771F98C77100AD2D77 /* Extensions */,
+				F20EB67E1F98C78B00AD2D77 /* Others */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		63AB443F23C32ECB00B20EDD /* HomeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				63D91CED23BDDF0B00F1CDE4 /* HomeFeedElement.swift */,
+				63D91CEB23BDDF0B00F1CDE4 /* HomeFeed.swift */,
+			);
+			path = HomeFeed;
+			sourceTree = "<group>";
+		};
+		63AB444023C32ED900B20EDD /* SearchFeed */ = {
+			isa = PBXGroup;
+			children = (
+				63D91CEE23BDDF0B00F1CDE4 /* SearchElement.swift */,
+				63D91CEC23BDDF0B00F1CDE4 /* SearchFeed.swift */,
+			);
+			path = SearchFeed;
+			sourceTree = "<group>";
+		};
 		F20EB6451F98925F00AD2D77 = {
 			isa = PBXGroup;
 			children = (
@@ -96,10 +124,8 @@
 		F20EB6501F98925F00AD2D77 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				63AB443E23C32E9D00B20EDD /* Helpers */,
 				F20EB6831F98C7FD00AD2D77 /* Layouts */,
-				F20EB67E1F98C78B00AD2D77 /* Others */,
-				F20EB6771F98C77100AD2D77 /* Extensions */,
-				F20EB6721F98C74B00AD2D77 /* ApiManager */,
 				F20EB6641F98931B00AD2D77 /* Models */,
 				F20EB6631F98931000AD2D77 /* ViewControllers */,
 				F20EB6691F98C5F800AD2D77 /* Views */,
@@ -126,10 +152,8 @@
 		F20EB6641F98931B00AD2D77 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				63D91CED23BDDF0B00F1CDE4 /* HomeFeedElement.swift */,
-				63D91CEB23BDDF0B00F1CDE4 /* HomeFeed.swift */,
-				63D91CEE23BDDF0B00F1CDE4 /* SearchElement.swift */,
-				63D91CEC23BDDF0B00F1CDE4 /* SearchFeed.swift */,
+				63AB444023C32ED900B20EDD /* SearchFeed */,
+				63AB443F23C32ECB00B20EDD /* HomeFeed */,
 			);
 			path = Models;
 			sourceTree = "<group>";

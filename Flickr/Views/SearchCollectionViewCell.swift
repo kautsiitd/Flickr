@@ -11,10 +11,10 @@ import UIKit
 class SearchCollectionViewCell: UICollectionViewCell {
     
     //MARK: Elements
-    @IBOutlet fileprivate weak var imageView: CustomImageView!
+    @IBOutlet private weak var imageView: CustomImageView!
     
     //MARK" Properties
-    fileprivate var searchElement: SearchElement?
+    private var searchElement: SearchElement?
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,13 +23,13 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.searchElement = nil
+        searchElement = nil
         imageView.image = nil
     }
 }
 
 extension SearchCollectionViewCell {
-    func setCellWith(searchElement: SearchElement) {
+    func setCell(with searchElement: SearchElement) {
         self.searchElement = searchElement
         imageView.setImage(with: searchElement.imageURL)
     }

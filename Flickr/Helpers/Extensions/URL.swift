@@ -9,12 +9,16 @@
 import Foundation
 
 extension URL {
-    public init?(string: String, params: [String: Any], relativeTo url: URL?) {
+    init?(string: String, params: [String: Any], relativeTo url: URL?) {
         let paramsString = params.map { key, value in
             return "\(key)=\(value)"
         }.joined(separator: "&")
         
         let urlString = string + "?" + paramsString
         self.init(string: urlString, relativeTo: url)
+    }
+    
+    func isValid() -> Bool {
+        return self.absoluteString != ""
     }
 }

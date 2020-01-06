@@ -17,11 +17,11 @@ class MasterLayout: UICollectionViewLayout {
 	
 	// MARK: Variables
 	weak var delegate: MasterLayoutDelegate!
-	fileprivate var numberOfColumns = UIApplication.shared.statusBarOrientation.isLandscape ? 3:2
-	fileprivate var cellPadding: CGFloat = 6
+	private var numberOfColumns = UIApplication.shared.statusBarOrientation.isLandscape ? 3:2
+	private var cellPadding: CGFloat = 6
 	var cache = [UICollectionViewLayoutAttributes]()
 	var contentHeight: CGFloat = 0
-	fileprivate var contentWidth: CGFloat {
+	private var contentWidth: CGFloat {
 		guard let collectionView = collectionView else {
 			return 0
 		}

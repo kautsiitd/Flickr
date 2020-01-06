@@ -30,9 +30,13 @@ class CustomImageView: UIImageView {
 }
     
 extension CustomImageView {
-    func setImage(with urlString: String) {
-        image = nil
-        backgroundColor = .lightGray
+    func setImage(with url: URL?) {
+        setImage(with: url?.absoluteString)
+    }
+    
+    func setImage(with urlString: String?) {
+        setNilImage()
+        guard  let urlString = urlString else { return }
         self.urlString = urlString
         loader.startAnimating()
         //Checking cache
@@ -42,7 +46,7 @@ extension CustomImageView {
         }
         
         guard let url = URL(string: urlString) else {
-            self.setImage(image: #imageLiteral(resourceName: "Placeholder.png"), for: urlString)
+            setImage(image: #imageLiteral(resourceName: "Placeholder.png"), for: urlString)
             return
         }
         let remoteImageTask = URLSession.shared.dataTask(with: url, completionHandler: { [weak self] data, response, error in
@@ -59,6 +63,11 @@ extension CustomImageView {
         DispatchQueue.global(qos: .userInteractive).async {
             remoteImageTask.resume()
         }
+    }
+    
+    private func setNilImage() {
+        image = nil
+        backgroundColor = .lightGray
     }
     
     private func setImage(image: UIImage, for urlString: String,

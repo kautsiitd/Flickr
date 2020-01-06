@@ -13,8 +13,8 @@ class HomeFeedElement {
 	
 	// MARK: Properties
 	var title: String
-	var flickrLink: String
-	var mediaLink: String
+	var flickrLink: URL?
+	var mediaLink: URL?
 	var dateTaken: String
 	var imageDescription: String
 	var publishedDate: String
@@ -25,15 +25,21 @@ class HomeFeedElement {
 	// MARK: Calculated Properties
 	var imagewidth: CGFloat = 180
 	var imageHeight: CGFloat = 240
-	var authorLink: String = ""
+	var authorLink: URL?
 	var date: Date = Date()
 	var attributedDescriptionString: NSAttributedString = NSAttributedString()
 	
 	// MARK: Init
 	init(response: [String: Any]) {
 		title = response["title"] as? String ?? ""
-		flickrLink = response["link"] as? String ?? ""
-		mediaLink = (response["media"] as? [String: String])?["m"] ?? ""
+        
+        if let linkString = response["link"] as? String {
+            flickrLink = URL(string: linkString)
+        }
+        if let linkString = (response["media"] as? [String: String])?["m"] {
+            mediaLink = URL(string: linkString)
+        }
+        
 		dateTaken = response["date_taken"] as? String ?? ""
 		imageDescription = response["description"] as? String ?? ""
 		publishedDate = response["published"] as? String ?? ""
@@ -41,7 +47,8 @@ class HomeFeedElement {
 		author = response["author"] as? String ?? ""
 		var imageDescriptionElements = imageDescription.matchingStrings(regex: "<a href=\\\"(.*?)\">(.*?)</a>")
 		if imageDescriptionElements.count > 0 {
-			authorLink = imageDescriptionElements[0][1]
+            let linkString = imageDescriptionElements[0][1]
+            authorLink = URL(string: linkString)
 			author = imageDescriptionElements[0][2]
 		}
 		

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SafariServices
 
 class DetailsViewController: UIViewController {
 	
@@ -22,10 +21,8 @@ class DetailsViewController: UIViewController {
 	@IBOutlet private weak var descriptionTextView: UITextView!
 	
 	// MARK: Properties
-	var feedElement: HomeFeedElement!
-    
-    //MARK: Variables
     let calendar = Calendar.current
+	var feedElement: HomeFeedElement!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,14 +32,11 @@ class DetailsViewController: UIViewController {
     private func setupView() {
         imageView.setImage(with: feedElement.mediaLink)
         titleLabel.text = feedElement.title
-        flickrLinkButton.isEnabled = feedElement.flickrLink != ""
+        flickrLinkButton.isEnabled = feedElement.flickrLink != nil
         dateTimeLabel.text = Date().offset(from: feedElement.date) + " ago"
         authorButton.setTitle(feedElement.author, for: .normal)
         dateLabel.text = dateString()
-        
-        
         timeLabel.text = timeString()
-        
         descriptionTextView.attributedText = self.feedElement.attributedDescriptionString
     }
     
@@ -74,20 +68,10 @@ class DetailsViewController: UIViewController {
 //MARK: IBActions
 extension DetailsViewController {
 	@IBAction func flickrLinkButtonPressed() {
-		openLink(urlString: feedElement.flickrLink)
+        open(url: feedElement.flickrLink)
 	}
 	
 	@IBAction func authorButtonPressed() {
-		openLink(urlString: feedElement.authorLink)
+        open(url: feedElement.authorLink)
 	}
-    
-    private func openLink(urlString: String) {
-        guard let url = URL(string: urlString) else {
-            showAlert(with: .invalidLink)
-            return
-        }
-        let safariViewController = SFSafariViewController(url: url,
-                                                          entersReaderIfAvailable: false)
-        present(safariViewController, animated: true)
-    }
 }

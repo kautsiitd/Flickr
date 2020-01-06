@@ -14,7 +14,7 @@ class FullImageViewController: UIViewController {
 	@IBOutlet private weak var imageView: CustomImageView!
 	
 	// MARK: Properties
-	var imageLink: String!
+	var imageLink: URL?
 	
 	override func viewDidLoad() {
         imageView.setImage(with: imageLink)

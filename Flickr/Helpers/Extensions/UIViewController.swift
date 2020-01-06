@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import SafariServices
 
 extension UIViewController {
     func showAlert(with error: CustomError) {
         let alert = CustomAlert(with: error, actions: [.ok])
         present(alert, animated: true, completion: nil)
+    }
+    
+    func open(url: URL?) {
+        guard let url = url else {
+            showAlert(with: .invalidLink)
+            return
+        }
+        let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+        present(safariViewController, animated: true)
     }
 }

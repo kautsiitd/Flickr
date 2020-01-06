@@ -17,6 +17,7 @@ class SearchViewController: UIViewController {
     
     //MARK: Variables
     private var feed: SearchFeed!
+    private var cellSize: CGSize!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -28,8 +29,7 @@ class SearchViewController: UIViewController {
         fetchFeed()
     }
     
-    @objc
-    fileprivate func fetchFeed() {
+    private func fetchFeed() {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView?.reloadData()
             self?.loader.startAnimating()
@@ -44,12 +44,9 @@ extension SearchViewController: UICollectionViewDataSource {
         return feed.searchElements.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell",
-                                                      for: indexPath)
-        if let cell = cell as? SearchCollectionViewCell {
-            let searchElement = feed.searchElements[indexPath.row]
-            cell.setCellWith(searchElement: searchElement)
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
+        let searchElement = feed.searchElements[indexPath.row]
+        cell.setCell(with: searchElement)
         return cell
     }
 }
@@ -66,9 +63,9 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: ApiProtocol {
     func didFetchSuccessfully() {
         DispatchQueue.main.async { [weak self] in
-            self?.collectionView?.reloadData()
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
+            self?.collectionView?.reloadData()
         }
     }
     func didFail(with error: CustomError) {

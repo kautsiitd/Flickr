@@ -155,23 +155,17 @@ extension MasterCollectionViewController: ApiProtocol {
             self?.navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
+    
     func didFail(with error: CustomError) {
         DispatchQueue.main.async { [weak self] in
-            self?.loader.stopAnimating()
-            self?.loader.isHidden = true
-            self?.refreshControl.endRefreshing()
-            let retryButton = UIAlertAction(title: "Retry",
-                                            style: .default,
-                                            handler: { _ in
-                                                self?.fetchFeed(normalRefresh: true)
-            })
-            let alertController = UIAlertController(title: error.title,
-                                                    message: error.description,
-                                                    preferredStyle: .alert)
-            alertController.addAction(retryButton)
-            self?.navigationController?.present(alertController,
-                                          animated: true,
-                                          completion: nil)
+            guard let self = self else { return }
+            self.loader.stopAnimating()
+            self.loader.isHidden = true
+            self.refreshControl.endRefreshing()
+            
+            let retry = CustomAlertAction.retry(self.fetchFeed(normalRefresh: true))
+            let alert = CustomAlert(with: error, actions: [retry])
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
@@ -179,24 +173,13 @@ extension MasterCollectionViewController: ApiProtocol {
 extension MasterCollectionViewController {
 	@IBAction func openFlickrInSafari() {
 		guard let url = URL(string: feed?.link ?? "") else {
-			let alertController = UIAlertController(title: "Error",
-			                                        message: "Link is not Working!!",
-			                                        preferredStyle: .alert)
-			alertController.addAction(UIAlertAction(title: "OK",
-			                                        style: .cancel,
-			                                        handler: nil))
-			navigationController?.present(alertController,
-			                              animated: true,
-			                              completion: nil)
+            showAlert(with: .invalidLink)
 			return
 		}
 		let safariViewController = SFSafariViewController(url: url,
 		                                                  entersReaderIfAvailable: true)
-		navigationController?.present(safariViewController,
-		                              animated: true,
-		                              completion: nil)
+		present(safariViewController, animated: true, completion: nil)
 	}
-	
 	
 	@IBAction func refreshFeed() {
 		fetchFeed(normalRefresh: true)

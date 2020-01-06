@@ -11,15 +11,10 @@ import UIKit
 class FullImageViewController: UIViewController {
 	
 	// MARK: Elements
-	@IBOutlet fileprivate weak var imageView: CustomImageView!
+	@IBOutlet private weak var imageView: CustomImageView!
 	
 	// MARK: Properties
 	var imageLink: String!
-	
-	// MARK: Init
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
 	
 	override func viewDidLoad() {
         imageView.setImage(with: imageLink)

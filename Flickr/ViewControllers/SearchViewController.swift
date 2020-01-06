@@ -75,19 +75,11 @@ extension SearchViewController: ApiProtocol {
         DispatchQueue.main.async { [weak self] in
             self?.loader.stopAnimating()
             self?.loader.isHidden = true
-            self?.showAlert(with: error)
+            
+            let retry = CustomAlertAction.retry(self?.fetchFeed())
+            let alert = CustomAlert(with: error, actions: [retry])
+            self?.present(alert, animated: true, completion: nil)
         }
-    }
-    private func showAlert(with error: CustomError) {
-        let retryButton = UIAlertAction(title: "Retry", style: .default,
-                                        handler: { _ in
-                                            self.fetchFeed()
-        })
-        let alertController = UIAlertController(title: error.title,
-                                                message: error.description,
-                                                preferredStyle: .alert)
-        alertController.addAction(retryButton)
-        present(alertController, animated: true, completion: nil)
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63AB443B23C325CA00B20EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB443A23C325CA00B20EDD /* UIViewController.swift */; };
+		63ACA35023C1FAA60029372D /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACA34F23C1FAA60029372D /* CustomAlert.swift */; };
 		63D91CDC23BDDED100F1CDE4 /* MasterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDB23BDDED100F1CDE4 /* MasterLayout.swift */; };
 		63D91CDE23BDDEDC00F1CDE4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */; };
 		63D91CE323BDDEEC00F1CDE4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDF23BDDEEC00F1CDE4 /* Date.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63AB443A23C325CA00B20EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		63ACA34F23C1FAA60029372D /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		63D91CDB23BDDED100F1CDE4 /* MasterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterLayout.swift; sourceTree = "<group>"; };
 		63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		63D91CDF23BDDEEC00F1CDE4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				63D91CE123BDDEEC00F1CDE4 /* GradientView.swift */,
 				63D91CE223BDDEEC00F1CDE4 /* String.swift */,
 				63D91D0523C0B8F700F1CDE4 /* URL.swift */,
+				63AB443A23C325CA00B20EDD /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 				63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */,
 				63D91CFF23BE22BF00F1CDE4 /* CustomImageView.swift */,
 				63D91D0323BF6C3A00F1CDE4 /* CustomError.swift */,
+				63ACA34F23C1FAA60029372D /* CustomAlert.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -256,6 +262,7 @@
 				63D91CE623BDDEEC00F1CDE4 /* String.swift in Sources */,
 				63D91CE923BDDEF900F1CDE4 /* FlickrObject.swift in Sources */,
 				63D91D0423BF6C3A00F1CDE4 /* CustomError.swift in Sources */,
+				63AB443B23C325CA00B20EDD /* UIViewController.swift in Sources */,
 				63D91CFA23BDDF1800F1CDE4 /* SearchViewController.swift in Sources */,
 				F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */,
 				63D91CDC23BDDED100F1CDE4 /* MasterLayout.swift in Sources */,
@@ -269,6 +276,7 @@
 				63D91CF723BDDF1800F1CDE4 /* DetailsViewController.swift in Sources */,
 				63D91D0623C0B8F700F1CDE4 /* URL.swift in Sources */,
 				63D91CF023BDDF0B00F1CDE4 /* SearchFeed.swift in Sources */,
+				63ACA35023C1FAA60029372D /* CustomAlert.swift in Sources */,
 				63D91CFE23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift in Sources */,
 				63D91CF223BDDF0B00F1CDE4 /* SearchElement.swift in Sources */,
 			);

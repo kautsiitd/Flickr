@@ -20,7 +20,7 @@ extension UIViewController {
             showAlert(with: .invalidLink)
             return
         }
-        let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+        let safariViewController = SFSafariViewController(url: url)
         present(safariViewController, animated: true)
     }
 }

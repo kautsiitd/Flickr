@@ -6,6 +6,7 @@
 //  Copyright © 2017 Kautsya Kanu. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 import SafariServices
 
@@ -24,24 +25,26 @@ class MasterCollectionViewController: UICollectionViewController {
         feed = HomeFeed(delegate: self)
     }
 	
-	override var preferredStatusBarStyle : UIStatusBarStyle {
-		return UIStatusBarStyle.lightContent
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationItem.backBarButtonItem?.title = ""
-		collectionView?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-		if let layout = collectionView?.collectionViewLayout as? MasterLayout {
-			layout.delegate = self
-		}
-		refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(fetchFeed), for: UIControl.Event.valueChanged)
-		collectionView?.addSubview(refreshControl)
+		setupView()
 		fetchFeed(normalRefresh: true)
 	}
+    
+    private func setupView() {
+        guard let collectionView = collectionView else { return }
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        let layout = collectionView.collectionViewLayout as! MosaicLayout
+        layout.delegate = self
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchFeed), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+    }
 	
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 		coordinator.animate(alongsideTransition: { [weak self] context in
 			let firstCellIndexPath = IndexPath(item: 0, section: 0)
 			guard let currentCell = self?.collectionView?.visibleCells[0] else {
@@ -54,15 +57,13 @@ class MasterCollectionViewController: UICollectionViewController {
             guard let self = self else {
                 return
             }
-			self.collectionView?.scrollToItem(at: self.visibleCellIndexPath, at: .centeredVertically, animated: true)
+            self.collectionView?.scrollToItem(at: self.visibleCellIndexPath, at: .centeredVertically, animated: true)
 		})
 		
-		guard let flowLayout = collectionView?.collectionViewLayout as? MasterLayout else {
+		guard let flowLayout = collectionView?.collectionViewLayout as? MosaicLayout else {
 			return
 		}
-		flowLayout.cache = []
-		flowLayout.contentHeight = 0
-		flowLayout.invalidateLayout()
+        flowLayout.reset()
 	}
 	
 	@objc
@@ -73,13 +74,10 @@ class MasterCollectionViewController: UICollectionViewController {
 			}
 		})
 		
-		if let layout = (collectionView?.collectionViewLayout as? MasterLayout) {
-			layout.cache = []
-			layout.contentHeight = 0
+		if let layout = (collectionView?.collectionViewLayout as? MosaicLayout) {
+            layout.reset()
 		}
-        collectionView?.setContentOffset(CGPoint.init(x: 0,
-                                                      y: -(collectionView?.contentInset.top ?? 0)),
-                                         animated: true)
+        collectionView?.setContentOffset(CGPoint.init(x: 0, y: -(collectionView?.contentInset.top ?? 0)), animated: true)
         DispatchQueue.main.async { [weak self] in
             self?.collectionView?.reloadData()
             if normalRefresh {
@@ -109,8 +107,7 @@ extension MasterCollectionViewController {
         return feed.feedElements.count
 	}
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MasterCollectionViewCell",
-		                                              for: indexPath)
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MasterCollectionViewCell", for: indexPath)
 		if let collectionViewCell = cell as? MasterCollectionViewCell {
             collectionViewCell.setCellWith(feedElement: feed.feedElements[indexPath.item])
 		}
@@ -134,11 +131,14 @@ extension MasterCollectionViewController {
     }
 }
 
-// MARK: - MasterLayoutDelegate
-extension MasterCollectionViewController : MasterLayoutDelegate {
-	func collectionView(_ collectionView: UICollectionView,
-	                    heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
-        return feed.feedElements[indexPath.item].imageHeight
+// MARK: - MosaicLayoutProtocol
+extension MasterCollectionViewController: MosaicLayoutProtocol {
+	func collectionView(_ collectionView: UICollectionView, heightAt indexPath:IndexPath, for width: CGFloat) -> CGFloat {
+        let element = feed.feedElements[indexPath.item]
+        let imageSize = CGSize(width: element.imagewidth, height: element.imageHeight)
+        let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
+        let imageRect = AVMakeRect(aspectRatio: imageSize, insideRect: boundingRect)
+        return imageRect.height
 	}
 	
 }
@@ -176,8 +176,7 @@ extension MasterCollectionViewController {
             showAlert(with: .invalidLink)
 			return
 		}
-		let safariViewController = SFSafariViewController(url: url,
-		                                                  entersReaderIfAvailable: true)
+		let safariViewController = SFSafariViewController(url: url)
 		present(safariViewController, animated: true, completion: nil)
 	}
 	

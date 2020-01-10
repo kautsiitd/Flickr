@@ -9,7 +9,6 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    
     //MARK: Elements
     @IBOutlet private weak var loader: UIActivityIndicatorView!
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -17,8 +16,23 @@ class SearchViewController: UIViewController {
     
     //MARK: Variables
     private var feed: SearchFeed!
-    private var cellSize: CGSize!
+    private let numberOfColumns = 2
+    private let cellSpacing: CGFloat = 10
     
+    //MARK: Calculated
+    lazy private var totalSpacing: CGFloat = {
+        return cellSpacing * (numberOfColumns-1)
+    }()
+    lazy private var contentWidth: CGFloat = {
+        guard let collectionView = collectionView else { return 0 }
+        let insets = collectionView.contentInset
+        return collectionView.bounds.width - (insets.left + insets.right)
+    }()
+    lazy private var cellWidth: CGFloat = {
+        return (contentWidth-totalSpacing)/numberOfColumns
+    }()
+    
+    //MARK:- Init
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         feed = SearchFeed(delegate: self)
@@ -26,7 +40,14 @@ class SearchViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
         fetchFeed()
+    }
+    
+    private func setupCollectionView() {
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.minimumInteritemSpacing = cellSpacing
     }
     
     private func fetchFeed() {
@@ -51,27 +72,26 @@ class SearchViewController: UIViewController {
     }
 }
 
+//MARK:- UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return feed.searchElements.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
-        let searchElement = feed.searchElements[indexPath.row]
-        cell.searchElement = searchElement
+        cell.searchElement = feed.searchElements[indexPath.row]
         return cell
     }
 }
 
+//MARK: UICollectionViewDelegateFlowLayout
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - 30)/2
-        let height = width
-        return CGSize(width: width, height: height)
+        return CGSize(width: cellWidth, height: cellWidth)
     }
 }
 
-// MARK: - SearchFeedProtocol
+// MARK:- SearchFeedProtocol
 extension SearchViewController: ApiProtocol {
     func didFetchSuccessfully() {
         DispatchQueue.main.async { [weak self] in
@@ -92,6 +112,7 @@ extension SearchViewController: ApiProtocol {
     }
 }
 
+//MARK:- UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if searchBar.text == "" {

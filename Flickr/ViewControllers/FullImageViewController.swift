@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CustomImageView
 
 class FullImageViewController: UIViewController {
 	

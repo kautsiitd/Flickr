@@ -50,8 +50,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6dg-qn-myf" customClass="CustomImageView" customModule="CustomImageView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dg-qn-myf" customClass="CustomImageView" customModule="CustomImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldPersist" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
@@ -201,6 +202,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QQ4-5h-D0g" customClass="CustomImageView" customModule="CustomImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldPersist" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
@@ -428,9 +430,6 @@
             <point key="canvasLocation" x="649" y="628"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Placeholder" width="384" height="220"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4bq-Xf-QSh"/>
     </inferredMetricsTieBreakers>

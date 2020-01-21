@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6389DF4C23D7AE7A008EE965 /* CustomImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6389DF4B23D7AE70008EE965 /* CustomImageView.framework */; };
+		6389DF4D23D7AE7A008EE965 /* CustomImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6389DF4B23D7AE70008EE965 /* CustomImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63AB443B23C325CA00B20EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB443A23C325CA00B20EDD /* UIViewController.swift */; };
 		63ACA35023C1FAA60029372D /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACA34F23C1FAA60029372D /* CustomAlert.swift */; };
 		63BECDB623C51F1D00B4C0B0 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BECDB523C51F1D00B4C0B0 /* Operators.swift */; };
-		63CD5E6623D5D95100619E21 /* CustomImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD5E6423D5D93800619E21 /* CustomImageView.framework */; };
-		63CD5E6723D5D95100619E21 /* CustomImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD5E6423D5D93800619E21 /* CustomImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63D91CDC23BDDED100F1CDE4 /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDB23BDDED100F1CDE4 /* MosaicLayout.swift */; };
 		63D91CDE23BDDEDC00F1CDE4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */; };
 		63D91CE323BDDEEC00F1CDE4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CDF23BDDEEC00F1CDE4 /* Date.swift */; };
@@ -38,9 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		63CD5E6323D5D93800619E21 /* PBXContainerItemProxy */ = {
+		6389DF4A23D7AE70008EE965 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 63CD5E5F23D5D93800619E21 /* CustomImageView.xcodeproj */;
+			containerPortal = 6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 63DF508723D09ADD009486D5;
 			remoteInfo = CustomImageView;
@@ -48,13 +48,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		63CD5E6823D5D95100619E21 /* Embed Frameworks */ = {
+		6389DF4523D7AE3B008EE965 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				63CD5E6723D5D95100619E21 /* CustomImageView.framework in Embed Frameworks */,
+				6389DF4D23D7AE7A008EE965 /* CustomImageView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,10 +62,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CustomImageView.xcodeproj; path = ../CustomImageView/CustomImageView.xcodeproj; sourceTree = "<group>"; };
 		63AB443A23C325CA00B20EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		63ACA34F23C1FAA60029372D /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		63BECDB523C51F1D00B4C0B0 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		63CD5E5F23D5D93800619E21 /* CustomImageView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CustomImageView.xcodeproj; path = ../CustomImageView/CustomImageView.xcodeproj; sourceTree = "<group>"; };
 		63D91CDB23BDDED100F1CDE4 /* MosaicLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
 		63D91CDD23BDDEDC00F1CDE4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		63D91CDF23BDDEEC00F1CDE4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -98,13 +98,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CD5E6623D5D95100619E21 /* CustomImageView.framework in Frameworks */,
+				6389DF4C23D7AE7A008EE965 /* CustomImageView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6389DF4723D7AE6F008EE965 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6389DF4B23D7AE70008EE965 /* CustomImageView.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		63AB443E23C32E9D00B20EDD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,14 +141,6 @@
 			path = SearchFeed;
 			sourceTree = "<group>";
 		};
-		63CD5E6023D5D93800619E21 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				63CD5E6423D5D93800619E21 /* CustomImageView.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		63CD5E6523D5D95100619E21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,7 +151,7 @@
 		F20EB6451F98925F00AD2D77 = {
 			isa = PBXGroup;
 			children = (
-				63CD5E5F23D5D93800619E21 /* CustomImageView.xcodeproj */,
+				6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */,
 				F20EB6501F98925F00AD2D77 /* Flickr */,
 				F20EB64F1F98925F00AD2D77 /* Products */,
 				63CD5E6523D5D95100619E21 /* Frameworks */,
@@ -262,7 +262,7 @@
 				F20EB64A1F98925F00AD2D77 /* Sources */,
 				F20EB64B1F98925F00AD2D77 /* Frameworks */,
 				F20EB64C1F98925F00AD2D77 /* Resources */,
-				63CD5E6823D5D95100619E21 /* Embed Frameworks */,
+				6389DF4523D7AE3B008EE965 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,8 +303,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 63CD5E6023D5D93800619E21 /* Products */;
-					ProjectRef = 63CD5E5F23D5D93800619E21 /* CustomImageView.xcodeproj */;
+					ProductGroup = 6389DF4723D7AE6F008EE965 /* Products */;
+					ProjectRef = 6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -315,11 +315,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		63CD5E6423D5D93800619E21 /* CustomImageView.framework */ = {
+		6389DF4B23D7AE70008EE965 /* CustomImageView.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CustomImageView.framework;
-			remoteRef = 63CD5E6323D5D93800619E21 /* PBXContainerItemProxy */;
+			remoteRef = 6389DF4A23D7AE70008EE965 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -510,6 +510,7 @@
 				DEVELOPMENT_TEAM = A8UX99CMMW;
 				INFOPLIST_FILE = Flickr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_NO_PIE = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kautsya.Flickr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -524,6 +525,7 @@
 				DEVELOPMENT_TEAM = A8UX99CMMW;
 				INFOPLIST_FILE = Flickr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_NO_PIE = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kautsya.Flickr;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -40,6 +40,9 @@ class MosaicLayout: UICollectionViewLayout {
 	
 	override func prepare() {
 		guard let collectionView = collectionView else { return }
+        cache.removeAll()
+        contentHeight = 0
+        
         let numberOfSpaces = numberOfColumns - 1
         let allSpaceWidth: CGFloat = numberOfSpaces * cellSpacing
         let allCellWidth = contentWidth - allSpaceWidth
@@ -87,10 +90,4 @@ class MosaicLayout: UICollectionViewLayout {
 	override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 		return cache[indexPath.item]
 	}
-    
-    func reset() {
-        cache.removeAll()
-        contentHeight = 0
-        invalidateLayout()
-    }
 }

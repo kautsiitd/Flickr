@@ -31,27 +31,29 @@ class HomeFeed: FlickrObject {
     }
 	
 	func fetchFeed() {
+        feedElements.removeAll()
         let params = ["format": "json#"]
         let regex = "(?s)\\{(.*)\\}"
         ApiManager.shared.getRequest(for: params, with: regex, self)
 	}
 	
     override func parse(_ response: [String: Any], for params: [String: Any]) {
-		title = response["title"] as? String ?? ""
-		link = response["link"] as? String ?? ""
-		feedDescription = response["description"] as? String ?? ""
-		
-        var dateString = response["modified"] as? String ?? ""
-        dateString = dateString.replacingOccurrences(of: "T", with: " ")
-        modifiedDate = formatter.date(from: dateString) ?? Date()
-        
-        generator = response["generator"] as? String ?? ""
-        
-        feedElements = []
-        let items = response["items"] as? [[String: Any]] ?? []
-        for item in items {
-            let feedElement = HomeFeedElement(response: item)
-            feedElements.append(feedElement)
+        DispatchQueue.main.async {
+            self.title = response["title"] as? String ?? ""
+            self.link = response["link"] as? String ?? ""
+            self.feedDescription = response["description"] as? String ?? ""
+            
+            var dateString = response["modified"] as? String ?? ""
+            dateString = dateString.replacingOccurrences(of: "T", with: " ")
+            self.modifiedDate = self.formatter.date(from: dateString) ?? Date()
+            
+            self.generator = response["generator"] as? String ?? ""
+            
+            let items = response["items"] as? [[String: Any]] ?? []
+            for item in items {
+                let feedElement = HomeFeedElement(response: item)
+                self.feedElements.append(feedElement)
+            }
         }
 	}
 	

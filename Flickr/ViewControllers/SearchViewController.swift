@@ -18,10 +18,13 @@ class SearchViewController: UIViewController {
     private var feed: SearchFeed!
     private let numberOfColumns = 2
     private let cellSpacing: CGFloat = 10
+    private var timer: Timer?
+    private var currentQuery: String = "Rose"
     
     //MARK: Calculated
     lazy private var totalSpacing: CGFloat = {
-        return cellSpacing * (numberOfColumns-1)
+        // +1 because of section insets
+        return cellSpacing * (numberOfColumns+1)
     }()
     lazy private var contentWidth: CGFloat = {
         guard let collectionView = collectionView else { return 0 }
@@ -31,31 +34,25 @@ class SearchViewController: UIViewController {
     lazy private var cellWidth: CGFloat = {
         return (contentWidth-totalSpacing)/numberOfColumns
     }()
-    
+
     //MARK:- Init
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         feed = SearchFeed(delegate: self)
     }
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
-        fetchFeed()
+        refreshFeed()
     }
-    
-    private func setupCollectionView() {
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.minimumInteritemSpacing = cellSpacing
-    }
-    
-    private func fetchFeed() {
+
+    private func refreshFeed() {
         DispatchQueue.main.async { [weak self] in
-            self?.collectionView?.reloadData()
-            self?.loader.startAnimating()
-            self?.loader.isHidden = false
-            self?.feed.fetch(for: "Rose", pageNumber: 1)
+            guard let self = self else { return }
+            self.loader.startAnimating()
+            self.loader.isHidden = false
+            self.feed.fetch(for: self.currentQuery, pageNumber: 1)
+            self.collectionView?.reloadData()
         }
     }
     
@@ -93,33 +90,40 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK:- SearchFeedProtocol
 extension SearchViewController: ApiProtocol {
-    func didFetchSuccessfully() {
+    func didFetchSuccessfully(for params: [String: Any]) {
         DispatchQueue.main.async { [weak self] in
-            self?.loader.stopAnimating()
-            self?.loader.isHidden = true
-            self?.collectionView?.reloadData()
+            guard let self = self else { return }
+            self.loader.stopAnimating()
+            self.loader.isHidden = true
+            self.collectionView?.reloadData()
         }
     }
     func didFail(with error: CustomError) {
         DispatchQueue.main.async { [weak self] in
-            self?.loader.stopAnimating()
-            self?.loader.isHidden = true
-            
-            let retry = CustomAlertAction.retry(self?.fetchFeed())
-            let alert = CustomAlert(with: error, actions: [retry])
-            self?.present(alert, animated: true, completion: nil)
+            guard let self = self else { return }
+            self.loader.stopAnimating()
+            self.loader.isHidden = true
+            self.showRetryAlert(for: error)
         }
+    }
+    private func showRetryAlert(for error: CustomError) {
+        let retry = CustomAlertAction.retry(self.refreshFeed())
+        let alert = CustomAlert(with: error, actions: [retry])
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
 //MARK:- UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: {
+            _ in
+            self.currentQuery = searchBar.text ?? "Rose"
+            self.refreshFeed()
+        })
+    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text == "" {
-            searchBar.text = "Rose"
-        }
-        let searchString = searchBar.text ?? "Rose"
-        feed.fetch(for: searchString, pageNumber: 1)
         searchBar.endEditing(true)
     }
 }

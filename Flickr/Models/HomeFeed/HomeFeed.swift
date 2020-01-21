@@ -36,7 +36,7 @@ class HomeFeed: FlickrObject {
         ApiManager.shared.getRequest(for: params, with: regex, self)
 	}
 	
-	override func parse(_ response: [String: Any]) {
+    override func parse(_ response: [String: Any], for params: [String: Any]) {
 		title = response["title"] as? String ?? ""
 		link = response["link"] as? String ?? ""
 		feedDescription = response["description"] as? String ?? ""
@@ -59,8 +59,8 @@ class HomeFeed: FlickrObject {
 		return "services/feeds/photos_public.gne"
 	}
 	
-	override func didFetchSuccessfully() {
-		delegate.didFetchSuccessfully()
+    override func didFetchSuccessfully(for params: [String: Any]) {
+		delegate.didFetchSuccessfully(for: params)
 	}
 	
 	override func didFail(with error: CustomError) {

@@ -18,47 +18,61 @@ class SearchFeed: FlickrObject {
     var searchElements: [SearchElement] = []
     
     private var delegate: ApiProtocol
+    private var query: String = "Rose"
     
     init(delegate: ApiProtocol) {
         self.delegate = delegate
     }
     
     func fetch(for text: String, pageNumber: Int) {
-        let params = getParams(for: text, pageNumber: pageNumber)
+        self.searchElements.removeAll()
+        query = text
+        let params = getParams(for: pageNumber)
         ApiManager.shared.getRequest(for: params, self)
     }
     
-    private func getParams(for text: String, pageNumber: Int) -> [String: Any] {
+    private func getParams(for pageNumber: Int) -> [String: Any] {
+        let urlQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         return ["method": "flickr.photos.search",
                 "api_key": "3e7cc266ae2b0e0d78e279ce8e361736",
                 "format": "json",
                 "nojsoncallback": 1,
                 "safe_search": 1,
-                "text": text,
+                "text": urlQuery ?? "Rose",
                 "page": pageNumber]
     }
     
-    override func parse(_ response: [String: Any]) {
-        let response = response["photos"] as? [String: Any] ?? [:]
-        currentPage = response["page"] as? Int ?? 1
-        totalPages = response["pages"] as? Int ?? 1
-        perPagePics = response["perpage"] as? Int ?? 0
-        totalPics = response["total"] as? Int ?? 0
-        
-        let photos = response["photo"] as? [[String: Any]] ?? []
-        searchElements = []
-        for photo in photos {
-            let searchElement = SearchElement(response: photo)
-            searchElements.append(searchElement)
+    override func parse(_ response: [String: Any], for params: [String: Any]) {
+        if !isLatest(params) { return }
+        DispatchQueue.main.async {
+            let response = response["photos"] as? [String: Any] ?? [:]
+            self.currentPage = response["page"] as? Int ?? 1
+            self.totalPages = response["pages"] as? Int ?? 1
+            self.perPagePics = response["perpage"] as? Int ?? 0
+            self.totalPics = response["total"] as? Int ?? 0
+            
+            let photos = response["photo"] as? [[String: Any]] ?? []
+            for photo in photos {
+                let searchElement = SearchElement(response: photo)
+                self.searchElements.append(searchElement)
+            }
         }
+    }
+    
+    private func isLatest(_ params: [String: Any]) -> Bool {
+        let queryFetched = params["text"] as? String ?? ""
+        let currentQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        return queryFetched == currentQuery
     }
     
     override func apiEndPoint() -> String {
         return "services/rest"
     }
     
-    override func didFetchSuccessfully() {
-        delegate.didFetchSuccessfully()
+    override func didFetchSuccessfully(for params: [String: Any]) {
+        if isLatest(params) {
+            delegate.didFetchSuccessfully(for: params)
+        }
     }
     
     override func didFail(with error: CustomError) {

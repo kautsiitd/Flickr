@@ -185,72 +185,74 @@
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Rose" translatesAutoresizingMaskIntoConstraints="NO" id="7DE-ri-eyX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="bg8-eW-hxx" id="UbT-Pj-ZUR"/>
                                 </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qmX-X6-iOh">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q8j-8U-QVP">
                                 <rect key="frame" x="0.0" y="56" width="320" height="404"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M6G-x5-CmN">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Gh-r6-tsB">
+                                    <size key="itemSize" width="172" height="172"/>
+                                    <size key="estimatedItemSize" width="172" height="172"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
-                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="gib-ZI-fXh">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="404"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </activityIndicatorView>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCollectionViewCell" id="bm6-Sh-1gE" customClass="SearchCollectionViewCell" customModule="Flickr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCollectionViewCell" id="2eR-4l-R1Z" customClass="SearchCollectionViewCell" customModule="Flickr" customModuleProvider="target">
+                                        <rect key="frame" x="74" y="10" width="172" height="172"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MCv-7f-TQU">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iRX-GQ-NX6">
+                                            <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pfk-e1-89v" customClass="CustomImageView" customModule="CustomImageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QQ4-5h-D0g" customClass="CustomImageView" customModule="CustomImageView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldPersist" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="pfk-e1-89v" firstAttribute="leading" secondItem="MCv-7f-TQU" secondAttribute="leading" id="6Fz-GS-EUF"/>
-                                                <constraint firstAttribute="trailing" secondItem="pfk-e1-89v" secondAttribute="trailing" id="MYx-d8-UDh"/>
-                                                <constraint firstItem="pfk-e1-89v" firstAttribute="top" secondItem="MCv-7f-TQU" secondAttribute="top" id="PYz-bR-F10"/>
-                                                <constraint firstAttribute="bottom" secondItem="pfk-e1-89v" secondAttribute="bottom" id="m0S-J5-KAu"/>
+                                                <constraint firstItem="QQ4-5h-D0g" firstAttribute="top" secondItem="iRX-GQ-NX6" secondAttribute="top" id="02m-w4-gaO"/>
+                                                <constraint firstItem="QQ4-5h-D0g" firstAttribute="leading" secondItem="iRX-GQ-NX6" secondAttribute="leading" id="0JC-e3-B0C"/>
+                                                <constraint firstAttribute="trailing" secondItem="QQ4-5h-D0g" secondAttribute="trailing" id="VFz-iu-ZRe"/>
+                                                <constraint firstAttribute="bottom" secondItem="QQ4-5h-D0g" secondAttribute="bottom" id="qPZ-bI-AEg"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="imageView" destination="pfk-e1-89v" id="ozg-ge-HFN"/>
-                                            <segue destination="re6-mh-tQo" kind="presentation" identifier="searchToFullImageVC" id="naA-An-MGl"/>
+                                            <outlet property="imageView" destination="QQ4-5h-D0g" id="8CV-yq-8Gd"/>
+                                            <segue destination="re6-mh-tQo" kind="presentation" identifier="searchToFullImageVC" id="4bq-Xf-QSh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="bg8-eW-hxx" id="6Hp-O3-elV"/>
-                                    <outlet property="delegate" destination="bg8-eW-hxx" id="lhh-TM-0u9"/>
+                                    <outlet property="dataSource" destination="bg8-eW-hxx" id="HBa-0y-7s5"/>
+                                    <outlet property="delegate" destination="bg8-eW-hxx" id="mUT-vi-kMf"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Jba-sU-qWh">
+                                <rect key="frame" x="150" y="248" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="yBM-rd-La5" firstAttribute="top" secondItem="qmX-X6-iOh" secondAttribute="bottom" id="BNK-u9-Gc8"/>
-                            <constraint firstAttribute="trailing" secondItem="qmX-X6-iOh" secondAttribute="trailing" id="GS2-eo-zm8"/>
+                            <constraint firstItem="q8j-8U-QVP" firstAttribute="top" secondItem="7DE-ri-eyX" secondAttribute="bottom" id="4nG-Wy-hwG"/>
+                            <constraint firstItem="Jba-sU-qWh" firstAttribute="centerX" secondItem="q8j-8U-QVP" secondAttribute="centerX" id="Ez4-C4-ljN"/>
+                            <constraint firstAttribute="trailing" secondItem="q8j-8U-QVP" secondAttribute="trailing" id="M63-kC-wYh"/>
                             <constraint firstAttribute="trailing" secondItem="7DE-ri-eyX" secondAttribute="trailing" id="RKH-GW-Rqg"/>
-                            <constraint firstItem="qmX-X6-iOh" firstAttribute="leading" secondItem="rHE-3a-ScO" secondAttribute="leading" id="Tni-WR-4GM"/>
+                            <constraint firstItem="yBM-rd-La5" firstAttribute="top" secondItem="q8j-8U-QVP" secondAttribute="bottom" id="Sbe-Lu-nb9"/>
                             <constraint firstItem="7DE-ri-eyX" firstAttribute="top" secondItem="MQn-Zt-fFf" secondAttribute="bottom" id="Vw7-9X-aUc"/>
-                            <constraint firstItem="qmX-X6-iOh" firstAttribute="top" secondItem="7DE-ri-eyX" secondAttribute="bottom" id="poD-TB-Zpr"/>
                             <constraint firstItem="7DE-ri-eyX" firstAttribute="leading" secondItem="rHE-3a-ScO" secondAttribute="leading" id="sCU-aa-kDN"/>
+                            <constraint firstItem="Jba-sU-qWh" firstAttribute="centerY" secondItem="q8j-8U-QVP" secondAttribute="centerY" id="vQ4-J1-w0u"/>
+                            <constraint firstItem="q8j-8U-QVP" firstAttribute="leading" secondItem="rHE-3a-ScO" secondAttribute="leading" id="vol-0a-I94"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="qmX-X6-iOh" id="8Xx-Ih-E6F"/>
-                        <outlet property="loader" destination="gib-ZI-fXh" id="663-3S-8Ll"/>
+                        <outlet property="collectionView" destination="q8j-8U-QVP" id="NtM-St-p4F"/>
+                        <outlet property="loader" destination="Jba-sU-qWh" id="APC-yW-bFN"/>
                         <outlet property="searchBar" destination="7DE-ri-eyX" id="UaX-qy-tR7"/>
                     </connections>
                 </viewController>
@@ -439,6 +441,6 @@
         <image name="Placeholder" width="384" height="220"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="naA-An-MGl"/>
+        <segue reference="4bq-Xf-QSh"/>
     </inferredMetricsTieBreakers>
 </document>

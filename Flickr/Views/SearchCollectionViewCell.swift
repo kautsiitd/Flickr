@@ -25,7 +25,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        super.prepareForReuse()
         searchElement = nil
     }
     

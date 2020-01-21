@@ -145,7 +145,7 @@ extension MasterCollectionViewController: MosaicLayoutProtocol {
 
 // MARK: - HomeFeedProtocol
 extension MasterCollectionViewController: ApiProtocol {
-    func didFetchSuccessfully() {
+    func didFetchSuccessfully(for params: [String: Any]) {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView?.reloadData()
             self?.loader.stopAnimating()
@@ -155,7 +155,6 @@ extension MasterCollectionViewController: ApiProtocol {
             self?.navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
-    
     func didFail(with error: CustomError) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -173,7 +172,7 @@ extension MasterCollectionViewController: ApiProtocol {
 extension MasterCollectionViewController {
 	@IBAction func openFlickrInSafari() {
 		guard let url = URL(string: feed?.link ?? "") else {
-            showAlert(with: .invalidLink)
+            showOkAlert(with: .invalidLink)
 			return
 		}
 		let safariViewController = SFSafariViewController(url: url)

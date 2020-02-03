@@ -1,5 +1,5 @@
 //
-//  MasterCollectionViewCell.swift
+//  FeedCollectionViewCell.swift
 //  Flickr
 //
 //  Created by Kautsya Kanu on 19/10/17.

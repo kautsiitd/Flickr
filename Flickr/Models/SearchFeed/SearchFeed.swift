@@ -18,21 +18,20 @@ class SearchFeed: FlickrObject {
     var searchElements: [SearchElement] = []
     
     private var delegate: ApiProtocol
-    private var query: String = "Rose"
+    private var currentQuery: String = "Rose"
     
     init(delegate: ApiProtocol) {
         self.delegate = delegate
     }
     
-    func fetch(for text: String, pageNumber: Int) {
-        self.searchElements.removeAll()
-        query = text
+    private func fetch(for text: String, pageNumber: Int) {
+        currentQuery = text
         let params = getParams(for: pageNumber)
         ApiManager.shared.getRequest(for: params, self)
     }
     
     private func getParams(for pageNumber: Int) -> [String: Any] {
-        let urlQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let urlQuery = currentQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         return ["method": "flickr.photos.search",
                 "api_key": "3e7cc266ae2b0e0d78e279ce8e361736",
                 "format": "json",
@@ -61,8 +60,8 @@ class SearchFeed: FlickrObject {
     
     private func isLatest(_ params: [String: Any]) -> Bool {
         let queryFetched = params["text"] as? String ?? ""
-        let currentQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        return queryFetched == currentQuery
+        let currentUrlQuery = currentQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        return queryFetched == currentUrlQuery
     }
     
     override func apiEndPoint() -> String {
@@ -77,5 +76,22 @@ class SearchFeed: FlickrObject {
     
     override func didFail(with error: CustomError) {
         delegate.didFail(with: error)
+    }
+}
+
+//MARK:- Available Functions
+extension SearchFeed {
+    func fetchFirstPage(for query: String) {
+        searchElements.removeAll()
+        currentPage = 1
+        currentQuery = query
+        fetch(for: currentQuery, pageNumber: currentPage)
+    }
+    func fetchCurrentPage() {
+        fetch(for: currentQuery, pageNumber: currentPage)
+    }
+    func fetchNextPage() {
+        currentPage += 1
+        fetch(for: currentQuery, pageNumber: currentPage)
     }
 }

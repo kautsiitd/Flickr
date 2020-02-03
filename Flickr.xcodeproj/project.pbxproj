@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6389DF4C23D7AE7A008EE965 /* CustomImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6389DF4B23D7AE70008EE965 /* CustomImageView.framework */; };
-		6389DF4D23D7AE7A008EE965 /* CustomImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6389DF4B23D7AE70008EE965 /* CustomImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63AB443B23C325CA00B20EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB443A23C325CA00B20EDD /* UIViewController.swift */; };
 		63ACA35023C1FAA60029372D /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACA34F23C1FAA60029372D /* CustomAlert.swift */; };
 		63BECDB623C51F1D00B4C0B0 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BECDB523C51F1D00B4C0B0 /* Operators.swift */; };
@@ -31,6 +29,8 @@
 		63D91CFE23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91CFC23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift */; };
 		63D91D0423BF6C3A00F1CDE4 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91D0323BF6C3A00F1CDE4 /* CustomError.swift */; };
 		63D91D0623C0B8F700F1CDE4 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D91D0523C0B8F700F1CDE4 /* URL.swift */; };
+		63EAC52123DE69FC00D20162 /* CustomImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EAC52023DE69F600D20162 /* CustomImageView.framework */; };
+		63EAC52223DE69FC00D20162 /* CustomImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63EAC52023DE69F600D20162 /* CustomImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F20EB6521F98925F00AD2D77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20EB6511F98925F00AD2D77 /* AppDelegate.swift */; };
 		F20EB6571F98925F00AD2D77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6551F98925F00AD2D77 /* Main.storyboard */; };
 		F20EB6591F98925F00AD2D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20EB6581F98925F00AD2D77 /* Assets.xcassets */; };
@@ -38,9 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6389DF4A23D7AE70008EE965 /* PBXContainerItemProxy */ = {
+		63EAC51F23DE69F600D20162 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */;
+			containerPortal = 63EAC51B23DE69F600D20162 /* CustomImageView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 63DF508723D09ADD009486D5;
 			remoteInfo = CustomImageView;
@@ -54,7 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6389DF4D23D7AE7A008EE965 /* CustomImageView.framework in Embed Frameworks */,
+				63EAC52223DE69FC00D20162 /* CustomImageView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,7 +62,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CustomImageView.xcodeproj; path = ../CustomImageView/CustomImageView.xcodeproj; sourceTree = "<group>"; };
 		63AB443A23C325CA00B20EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		63ACA34F23C1FAA60029372D /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		63BECDB523C51F1D00B4C0B0 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		63D91CFC23BDDF2400F1CDE4 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D91D0323BF6C3A00F1CDE4 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		63D91D0523C0B8F700F1CDE4 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		63EAC51B23DE69F600D20162 /* CustomImageView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CustomImageView.xcodeproj; path = ../CustomImageView/CustomImageView.xcodeproj; sourceTree = "<group>"; };
 		F20EB64E1F98925F00AD2D77 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20EB6511F98925F00AD2D77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F20EB6561F98925F00AD2D77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,21 +98,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6389DF4C23D7AE7A008EE965 /* CustomImageView.framework in Frameworks */,
+				63EAC52123DE69FC00D20162 /* CustomImageView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6389DF4723D7AE6F008EE965 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6389DF4B23D7AE70008EE965 /* CustomImageView.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		63AB443E23C32E9D00B20EDD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,10 +140,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		63EAC51C23DE69F600D20162 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63EAC52023DE69F600D20162 /* CustomImageView.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F20EB6451F98925F00AD2D77 = {
 			isa = PBXGroup;
 			children = (
-				6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */,
+				63EAC51B23DE69F600D20162 /* CustomImageView.xcodeproj */,
 				F20EB6501F98925F00AD2D77 /* Flickr */,
 				F20EB64F1F98925F00AD2D77 /* Products */,
 				63CD5E6523D5D95100619E21 /* Frameworks */,
@@ -303,8 +303,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6389DF4723D7AE6F008EE965 /* Products */;
-					ProjectRef = 6389DF4623D7AE6F008EE965 /* CustomImageView.xcodeproj */;
+					ProductGroup = 63EAC51C23DE69F600D20162 /* Products */;
+					ProjectRef = 63EAC51B23DE69F600D20162 /* CustomImageView.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -315,11 +315,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6389DF4B23D7AE70008EE965 /* CustomImageView.framework */ = {
+		63EAC52023DE69F600D20162 /* CustomImageView.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CustomImageView.framework;
-			remoteRef = 6389DF4A23D7AE70008EE965 /* PBXContainerItemProxy */;
+			remoteRef = 63EAC51F23DE69F600D20162 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

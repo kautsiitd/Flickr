@@ -9,6 +9,24 @@
 import UIKit
 import CustomImageView
 
+class LoaderCollectionViewCell: UICollectionViewCell {
+    //MARK: Elements
+    @IBOutlet private weak var loader: UIActivityIndicatorView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        loader.isHidden = false
+        loader.startAnimating()
+        layer.cornerRadius = 5
+    }
+    
+    override func prepareForReuse() {
+        loader.isHidden = false
+        loader.startAnimating()
+    }
+}
+
+
 class SearchCollectionViewCell: UICollectionViewCell {
     
     //MARK: Elements

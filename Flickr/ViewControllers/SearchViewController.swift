@@ -51,7 +51,7 @@ class SearchViewController: UIViewController {
             guard let self = self else { return }
             self.loader.startAnimating()
             self.loader.isHidden = false
-            self.feed.fetch(for: self.currentQuery, pageNumber: 1)
+            self.feed.fetchFirstPage(for: self.currentQuery)
             self.collectionView?.reloadData()
         }
     }
@@ -69,19 +69,34 @@ class SearchViewController: UIViewController {
     }
 }
 
-//MARK:- UICollectionViewDataSource
+//MARK:- Collection View
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return feed.searchElements.count
+        var searchCount = feed.searchElements.count
+        if feed.currentPage < feed.totalPages && searchCount != 0 { searchCount += 1 }
+        return searchCount
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
-        cell.searchElement = feed.searchElements[indexPath.row]
-        return cell
+        if indexPath.row < feed.searchElements.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
+            let cellData = feed.searchElements[indexPath.row]
+            cell.searchElement = cellData
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoaderCollectionViewCell", for: indexPath) as! LoaderCollectionViewCell
+            return cell
+        }
     }
 }
 
-//MARK: UICollectionViewDelegateFlowLayout
+extension SearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == feed.searchElements.count {
+            feed.fetchNextPage()
+        }
+    }
+}
+
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: cellWidth, height: cellWidth)

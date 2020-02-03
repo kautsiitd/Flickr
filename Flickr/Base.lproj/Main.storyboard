@@ -50,9 +50,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dg-qn-myf" customClass="CustomImageView" customModule="CustomImageView">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mmu-E7-qnQ" customClass="CustomImageView" customModule="CustomImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldPersist" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
@@ -95,20 +95,20 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6dg-qn-myf" firstAttribute="leading" secondItem="5b7-Up-buF" secondAttribute="leading" id="0l5-rg-Fhz"/>
                                                 <constraint firstItem="XZc-Kn-CH2" firstAttribute="leading" secondItem="5b7-Up-buF" secondAttribute="leading" id="IV1-MY-hYy"/>
-                                                <constraint firstAttribute="trailing" secondItem="6dg-qn-myf" secondAttribute="trailing" id="NKo-ay-HxL"/>
-                                                <constraint firstAttribute="bottom" secondItem="6dg-qn-myf" secondAttribute="bottom" id="dEx-bk-71R"/>
+                                                <constraint firstAttribute="bottom" secondItem="mmu-E7-qnQ" secondAttribute="bottom" id="QqY-1B-mN2"/>
+                                                <constraint firstItem="mmu-E7-qnQ" firstAttribute="top" secondItem="5b7-Up-buF" secondAttribute="top" id="coO-04-We2"/>
                                                 <constraint firstAttribute="bottom" secondItem="XZc-Kn-CH2" secondAttribute="bottom" id="dsb-5N-ldW"/>
+                                                <constraint firstItem="mmu-E7-qnQ" firstAttribute="leading" secondItem="5b7-Up-buF" secondAttribute="leading" id="ep1-yX-heI"/>
                                                 <constraint firstAttribute="trailing" secondItem="XZc-Kn-CH2" secondAttribute="trailing" id="iVr-kF-sAZ"/>
-                                                <constraint firstItem="6dg-qn-myf" firstAttribute="top" secondItem="5b7-Up-buF" secondAttribute="top" id="mGc-LD-ABN"/>
+                                                <constraint firstAttribute="trailing" secondItem="mmu-E7-qnQ" secondAttribute="trailing" id="l7z-Mq-8VL"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="authorNameLabel" destination="N1M-32-jFi" id="LVu-7C-6nn"/>
                                             <outlet property="dateTimeLabel" destination="XzC-5f-oyp" id="QIH-Nv-6Wp"/>
                                             <outlet property="gradientView" destination="XZc-Kn-CH2" id="Jbh-0n-z7T"/>
-                                            <outlet property="productImageView" destination="6dg-qn-myf" id="Mp8-d5-8Mg"/>
+                                            <outlet property="productImageView" destination="mmu-E7-qnQ" id="AFm-41-Hcg"/>
                                             <segue destination="EOJ-BE-PfC" kind="show" identifier="pushingDescriptionVC" id="lSW-m0-vsJ"/>
                                         </connections>
                                     </collectionViewCell>
@@ -218,6 +218,27 @@
                                         <connections>
                                             <outlet property="imageView" destination="QQ4-5h-D0g" id="8CV-yq-8Gd"/>
                                             <segue destination="re6-mh-tQo" kind="presentation" identifier="searchToFullImageVC" id="4bq-Xf-QSh"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoaderCollectionViewCell" id="cBR-No-lKl" customClass="LoaderCollectionViewCell" customModule="Flickr" customModuleProvider="target">
+                                        <rect key="frame" x="193" y="10" width="172" height="172"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d41-Uo-pxe">
+                                            <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bIh-US-Ioq">
+                                                    <rect key="frame" x="76" y="76" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="bIh-US-Ioq" firstAttribute="centerX" secondItem="d41-Uo-pxe" secondAttribute="centerX" id="fd9-UW-tOq"/>
+                                                <constraint firstItem="bIh-US-Ioq" firstAttribute="centerY" secondItem="d41-Uo-pxe" secondAttribute="centerY" id="hoH-Bl-cgA"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="loader" destination="bIh-US-Ioq" id="g4t-cq-QLI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

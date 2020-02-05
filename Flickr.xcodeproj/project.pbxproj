@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635B19D823E8B63B002C4480 /* FullImageAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B19D723E8B63B002C4480 /* FullImageAnimation.swift */; };
 		63AB443B23C325CA00B20EDD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB443A23C325CA00B20EDD /* UIViewController.swift */; };
 		63ACA35023C1FAA60029372D /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACA34F23C1FAA60029372D /* CustomAlert.swift */; };
 		63BECDB623C51F1D00B4C0B0 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BECDB523C51F1D00B4C0B0 /* Operators.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		635B19D723E8B63B002C4480 /* FullImageAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageAnimation.swift; sourceTree = "<group>"; };
 		63AB443A23C325CA00B20EDD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		63ACA34F23C1FAA60029372D /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		63BECDB523C51F1D00B4C0B0 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		635B19D523E8B61B002C4480 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				635B19D723E8B63B002C4480 /* FullImageAnimation.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		63AB443E23C32E9D00B20EDD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 		F20EB6501F98925F00AD2D77 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				635B19D523E8B61B002C4480 /* Animations */,
 				63AB443E23C32E9D00B20EDD /* Helpers */,
 				F20EB6831F98C7FD00AD2D77 /* Layouts */,
 				F20EB6641F98931B00AD2D77 /* Models */,
@@ -343,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63D91CFD23BDDF2400F1CDE4 /* FeedCollectionViewCell.swift in Sources */,
+				635B19D823E8B63B002C4480 /* FullImageAnimation.swift in Sources */,
 				63D91CF123BDDF0B00F1CDE4 /* HomeFeedElement.swift in Sources */,
 				63D91CF823BDDF1800F1CDE4 /* FeedViewController.swift in Sources */,
 				63D91CE623BDDEEC00F1CDE4 /* String.swift in Sources */,

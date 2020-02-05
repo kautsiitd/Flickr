@@ -21,6 +21,8 @@ class SearchViewController: UIViewController {
     private var timer: Timer?
     private var currentQuery: String = "Rose"
     
+    private let transition: UIViewControllerAnimatedTransitioning
+    
     //MARK: Calculated
     lazy private var totalSpacing: CGFloat = {
         // +1 because of section insets
@@ -37,12 +39,14 @@ class SearchViewController: UIViewController {
 
     //MARK:- Init
     required init?(coder: NSCoder) {
+        transition = FullImageAnimation()
         super.init(coder: coder)
         feed = SearchFeed(delegate: self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        transitioningDelegate = self
         refreshFeed()
     }
 
@@ -140,5 +144,16 @@ extension SearchViewController: UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
+    }
+}
+
+//MARK:-
+extension SearchViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return transition
     }
 }

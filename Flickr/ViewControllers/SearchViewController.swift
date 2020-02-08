@@ -122,7 +122,7 @@ extension SearchViewController: ApiProtocol {
         }
     }
     private func showRetryAlert(for error: CustomError) {
-        let retry = CustomAlertAction.retry(self.refreshFeed())
+        let retry = CustomAlertAction.retry(self.refreshFeed)
         let alert = CustomAlert(with: error, actions: [retry])
         self.present(alert, animated: true, completion: nil)
     }

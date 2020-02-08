@@ -158,7 +158,7 @@ extension FeedViewController: ApiProtocol {
         }
     }
     private func showRetryAlert(for error: CustomError) {
-        let retry = CustomAlertAction.retry(refreshFeed())
+        let retry = CustomAlertAction.retry(refreshFeed)
         let alert = CustomAlert(with: error, actions: [retry])
         present(alert, animated: true, completion: nil)
     }

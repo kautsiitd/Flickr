@@ -38,8 +38,12 @@ class ApiManager {
             guard let data = self.fix(data, for: regex),
                 let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
                 let response = json as? [String: Any] else {
-                delegate.didFail(with: .invalidData)
-                return
+                    if let error = error {
+                        delegate.didFail(with: .custom(error))
+                    } else {
+                        delegate.didFail(with: .invalidData)
+                    }
+                    return
             }
             
             delegate.parse(response, for: params)

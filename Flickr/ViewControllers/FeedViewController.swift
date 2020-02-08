@@ -167,7 +167,7 @@ extension FeedViewController: ApiProtocol {
 extension FeedViewController {
 	@IBAction func openFlickrInSafari() {
 		guard let url = URL(string: feed?.link ?? "") else {
-            showOkAlert(with: .invalidLink)
+            showOkAlert(with: .invalidURL)
 			return
 		}
 		let safariViewController = SFSafariViewController(url: url)

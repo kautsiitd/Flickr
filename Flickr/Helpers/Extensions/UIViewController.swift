@@ -17,7 +17,7 @@ extension UIViewController {
     
     func open(url: URL?) {
         guard let url = url else {
-            showOkAlert(with: .invalidLink)
+            showOkAlert(with: .invalidURL)
             return
         }
         let safariViewController = SFSafariViewController(url: url)
